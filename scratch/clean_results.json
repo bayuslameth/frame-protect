@@ -1,0 +1,323 @@
+[
+  {
+    "algo": "dct",
+    "attack": "baseline",
+    "param": "N/A",
+    "detail": "1 validation error for AttackParameters\n  Value error, Brightness delta must be -30 or 30 [type=value_error, input_value={'attack_type': 'brightness', 'parameter': 0.0}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/value_error"
+  },
+  {
+    "algo": "dct",
+    "attack": "jpeg",
+    "param": 90,
+    "success": true,
+    "attack_type": "jpeg",
+    "parameter": 90.0,
+    "original_dimensions": {
+      "width": 1280,
+      "height": 720
+    },
+    "attacked_dimensions": {
+      "width": 1280,
+      "height": 720
+    },
+    "extraction_status": "DETECTED",
+    "extracted_watermark": "BAYU SLAMET HIDAYAT",
+    "psnr": 48.63413346597147,
+    "nc": 1.0,
+    "ber": 0.0
+  },
+  {
+    "algo": "dct",
+    "attack": "jpeg",
+    "param": 70,
+    "success": true,
+    "attack_type": "jpeg",
+    "parameter": 70.0,
+    "original_dimensions": {
+      "width": 1280,
+      "height": 720
+    },
+    "attacked_dimensions": {
+      "width": 1280,
+      "height": 720
+    },
+    "extraction_status": "DETECTED",
+    "extracted_watermark": "",
+    "psnr": 41.172807140289855,
+    "nc": -0.028846153846153848,
+    "ber": 0.5144230769230769
+  },
+  {
+    "algo": "dct",
+    "attack": "jpeg",
+    "param": 50,
+    "success": true,
+    "attack_type": "jpeg",
+    "parameter": 50.0,
+    "original_dimensions": {
+      "width": 1280,
+      "height": 720
+    },
+    "attacked_dimensions": {
+      "width": 1280,
+      "height": 720
+    },
+    "extraction_status": "DETECTED",
+    "extracted_watermark": "",
+    "psnr": 39.124091569361646,
+    "nc": -0.08653846153846154,
+    "ber": 0.5432692307692307
+  },
+  {
+    "algo": "dct",
+    "attack": "crop",
+    "param": 10,
+    "success": true,
+    "attack_type": "crop",
+    "parameter": 10.0,
+    "original_dimensions": {
+      "width": 1280,
+      "height": 720
+    },
+    "attacked_dimensions": {
+      "width": 1152,
+      "height": 648
+    },
+    "extraction_status": "DETECTED",
+    "extracted_watermark": "",
+    "psnr": null,
+    "nc": 0.07692307692307693,
+    "ber": 0.46153846153846156
+  },
+  {
+    "algo": "dct",
+    "attack": "crop",
+    "param": 25,
+    "success": true,
+    "attack_type": "crop",
+    "parameter": 25.0,
+    "original_dimensions": {
+      "width": 1280,
+      "height": 720
+    },
+    "attacked_dimensions": {
+      "width": 960,
+      "height": 540
+    },
+    "extraction_status": "DETECTED",
+    "extracted_watermark": "",
+    "psnr": null,
+    "nc": 0.21153846153846154,
+    "ber": 0.3942307692307692
+  },
+  {
+    "algo": "dct",
+    "attack": "resize",
+    "param": 75,
+    "success": true,
+    "attack_type": "resize",
+    "parameter": 75.0,
+    "original_dimensions": {
+      "width": 1280,
+      "height": 720
+    },
+    "attacked_dimensions": {
+      "width": 960,
+      "height": 540
+    },
+    "extraction_status": "DETECTED",
+    "extracted_watermark": "",
+    "psnr": null,
+    "nc": -0.038461538461538464,
+    "ber": 0.5192307692307693
+  },
+  {
+    "algo": "dct",
+    "attack": "resize",
+    "param": 50,
+    "success": true,
+    "attack_type": "resize",
+    "parameter": 50.0,
+    "original_dimensions": {
+      "width": 1280,
+      "height": 720
+    },
+    "attacked_dimensions": {
+      "width": 640,
+      "height": 360
+    },
+    "extraction_status": "DETECTED",
+    "extracted_watermark": "",
+    "psnr": null,
+    "nc": 0.019230769230769232,
+    "ber": 0.49038461538461536
+  },
+  {
+    "algo": "dct",
+    "attack": "gaussian_noise",
+    "param": 5,
+    "success": true,
+    "attack_type": "gaussian_noise",
+    "parameter": 5.0,
+    "original_dimensions": {
+      "width": 1280,
+      "height": 720
+    },
+    "attacked_dimensions": {
+      "width": 1280,
+      "height": 720
+    },
+    "extraction_status": "DETECTED",
+    "extracted_watermark": "BAYU SLAMET HIDAYAT",
+    "psnr": 34.21683231372592,
+    "nc": 1.0,
+    "ber": 0.0
+  },
+  {
+    "algo": "dct",
+    "attack": "gaussian_noise",
+    "param": 10,
+    "success": true,
+    "attack_type": "gaussian_noise",
+    "parameter": 10.0,
+    "original_dimensions": {
+      "width": 1280,
+      "height": 720
+    },
+    "attacked_dimensions": {
+      "width": 1280,
+      "height": 720
+    },
+    "extraction_status": "DETECTED",
+    "extracted_watermark": "",
+    "psnr": 28.45044039293142,
+    "nc": 0.8365384615384616,
+    "ber": 0.08173076923076923
+  },
+  {
+    "algo": "dct",
+    "attack": "gaussian_noise",
+    "param": 20,
+    "success": true,
+    "attack_type": "gaussian_noise",
+    "parameter": 20.0,
+    "original_dimensions": {
+      "width": 1280,
+      "height": 720
+    },
+    "attacked_dimensions": {
+      "width": 1280,
+      "height": 720
+    },
+    "extraction_status": "DETECTED",
+    "extracted_watermark": "",
+    "psnr": 22.823695707038777,
+    "nc": 0.25,
+    "ber": 0.375
+  },
+  {
+    "algo": "dct",
+    "attack": "brightness",
+    "param": -30,
+    "success": true,
+    "attack_type": "brightness",
+    "parameter": -30.0,
+    "original_dimensions": {
+      "width": 1280,
+      "height": 720
+    },
+    "attacked_dimensions": {
+      "width": 1280,
+      "height": 720
+    },
+    "extraction_status": "DETECTED",
+    "extracted_watermark": "BAYU SLAMET HIDAYAT",
+    "psnr": 15.597638129921066,
+    "nc": 1.0,
+    "ber": 0.0
+  },
+  {
+    "algo": "dct",
+    "attack": "brightness",
+    "param": 30,
+    "success": true,
+    "attack_type": "brightness",
+    "parameter": 30.0,
+    "original_dimensions": {
+      "width": 1280,
+      "height": 720
+    },
+    "attacked_dimensions": {
+      "width": 1280,
+      "height": 720
+    },
+    "extraction_status": "DETECTED",
+    "extracted_watermark": "",
+    "psnr": 18.973960519221468,
+    "nc": 0.7884615384615384,
+    "ber": 0.10576923076923077
+  },
+  {
+    "algo": "dct",
+    "attack": "contrast",
+    "param": 0.7,
+    "success": true,
+    "attack_type": "contrast",
+    "parameter": 0.7,
+    "original_dimensions": {
+      "width": 1280,
+      "height": 720
+    },
+    "attacked_dimensions": {
+      "width": 1280,
+      "height": 720
+    },
+    "extraction_status": "DETECTED",
+    "extracted_watermark": "BAYU SLAMET HIDAYAT",
+    "psnr": 19.531065121673016,
+    "nc": 1.0,
+    "ber": 0.0
+  },
+  {
+    "algo": "dct",
+    "attack": "contrast",
+    "param": 1.0,
+    "success": true,
+    "attack_type": "contrast",
+    "parameter": 1.0,
+    "original_dimensions": {
+      "width": 1280,
+      "height": 720
+    },
+    "attacked_dimensions": {
+      "width": 1280,
+      "height": 720
+    },
+    "extraction_status": "DETECTED",
+    "extracted_watermark": "BAYU SLAMET HIDAYAT",
+    "psnr": -1.0,
+    "nc": 1.0,
+    "ber": 0.0
+  },
+  {
+    "algo": "dct",
+    "attack": "contrast",
+    "param": 1.3,
+    "success": true,
+    "attack_type": "contrast",
+    "parameter": 1.3,
+    "original_dimensions": {
+      "width": 1280,
+      "height": 720
+    },
+    "attacked_dimensions": {
+      "width": 1280,
+      "height": 720
+    },
+    "extraction_status": "DETECTED",
+    "extracted_watermark": "",
+    "psnr": 21.672322858048272,
+    "nc": 0.5865384615384616,
+    "ber": 0.20673076923076922
+  }
+]
