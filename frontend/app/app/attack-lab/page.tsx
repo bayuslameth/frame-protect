@@ -24,7 +24,7 @@ interface AttackHistoryEntry extends AttackTestResponse {
 }
 
 export default function AttackLabPage() {
-  const { baselineContext, metricsResult } = useWorkflowState();
+  const { baselineContext, session, addExperimentResult, refreshSession } = useWorkflowState();
   
   const [selectedAttack, setSelectedAttack] = useState<AttackType>("jpeg");
   const [selectedParam, setSelectedParam] = useState<number>(70);
@@ -50,6 +50,7 @@ export default function AttackLabPage() {
     setIsAttacking(true);
 
     try {
+      const attackStart = Date.now();
       const res = await testAttack({
         watermarked_image: baselineContext.watermarkedImage,
         original_watermark_text: baselineContext.watermarkText,
@@ -57,10 +58,31 @@ export default function AttackLabPage() {
         attack_type: selectedAttack,
         parameter: selectedParam,
       });
+      const duration = Date.now() - attackStart;
 
       setHistory((prev) => [{ ...res, timestamp: new Date().toISOString() }, ...prev]);
-    } catch (err: any) {
-      setAttackError(err.message || "Failed to run attack");
+
+      // Persist to session store
+      addExperimentResult({
+        watermarkType: "text",
+        watermarkPayloadDescription: baselineContext.watermarkText,
+        imageWidth: res.original_dimensions.width,
+        imageHeight: res.original_dimensions.height,
+        attackType: selectedAttack as import("@/lib/types/experiment").ExperimentAttackType,
+        attackParameter: selectedParam,
+        attackedWidth: res.attacked_dimensions.width,
+        attackedHeight: res.attacked_dimensions.height,
+        extractionStatus: res.extraction_status,
+        extractedWatermark: res.extracted_watermark,
+        psnr: res.psnr === -1 ? null : res.psnr,
+        nc: res.nc,
+        ber: res.ber,
+        error: null,
+        duration,
+      });
+      refreshSession();
+    } catch (err: unknown) {
+      setAttackError(err instanceof Error ? err.message : "Failed to run attack");
     } finally {
       setIsAttacking(false);
     }

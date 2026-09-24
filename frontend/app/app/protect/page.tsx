@@ -28,7 +28,7 @@ export default function ProtectPage() {
     reset: resetUpload,
   } = useImageUpload();
 
-  const { metricsResult, setMetricsResult, isVerifying, setIsVerifying, setBaselineContext } = useWorkflowState();
+  const { metricsResult, setMetricsResult, isVerifying, setIsVerifying, startNewSession, addExperimentResult } = useWorkflowState();
 
   // Config State
   const [watermarkType, setWatermarkType] = useState<"text" | "logo">("text");
@@ -73,9 +73,9 @@ export default function ProtectPage() {
     setEmbedError(null);
     setIsEmbedding(true);
     setMetricsResult(null);
-    setBaselineContext(null);
 
     try {
+      const embedStart = Date.now();
       // 1. Embed
       const result = await embedWatermark({
         image: asset.file,
@@ -98,14 +98,40 @@ export default function ProtectPage() {
         watermark_text: watermarkText,
         secret_key: secretKey,
       });
+      const duration = Date.now() - embedStart;
 
       setMetricsResult(verifyRes);
-      setBaselineContext({
+
+      // 3. Create a new session and record the baseline result
+      const imgMeta = asset.metadata;
+      const ctx = {
         originalImage: asset.file,
         watermarkedImage: wmFile,
         watermarkedImageUrl: result.image,
         secretKey: secretKey,
         watermarkText: watermarkText,
+        imageFileName: asset.file.name,
+        imageWidth: imgMeta?.width ?? 0,
+        imageHeight: imgMeta?.height ?? 0,
+      };
+      startNewSession(ctx);
+
+      addExperimentResult({
+        watermarkType: "text",
+        watermarkPayloadDescription: watermarkText,
+        imageWidth: imgMeta?.width ?? 0,
+        imageHeight: imgMeta?.height ?? 0,
+        attackType: "baseline",
+        attackParameter: null,
+        attackedWidth: imgMeta?.width ?? 0,
+        attackedHeight: imgMeta?.height ?? 0,
+        extractionStatus: "DETECTED",
+        extractedWatermark: verifyRes.recovered_text ?? "",
+        psnr: verifyRes.metrics.psnr.value === Infinity ? null : verifyRes.metrics.psnr.value,
+        nc: verifyRes.metrics.nc.value,
+        ber: verifyRes.metrics.ber.value,
+        error: null,
+        duration,
       });
     } catch (err: unknown) {
       setIsEmbedding(false);
@@ -120,7 +146,6 @@ export default function ProtectPage() {
     setEmbedResult(null);
     setEmbedError(null);
     setMetricsResult(null);
-    setBaselineContext(null);
     setWatermarkText("");
     setSecretKey("");
   };

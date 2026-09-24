@@ -5,5 +5,5 @@
 export * from "./watermark";
 export * from "./attack";
 export * from "./metrics";
-
 export * from "./image";
+export * from "./experiment";
