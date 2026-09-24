@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+:root {
+  --background: #F7F7F5;
+  --surface: #FFFFFF;
+  --surface-soft: #F0F0EC;
+  --surface-hover: #EAEAE5;
+  --text-primary: #111111;
+  --text-secondary: #666666;
+  --text-tertiary: #8A8A85;
+  --border: #DCDCD7;
+  --border-strong: #BEBEB8;
+  --technical: #171717;
+  --status-success: #6B8F5E;
+  --status-warning: #A68C5B;
+  --status-error: #9E5B5B;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-surface: var(--surface);
+  --color-surface-soft: var(--surface-soft);
+  --color-surface-hover: var(--surface-hover);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-technical: var(--technical);
+  --color-success: var(--status-success);
+  --color-warning: var(--status-warning);
+  --color-error: var(--status-error);
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
+  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--technical);
+  color: var(--background);
+}
+
+input[type="range"] {
+  accent-color: var(--technical);
+}
