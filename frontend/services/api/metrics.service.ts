@@ -10,6 +10,7 @@ export interface VerifyRequest {
 
 export interface VerifyResponse {
   success: boolean;
+  recovered_text?: string;
   metrics: {
     psnr: {
       value: number;

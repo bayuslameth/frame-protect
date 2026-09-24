@@ -28,7 +28,7 @@ export default function ProtectPage() {
     reset: resetUpload,
   } = useImageUpload();
 
-  const { setMetricsResult, isVerifying, setIsVerifying } = useWorkflowState();
+  const { metricsResult, setMetricsResult, isVerifying, setIsVerifying } = useWorkflowState();
 
   // Config State
   const [watermarkType, setWatermarkType] = useState<"text" | "logo">("text");
@@ -41,6 +41,32 @@ export default function ProtectPage() {
   const [isEmbedding, setIsEmbedding] = useState(false);
   const [embedError, setEmbedError] = useState<string | null>(null);
   const [embedResult, setEmbedResult] = useState<EmbedResponse | null>(null);
+
+  const handleDownloadWatermarkedImage = () => {
+    if (!embedResult?.image) return;
+    try {
+      const parts = embedResult.image.split(";base64,");
+      const contentType = parts[0].split(":")[1] || "image/png";
+      const raw = window.atob(parts[1]);
+      const rawLength = raw.length;
+      const uInt8Array = new Uint8Array(rawLength);
+      for (let i = 0; i < rawLength; ++i) {
+        uInt8Array[i] = raw.charCodeAt(i);
+      }
+      const blob = new Blob([uInt8Array], { type: contentType });
+      const blobUrl = URL.createObjectURL(blob);
+
+      const downloadLink = document.createElement("a");
+      downloadLink.href = blobUrl;
+      downloadLink.download = "frame-protect-watermarked.png";
+      document.body.appendChild(downloadLink);
+      downloadLink.click();
+      document.body.removeChild(downloadLink);
+      setTimeout(() => URL.revokeObjectURL(blobUrl), 1000);
+    } catch (e) {
+      console.error("Failed to download watermarked image:", e);
+    }
+  };
 
   const handleEmbed = async () => {
     if (!asset) return;
@@ -69,11 +95,10 @@ export default function ProtectPage() {
         watermarked_image: wmFile,
         watermark_type: watermarkType,
         watermark_text: watermarkText,
-        secret_key: secretKey
+        secret_key: secretKey,
       });
-      
+
       setMetricsResult(verifyRes);
-      
     } catch (err: unknown) {
       setIsEmbedding(false);
       setEmbedError(err instanceof Error ? err.message : "An unknown error occurred during embedding.");
@@ -107,11 +132,11 @@ export default function ProtectPage() {
     >
       <div className="space-y-12">
         <WorkflowStepper currentStepId={stepId} />
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           <div className="space-y-8">
-            <ImageUploadZone 
-              label="SOURCE IMAGE" 
+            <ImageUploadZone
+              label="SOURCE IMAGE"
               asset={asset}
               error={uploadError}
               isDragging={isDragging}
@@ -122,92 +147,169 @@ export default function ProtectPage() {
               onFileChange={onFileChange}
               onReset={handleReset}
             />
-            
-            <WatermarkConfigPanel 
-               watermarkType={watermarkType}
-               setWatermarkType={setWatermarkType}
-               watermarkText={watermarkText}
-               setWatermarkText={setWatermarkText}
-               secretKey={secretKey}
-               setSecretKey={setSecretKey}
-               strength={strength}
-               setStrength={setStrength}
-               dctBand={dctBand}
-               setDctBand={setDctBand}
+
+            <WatermarkConfigPanel
+              watermarkType={watermarkType}
+              setWatermarkType={setWatermarkType}
+              watermarkText={watermarkText}
+              setWatermarkText={setWatermarkText}
+              secretKey={secretKey}
+              setSecretKey={setSecretKey}
+              strength={strength}
+              setStrength={setStrength}
+              dctBand={dctBand}
+              setDctBand={setDctBand}
             />
-            
+
             <div className="space-y-3">
-              <Button 
-                variant="primary" 
-                size="lg" 
-                className="w-full" 
+              <Button
+                variant="primary"
+                size="lg"
+                className="w-full"
                 disabled={!canEmbed || isEmbedding || isVerifying}
                 onClick={handleEmbed}
               >
                 {isEmbedding ? "EMBEDDING..." : isVerifying ? "VERIFYING METRICS..." : "EMBED WATERMARK"}
               </Button>
-              
+
               {embedError && (
                 <div className="p-3 border border-error bg-[#9e5b5b]/10 text-error text-[10px] font-mono tracking-widest uppercase">
                   ERROR: {embedError}
                 </div>
               )}
             </div>
-            
+
             {embedResult && !isVerifying && (
-              <div className="border border-border bg-surface p-5 space-y-4">
-                <div className="flex items-center justify-between border-b border-border pb-3">
-                  <h4 className="font-mono text-[10px] uppercase tracking-widest text-text-primary">
-                    Embedding Record
-                  </h4>
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => router.push("/app/results")}
-                      className="text-[10px] font-mono uppercase tracking-widest text-text-secondary hover:text-text-primary transition-colors border border-border px-2 py-1 hover:border-border-strong"
-                    >
-                      View Results →
-                    </button>
-                    <a
-                      href={embedResult.image}
-                      download="frame-protect-watermarked.png"
-                      className="text-[10px] font-mono uppercase tracking-widest text-background bg-technical hover:bg-text-primary transition-colors border border-technical px-2 py-1 flex items-center justify-center"
-                    >
-                      Download Image
-                    </a>
+              <div className="space-y-6">
+                <div className="border border-border bg-surface p-5 space-y-4">
+                  <div className="flex items-center justify-between border-b border-border pb-3">
+                    <h4 className="font-mono text-[10px] uppercase tracking-widest text-text-primary">
+                      Embedding Record
+                    </h4>
+                    <span className="font-mono text-[9px] text-success tracking-widest uppercase flex items-center gap-1.5">
+                      <span className="h-1.5 w-1.5 rounded-full bg-success" />
+                      Success
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-3 gap-4">
+                    {[
+                      ["Type", embedResult.metadata.watermark_type.toUpperCase()],
+                      ["DCT", "8 × 8"],
+                      ["Band", embedResult.metadata.dct_band.toUpperCase()],
+                      ["Strength", embedResult.metadata.strength.toFixed(2)],
+                      ["Payload", `${embedResult.metadata.payload_bits} bits`],
+                      [
+                        "Blocks",
+                        `${embedResult.metadata.blocks_used} / ${embedResult.metadata.capacity_blocks}`,
+                      ],
+                    ].map(([k, v]) => (
+                      <div key={k}>
+                        <span className="block font-mono text-[8px] uppercase tracking-widest text-text-tertiary">
+                          {k}
+                        </span>
+                        <span className="block font-mono text-[11px] text-text-primary">{v}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
-                <div className="grid grid-cols-3 gap-4">
-                  {[
-                    ["Type", embedResult.metadata.watermark_type.toUpperCase()],
-                    ["DCT", "8 × 8"],
-                    ["Band", embedResult.metadata.dct_band.toUpperCase()],
-                    ["Strength", embedResult.metadata.strength.toFixed(2)],
-                    ["Payload", `${embedResult.metadata.payload_bits} bits`],
-                    [
-                      "Blocks",
-                      `${embedResult.metadata.blocks_used} / ${embedResult.metadata.capacity_blocks}`,
-                    ],
-                  ].map(([k, v]) => (
-                    <div key={k}>
-                      <span className="block font-mono text-[8px] uppercase tracking-widest text-text-tertiary">
-                        {k}
+
+                {metricsResult?.metrics && (
+                  <div className="border border-border bg-surface p-5 space-y-4">
+                    <div className="flex items-center justify-between border-b border-border pb-3">
+                      <div className="space-y-0.5">
+                        <h4 className="font-mono text-[10px] uppercase tracking-widest text-text-primary">
+                          Baseline Verification
+                        </h4>
+                        <p className="text-[9px] font-sans text-text-tertiary">
+                          Signal recovery directly from generated watermarked frame
+                        </p>
+                      </div>
+                      <span className="font-mono text-[9px] text-text-secondary tracking-widest uppercase">
+                        Verified
                       </span>
-                      <span className="block font-mono text-[11px] text-text-primary">{v}</span>
                     </div>
-                  ))}
-                </div>
+
+                    <div className="bg-background p-4 border border-border space-y-1">
+                      <span className="block font-mono text-[8px] uppercase tracking-widest text-text-tertiary">
+                        Extracted Watermark
+                      </span>
+                      <div className="font-mono text-sm text-text-primary font-medium tracking-wide">
+                        {metricsResult.recovered_text || "(empty)"}
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-3">
+                      <div className="bg-background p-3 border border-border">
+                        <span className="block font-mono text-[8px] uppercase tracking-widest text-text-tertiary">
+                          PSNR
+                        </span>
+                        <span className="block font-mono text-xs text-text-primary font-bold">
+                          {metricsResult.metrics.psnr.value === Infinity
+                            ? "∞"
+                            : `${metricsResult.metrics.psnr.value.toFixed(2)} dB`}
+                        </span>
+                      </div>
+                      <div className="bg-background p-3 border border-border">
+                        <span className="block font-mono text-[8px] uppercase tracking-widest text-text-tertiary">
+                          NC
+                        </span>
+                        <span className="block font-mono text-xs text-text-primary font-bold">
+                          {metricsResult.metrics.nc.value.toFixed(4)}
+                        </span>
+                      </div>
+                      <div className="bg-background p-3 border border-border">
+                        <span className="block font-mono text-[8px] uppercase tracking-widest text-text-tertiary">
+                          BER
+                        </span>
+                        <span className="block font-mono text-xs text-text-primary font-bold">
+                          {metricsResult.metrics.ber.value.toFixed(6)}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                      <Button
+                        variant="primary"
+                        size="md"
+                        className="flex-1 font-mono text-[10px] tracking-widest uppercase"
+                        onClick={handleDownloadWatermarkedImage}
+                      >
+                        DOWNLOAD WATERMARKED IMAGE
+                      </Button>
+                      <button
+                        onClick={() => router.push("/app/results")}
+                        className="font-mono text-[10px] uppercase tracking-widest text-text-secondary hover:text-text-primary transition-colors border border-border px-3 py-2 hover:border-border-strong text-center"
+                      >
+                        Detailed Analysis →
+                      </button>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
-            
           </div>
-          
-          <div className="sticky top-24">
+
+          <div className="sticky top-24 space-y-4">
             <ContactSheetPreview
-               leftTitle="Source"
-               rightTitle="Target Output"
-               leftImage={asset}
-               rightImage={embedResult ? { file: asset!.file, previewUrl: embedResult.image, metadata: asset!.metadata } : null}
+              leftTitle="Source"
+              rightTitle="Target Output"
+              leftImage={asset}
+              rightImage={
+                embedResult
+                  ? { file: asset!.file, previewUrl: embedResult.image, metadata: asset!.metadata }
+                  : null
+              }
             />
+            {embedResult && (
+              <Button
+                variant="primary"
+                size="lg"
+                className="w-full font-mono text-xs tracking-widest uppercase shadow-md"
+                onClick={handleDownloadWatermarkedImage}
+              >
+                DOWNLOAD WATERMARKED IMAGE
+              </Button>
+            )}
           </div>
         </div>
       </div>

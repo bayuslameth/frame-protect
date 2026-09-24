@@ -6,7 +6,7 @@ import numpy as np
 import json
 
 from ..metrics import calculate_psnr, calculate_nc, calculate_ber
-from ..watermark.payload import text_to_bits
+from ..watermark.payload import text_to_bits, bits_to_text
 from ..watermark.extract import extract_watermark
 
 router = APIRouter()
@@ -70,8 +70,10 @@ async def verify_api(
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
         
+    recovered_text = bits_to_text(extracted_bits)
     return JSONResponse({
         "success": True,
+        "recovered_text": recovered_text,
         "metrics": {
             "psnr": {
                 "value": psnr_val,
