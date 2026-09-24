@@ -28,7 +28,7 @@ export default function ProtectPage() {
     reset: resetUpload,
   } = useImageUpload();
 
-  const { metricsResult, setMetricsResult, isVerifying, setIsVerifying } = useWorkflowState();
+  const { metricsResult, setMetricsResult, isVerifying, setIsVerifying, setBaselineContext } = useWorkflowState();
 
   // Config State
   const [watermarkType, setWatermarkType] = useState<"text" | "logo">("text");
@@ -73,6 +73,7 @@ export default function ProtectPage() {
     setEmbedError(null);
     setIsEmbedding(true);
     setMetricsResult(null);
+    setBaselineContext(null);
 
     try {
       // 1. Embed
@@ -99,6 +100,13 @@ export default function ProtectPage() {
       });
 
       setMetricsResult(verifyRes);
+      setBaselineContext({
+        originalImage: asset.file,
+        watermarkedImage: wmFile,
+        watermarkedImageUrl: result.image,
+        secretKey: secretKey,
+        watermarkText: watermarkText,
+      });
     } catch (err: unknown) {
       setIsEmbedding(false);
       setEmbedError(err instanceof Error ? err.message : "An unknown error occurred during embedding.");
@@ -112,6 +120,7 @@ export default function ProtectPage() {
     setEmbedResult(null);
     setEmbedError(null);
     setMetricsResult(null);
+    setBaselineContext(null);
     setWatermarkText("");
     setSecretKey("");
   };
