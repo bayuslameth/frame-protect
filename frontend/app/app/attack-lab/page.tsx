@@ -24,7 +24,7 @@ interface AttackHistoryEntry extends AttackTestResponse {
 }
 
 export default function AttackLabPage() {
-  const { baselineContext, session, addExperimentResult, refreshSession } = useWorkflowState();
+  const { baselineContext, addExperimentResult, refreshSession } = useWorkflowState();
   
   const [selectedAttack, setSelectedAttack] = useState<AttackType>("jpeg");
   const [selectedParam, setSelectedParam] = useState<number>(70);
@@ -298,10 +298,10 @@ export default function AttackLabPage() {
               <ContactSheetPreview
                 leftTitle="Watermarked Baseline"
                 rightTitle="Attacked Output"
-                leftImage={{ file: baselineContext.watermarkedImage, previewUrl: baselineContext.watermarkedImageUrl, metadata: {} as any }}
+                leftImage={{ file: baselineContext.watermarkedImage, previewUrl: baselineContext.watermarkedImageUrl, metadata: {} as any /* eslint-disable-line @typescript-eslint/no-explicit-any */ }}
                 rightImage={
                   currentResult
-                    ? { file: new File([], "attacked.png"), previewUrl: currentResult.attacked_image, metadata: {} as any }
+                    ? { file: new File([], "attacked.png"), previewUrl: currentResult.attacked_image, metadata: {} as any /* eslint-disable-line @typescript-eslint/no-explicit-any */ }
                     : null
                 }
               />
