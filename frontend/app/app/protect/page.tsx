@@ -200,7 +200,7 @@ export default function ProtectPage() {
                 variant="primary"
                 size="lg"
                 className="w-full"
-                disabled={!canEmbed || isEmbedding || isVerifying}
+                disabled={Boolean(!canEmbed || isEmbedding || isVerifying)}
                 onClick={handleEmbed}
               >
                 {isEmbedding ? "EMBEDDING..." : isVerifying ? "VERIFYING METRICS..." : "EMBED WATERMARK"}
