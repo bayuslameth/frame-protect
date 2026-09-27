@@ -98,9 +98,9 @@ export default function DetectPage() {
                     placeholder="Enter secret key..."
                     value={secretKey}
                     onChange={(e) => setSecretKey(e.target.value)}
-                    className="w-full h-10 bg-surface border border-border px-3 text-[11px] font-mono text-text-primary placeholder:text-text-tertiary focus:outline-none focus:border-text-primary transition-colors"
+                    className="w-full h-10 bg-surface border border-border px-3 text-[11px] font-mono text-text-primary placeholder:text-text-secondary focus:outline-none focus:border-text-primary transition-colors"
                   />
-                  <p className="text-[9px] font-sans text-text-tertiary">
+                  <p className="text-[9px] font-sans text-text-secondary">
                     Must match the key used during embedding.
                   </p>
                 </div>
@@ -108,16 +108,16 @@ export default function DetectPage() {
                 <div className="space-y-2">
                   <label className="block text-[10px] font-mono uppercase tracking-widest text-text-secondary flex justify-between">
                     <span>Reference Watermark</span>
-                    <span className="text-text-tertiary">(Optional)</span>
+                    <span className="text-text-secondary">(Optional)</span>
                   </label>
                   <input
                     type="text"
                     placeholder="Enter reference text to calculate NC/BER..."
                     value={originalText}
                     onChange={(e) => setOriginalText(e.target.value)}
-                    className="w-full h-10 bg-surface border border-border px-3 text-[11px] font-mono text-text-primary placeholder:text-text-tertiary focus:outline-none focus:border-text-primary transition-colors"
+                    className="w-full h-10 bg-surface border border-border px-3 text-[11px] font-mono text-text-primary placeholder:text-text-secondary focus:outline-none focus:border-text-primary transition-colors"
                   />
-                  <p className="text-[9px] font-sans text-text-tertiary">
+                  <p className="text-[9px] font-sans text-text-secondary">
                     Provide the original text to calculate structural similarity metrics.
                   </p>
                 </div>
@@ -164,18 +164,18 @@ export default function DetectPage() {
                 {result.nc !== undefined && result.ber !== undefined && result.nc !== null && (
                   <div className="grid grid-cols-2 gap-3 mt-4">
                     <div className="bg-background p-3 border border-border">
-                      <span className="block font-mono text-[8px] uppercase tracking-widest text-text-tertiary">
+                      <span className="block font-mono text-[8px] uppercase tracking-widest text-text-secondary">
                         NC
                       </span>
-                      <span className="block font-mono text-xs text-text-primary font-bold">
+                      <span className="block font-mono text-sm text-black font-extrabold">
                         {result.nc.toFixed(4)}
                       </span>
                     </div>
                     <div className="bg-background p-3 border border-border">
-                      <span className="block font-mono text-[8px] uppercase tracking-widest text-text-tertiary">
+                      <span className="block font-mono text-[8px] uppercase tracking-widest text-text-secondary">
                         BER
                       </span>
-                      <span className="block font-mono text-xs text-text-primary font-bold">
+                      <span className="block font-mono text-sm text-black font-extrabold">
                         {result.ber?.toFixed(6)}
                       </span>
                     </div>

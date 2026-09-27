@@ -13,7 +13,7 @@ export function ResultsVerdictCard({ className }: ResultsVerdictCardProps) {
           <h4 className="font-sans text-sm uppercase tracking-widest text-text-primary">
             Verification Verdict
           </h4>
-          <p className="text-[10px] text-text-tertiary font-mono tracking-widest uppercase">
+          <p className="text-[10px] text-text-secondary font-mono tracking-widest uppercase">
             Cryptographic Tamper Audit
           </p>
         </div>
@@ -24,7 +24,7 @@ export function ResultsVerdictCard({ className }: ResultsVerdictCardProps) {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border border border-border">
         <div className="bg-background p-6 space-y-4">
-          <span className="block font-mono text-[10px] text-text-tertiary uppercase tracking-widest">
+          <span className="block font-mono text-[10px] text-text-secondary uppercase tracking-widest">
             Authenticity Status
           </span>
           <div className="font-serif text-2xl text-text-primary uppercase tracking-wide">
@@ -33,7 +33,7 @@ export function ResultsVerdictCard({ className }: ResultsVerdictCardProps) {
         </div>
 
         <div className="bg-background p-6 space-y-4">
-           <span className="block font-mono text-[10px] text-text-tertiary uppercase tracking-widest">
+           <span className="block font-mono text-[10px] text-text-secondary uppercase tracking-widest">
             Extracted Signature
           </span>
           <div className="font-mono text-xl text-text-secondary">

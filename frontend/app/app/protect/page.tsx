@@ -238,7 +238,7 @@ export default function ProtectPage() {
                       ],
                     ].map(([k, v]) => (
                       <div key={k}>
-                        <span className="block font-mono text-[8px] uppercase tracking-widest text-text-tertiary">
+                        <span className="block font-mono text-[8px] uppercase tracking-widest text-text-secondary">
                           {k}
                         </span>
                         <span className="block font-mono text-[11px] text-text-primary">{v}</span>
@@ -254,7 +254,7 @@ export default function ProtectPage() {
                         <h4 className="font-mono text-[10px] uppercase tracking-widest text-text-primary">
                           Baseline Verification
                         </h4>
-                        <p className="text-[9px] font-sans text-text-tertiary">
+                        <p className="text-[9px] font-sans text-text-secondary">
                           Signal recovery directly from generated watermarked frame
                         </p>
                       </div>
@@ -264,7 +264,7 @@ export default function ProtectPage() {
                     </div>
 
                     <div className="bg-background p-4 border border-border space-y-1">
-                      <span className="block font-mono text-[8px] uppercase tracking-widest text-text-tertiary">
+                      <span className="block font-mono text-[8px] uppercase tracking-widest text-text-secondary">
                         Extracted Watermark
                       </span>
                       <div className="font-mono text-sm text-text-primary font-medium tracking-wide">
@@ -274,7 +274,7 @@ export default function ProtectPage() {
 
                     <div className="grid grid-cols-3 gap-3">
                       <div className="bg-background p-3 border border-border">
-                        <span className="block font-mono text-[8px] uppercase tracking-widest text-text-tertiary">
+                        <span className="block font-mono text-[8px] uppercase tracking-widest text-text-secondary">
                           PSNR
                         </span>
                         <span className="block font-mono text-xs text-text-primary font-bold">
@@ -284,7 +284,7 @@ export default function ProtectPage() {
                         </span>
                       </div>
                       <div className="bg-background p-3 border border-border">
-                        <span className="block font-mono text-[8px] uppercase tracking-widest text-text-tertiary">
+                        <span className="block font-mono text-[8px] uppercase tracking-widest text-text-secondary">
                           NC
                         </span>
                         <span className="block font-mono text-xs text-text-primary font-bold">
@@ -292,7 +292,7 @@ export default function ProtectPage() {
                         </span>
                       </div>
                       <div className="bg-background p-3 border border-border">
-                        <span className="block font-mono text-[8px] uppercase tracking-widest text-text-tertiary">
+                        <span className="block font-mono text-[8px] uppercase tracking-widest text-text-secondary">
                           BER
                         </span>
                         <span className="block font-mono text-xs text-text-primary font-bold">

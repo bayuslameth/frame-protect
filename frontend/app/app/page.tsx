@@ -26,7 +26,7 @@ export default function DashboardPage() {
         <h1 className="font-serif text-3xl sm:text-4xl uppercase tracking-wide text-text-primary">
           Image Security Workspace
         </h1>
-        <p className="font-sans text-sm text-text-tertiary">
+        <p className="font-sans text-sm text-text-secondary">
           Central dashboard for watermark embedding, extraction, and robustness auditing.
         </p>
       </div>
@@ -66,7 +66,7 @@ export default function DashboardPage() {
                 <span className="font-mono text-[9px] uppercase tracking-widest text-text-primary">SOURCE / READY</span>
                 <button 
                   onClick={reset}
-                  className="font-mono text-[9px] uppercase tracking-widest text-text-tertiary hover:text-error transition-colors"
+                  className="font-mono text-[9px] uppercase tracking-widest text-text-secondary hover:text-error transition-colors"
                 >
                   [ CLEAR SOURCE ]
                 </button>
@@ -89,7 +89,7 @@ export default function DashboardPage() {
           </h2>
           <div className="border border-border bg-surface p-6 space-y-6">
             <div className="space-y-2">
-              <span className="block font-mono text-[9px] uppercase tracking-widest text-text-tertiary">Engine Status</span>
+              <span className="block font-mono text-[9px] uppercase tracking-widest text-text-secondary">Engine Status</span>
               <span className="flex items-center space-x-2 text-text-primary font-mono text-xs">
                 <span className="h-1.5 w-1.5 rounded-full bg-warning" />
                 <span>OFFLINE (Phase 3 Target)</span>
@@ -98,14 +98,14 @@ export default function DashboardPage() {
             
             {asset && (
               <div className="space-y-4 border-t border-border pt-4">
-                <span className="block font-mono text-[9px] uppercase tracking-widest text-text-tertiary">Image Metadata</span>
+                <span className="block font-mono text-[9px] uppercase tracking-widest text-text-secondary">Image Metadata</span>
                 <div className="grid grid-cols-2 gap-4">
                    <div>
-                     <span className="block font-mono text-[9px] text-text-tertiary">FORMAT</span>
+                     <span className="block font-mono text-[9px] text-text-secondary">FORMAT</span>
                      <span className="block font-mono text-[11px] text-text-secondary uppercase">{asset.metadata.type.split('/')[1] || asset.metadata.type}</span>
                    </div>
                    <div>
-                     <span className="block font-mono text-[9px] text-text-tertiary">DIMENSIONS</span>
+                     <span className="block font-mono text-[9px] text-text-secondary">DIMENSIONS</span>
                      <span className="block font-mono text-[11px] text-text-secondary uppercase">{asset.metadata.width} × {asset.metadata.height}</span>
                    </div>
                 </div>
@@ -113,19 +113,19 @@ export default function DashboardPage() {
             )}
 
             <div className="space-y-2 border-t border-border pt-4">
-              <span className="block font-mono text-[9px] uppercase tracking-widest text-text-tertiary">Active Key</span>
+              <span className="block font-mono text-[9px] uppercase tracking-widest text-text-secondary">Active Key</span>
               <span className="block font-mono text-xs text-text-secondary">—</span>
             </div>
 
             <div className="space-y-2 border-t border-border pt-4">
-              <span className="block font-mono text-[9px] uppercase tracking-widest text-text-tertiary">Recent Metrics</span>
+              <span className="block font-mono text-[9px] uppercase tracking-widest text-text-secondary">Recent Metrics</span>
               <div className="grid grid-cols-2 gap-4">
                  <div>
-                   <span className="block font-mono text-[9px] text-text-tertiary">PSNR</span>
+                   <span className="block font-mono text-[9px] text-text-secondary">PSNR</span>
                    <span className="block font-mono text-xs text-text-secondary">—</span>
                  </div>
                  <div>
-                   <span className="block font-mono text-[9px] text-text-tertiary">NC</span>
+                   <span className="block font-mono text-[9px] text-text-secondary">NC</span>
                    <span className="block font-mono text-xs text-text-secondary">—</span>
                  </div>
               </div>

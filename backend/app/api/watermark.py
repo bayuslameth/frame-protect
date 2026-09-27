@@ -74,10 +74,14 @@ async def embed_api(
         }
     })
 
+from ..metrics.nc import calculate_nc
+from ..metrics.ber import calculate_ber
+
 @router.post("/detect")
 async def detect_api(
     image: UploadFile = File(...),
-    secret_key: str = Form(...)
+    secret_key: str = Form(...),
+    original_watermark_text: str = Form(None)
 ):
     if not secret_key:
         raise HTTPException(status_code=400, detail="Secret key is required.")
@@ -95,7 +99,26 @@ async def detect_api(
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Extraction error: {str(e)}")
         
-    return JSONResponse({
+    response_data = {
         "success": True,
         "recovered_text": recovered_text
-    })
+    }
+    
+    if original_watermark_text:
+        original_bits = text_to_bits(original_watermark_text)
+        payload_length = len(original_bits)
+        extracted_slice = extracted_bits[:payload_length]
+        
+        if len(extracted_slice) < payload_length:
+            pad = np.zeros(payload_length - len(extracted_slice), dtype=np.uint8)
+            extracted_slice = np.concatenate([extracted_slice, pad])
+            
+        try:
+            nc_val = calculate_nc(original_bits, extracted_slice)
+            ber_dict = calculate_ber(original_bits, extracted_slice)
+            response_data["nc"] = nc_val
+            response_data["ber"] = ber_dict["ber"]
+        except ValueError:
+            pass
+            
+    return JSONResponse(response_data)

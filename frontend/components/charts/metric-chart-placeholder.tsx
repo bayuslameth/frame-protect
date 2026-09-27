@@ -21,7 +21,7 @@ export function MetricChartPlaceholder({
           <h4 className="font-sans text-sm uppercase tracking-widest text-text-primary">
             Scientific Metrics
           </h4>
-          <p className="text-[10px] text-text-tertiary font-mono tracking-widest uppercase">
+          <p className="text-[10px] text-text-secondary font-mono tracking-widest uppercase">
             Signal Integrity & Recovery
           </p>
         </div>
@@ -32,10 +32,10 @@ export function MetricChartPlaceholder({
           <div key={m.symbol} className="bg-background p-6 flex flex-col items-center justify-center space-y-4 text-center">
             <div className="space-y-1">
                <span className="block font-mono text-[10px] text-text-secondary tracking-widest">{m.symbol}</span>
-               <span className="block font-mono text-[9px] text-text-tertiary uppercase tracking-widest">{m.label}</span>
+               <span className="block font-mono text-[9px] text-text-secondary uppercase tracking-widest">{m.label}</span>
             </div>
             <div className="font-serif text-3xl text-text-primary">—</div>
-            <span className="font-mono text-[9px] text-text-tertiary uppercase">{m.unit}</span>
+            <span className="font-mono text-[9px] text-text-secondary uppercase">{m.unit}</span>
           </div>
         ))}
       </div>

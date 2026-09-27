@@ -14,14 +14,14 @@ export function Footer() {
                 Protect
               </p>
             </div>
-            <p className="font-sans text-xs text-text-tertiary">
+            <p className="font-sans text-xs text-text-secondary">
               Digital Watermarking Laboratory
             </p>
           </div>
 
           <div className="flex gap-8">
             <div className="space-y-2">
-              <p className="font-mono text-[9px] uppercase tracking-widest text-text-tertiary">
+              <p className="font-mono text-[9px] uppercase tracking-widest text-text-secondary">
                 Algorithm
               </p>
               {["DCT · 8×8 Blocks", "Secret Key", "Mid-Freq. Embedding"].map(
@@ -33,7 +33,7 @@ export function Footer() {
               )}
             </div>
             <div className="space-y-2">
-              <p className="font-mono text-[9px] uppercase tracking-widest text-text-tertiary">
+              <p className="font-mono text-[9px] uppercase tracking-widest text-text-secondary">
                 Metrics
               </p>
               {["PSNR · Fidelity", "NC · Correlation", "BER · Accuracy"].map(
@@ -48,10 +48,10 @@ export function Footer() {
         </div>
 
         <div className="mt-8 pt-6 border-t border-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
-          <p className="font-mono text-[9px] text-text-tertiary uppercase tracking-widest">
+          <p className="font-mono text-[9px] text-text-secondary uppercase tracking-widest">
             Information Security Project — 2026
           </p>
-          <p className="font-mono text-[9px] text-text-tertiary uppercase tracking-widest">
+          <p className="font-mono text-[9px] text-text-secondary uppercase tracking-widest">
             Local Processing · No Server Upload
           </p>
         </div>

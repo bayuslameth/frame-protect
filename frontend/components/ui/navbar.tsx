@@ -18,15 +18,15 @@ export function Navbar() {
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center space-x-3 group">
           <div className="flex flex-col leading-none">
-            <span className="font-serif text-[11px] tracking-[0.25em] text-text-secondary uppercase">
+            <span className="font-serif text-[11px] tracking-[0.25em] text-black uppercase font-semibold">
               Frame
             </span>
-            <span className="font-serif text-[11px] tracking-[0.25em] text-text-primary uppercase font-semibold">
+            <span className="font-serif text-[11px] tracking-[0.25em] text-black uppercase font-bold">
               Protect
             </span>
           </div>
           <div className="w-px h-6 bg-border" />
-          <span className="font-mono text-[10px] tracking-widest text-text-tertiary uppercase hidden sm:block">
+          <span className="font-mono text-[10px] tracking-widest text-text-secondary uppercase hidden sm:block">
             Image Lab
           </span>
         </Link>
@@ -44,8 +44,8 @@ export function Navbar() {
                 className={cn(
                   "py-1 text-[11px] font-mono tracking-widest whitespace-nowrap transition-colors",
                   isActive
-                    ? "text-text-primary border-b border-text-primary"
-                    : "text-text-tertiary hover:text-text-primary border-b border-transparent"
+                    ? "text-black border-b border-black font-semibold"
+                    : "text-text-secondary hover:text-black border-b border-transparent"
                 )}
               >
                 {link.label}
@@ -56,7 +56,7 @@ export function Navbar() {
 
         <div className="hidden lg:flex items-center space-x-2">
           <span className="h-1.5 w-1.5 rounded-full bg-success" />
-          <span className="font-mono text-[9px] text-text-tertiary uppercase tracking-widest">
+          <span className="font-mono text-[9px] text-text-secondary uppercase tracking-widest">
             Local Processing
           </span>
         </div>

@@ -29,7 +29,7 @@ export function AttackPalette({ className }: AttackPaletteProps) {
           <h4 className="font-sans text-sm uppercase tracking-widest text-text-primary">
             Distortion Vectors
           </h4>
-          <p className="text-[10px] text-text-tertiary font-mono tracking-widest uppercase">
+          <p className="text-[10px] text-text-secondary font-mono tracking-widest uppercase">
             Robustness Simulation Suite
           </p>
         </div>
@@ -52,7 +52,7 @@ export function AttackPalette({ className }: AttackPaletteProps) {
             </div>
             
             <div className="space-y-1">
-              <div className="font-mono text-[9px] text-text-tertiary uppercase tracking-widest">
+              <div className="font-mono text-[9px] text-text-secondary uppercase tracking-widest">
                 {atk.category}
               </div>
               <div className="font-mono text-[11px] text-text-primary">

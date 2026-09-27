@@ -76,7 +76,7 @@ export function ImageUploadZone({
             ["Color", "RGB"],
           ].map(([k, v]) => (
             <div key={k}>
-              <span className="block font-mono text-[9px] text-text-tertiary uppercase tracking-widest">
+              <span className="block font-mono text-[9px] text-text-secondary uppercase tracking-widest">
                 {k}
               </span>
               <span className="block font-mono text-[11px] text-text-primary">
@@ -87,7 +87,7 @@ export function ImageUploadZone({
         </div>
         <button
           onClick={onReset}
-          className="text-[10px] font-mono uppercase tracking-widest text-text-tertiary hover:text-error transition-colors"
+          className="text-[10px] font-mono uppercase tracking-widest text-text-secondary hover:text-error transition-colors"
         >
           [ Remove Image ]
         </button>
@@ -155,14 +155,14 @@ export function ImageUploadZone({
         {error ? (
           <p className="text-[10px] text-error font-sans">{getErrorText(error)}</p>
         ) : (
-          <p className="text-[10px] text-text-tertiary font-mono uppercase tracking-wider">
+          <p className="text-[10px] text-text-secondary font-mono uppercase tracking-wider">
             {isProcessing ? "Processing..." : accept}
           </p>
         )}
       </div>
 
       {!error && (
-        <p className="mt-5 text-[10px] text-text-tertiary font-mono tracking-widest uppercase relative z-10">
+        <p className="mt-5 text-[10px] text-text-secondary font-mono tracking-widest uppercase relative z-10">
           {isDragging ? "Release to upload" : "Click or drag & drop"}
         </p>
       )}

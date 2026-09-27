@@ -12,13 +12,13 @@ export function Badge({
   ...props
 }: BadgeProps) {
   const variants = {
-    default: "bg-surface-soft text-text-secondary border-border",
-    outline: "bg-transparent text-text-tertiary border-border",
+    default: "bg-surface-soft text-black border-border-strong font-semibold",
+    outline: "bg-transparent text-text-primary border-border-strong",
     phase:
-      "bg-transparent text-text-tertiary border-border font-mono tracking-widest uppercase",
-    success: "bg-[#6B8F5E]/10 text-[#6B8F5E] border-[#6B8F5E]/30",
-    warning: "bg-[#A68C5B]/10 text-[#A68C5B] border-[#A68C5B]/30",
-    error: "bg-[#9E5B5B]/10 text-[#9E5B5B] border-[#9E5B5B]/30",
+      "bg-black text-white border-black font-mono tracking-widest uppercase font-semibold",
+    success: "bg-[#6B8F5E]/10 text-[#6B8F5E] border-[#6B8F5E]/50 font-semibold",
+    warning: "bg-[#A68C5B]/10 text-[#A68C5B] border-[#A68C5B]/50 font-semibold",
+    error: "bg-[#9E5B5B]/10 text-[#9E5B5B] border-[#9E5B5B]/50 font-semibold",
   };
 
   return (

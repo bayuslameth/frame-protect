@@ -18,17 +18,17 @@ export default function HomePage() {
             <div className="space-y-4">
                <div className="flex items-center space-x-3">
                  <span className="h-px w-8 bg-text-secondary" />
-                 <span className="font-mono text-[10px] uppercase tracking-widest text-text-secondary">System Ready</span>
+                 <span className="font-mono text-[10px] uppercase tracking-widest text-text-primary">System Ready</span>
                </div>
                <h1 className="text-5xl sm:text-7xl lg:text-8xl font-serif text-text-primary uppercase leading-[0.95] tracking-tight">
                  Protect<br />
-                 <span className="text-text-secondary italic">the image.</span><br />
+                 <span className="text-text-primary italic">the image.</span><br />
                  Prove<br />
-                 <span className="text-text-secondary italic">the origin.</span>
+                 <span className="text-text-primary italic">the origin.</span>
                </h1>
             </div>
             
-            <p className="max-w-md text-sm font-sans text-text-tertiary leading-relaxed">
+            <p className="max-w-md text-sm font-sans text-text-primary leading-relaxed">
               Digital watermarking for photographers, creators, and visual evidence. Embed imperceptible cryptographic signatures directly into the image frequencies.
             </p>
             
@@ -50,7 +50,7 @@ export default function HomePage() {
             <div className="absolute bottom-0 left-0 w-8 h-8 border-b border-l border-text-tertiary" />
             <div className="absolute bottom-0 right-0 w-8 h-8 border-b border-r border-text-tertiary" />
             
-            <div className="flex justify-between font-mono text-[9px] uppercase tracking-widest text-text-tertiary">
+            <div className="flex justify-between font-mono text-[9px] uppercase tracking-widest text-text-primary">
               <span>Frame / 001</span>
               <span>Source / Original</span>
             </div>
@@ -63,7 +63,7 @@ export default function HomePage() {
                </div>
             </div>
 
-            <div className="flex justify-between font-mono text-[9px] uppercase tracking-widest text-text-tertiary">
+            <div className="flex justify-between font-mono text-[9px] uppercase tracking-widest text-text-primary">
               <span>Mode / DCT</span>
               <span className="flex items-center space-x-2">
                 <span className="h-1.5 w-1.5 rounded-full bg-success" />
@@ -80,7 +80,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
           <div className="space-y-4">
             <h2 className="font-serif text-3xl text-text-primary uppercase tracking-wide">The Process</h2>
-            <p className="text-sm font-sans text-text-tertiary max-w-lg">From ingestion to verification, a strictly controlled cryptographic workflow.</p>
+            <p className="text-sm font-sans text-text-primary max-w-lg">From ingestion to verification, a strictly controlled cryptographic workflow.</p>
           </div>
           <WorkflowStepper />
         </div>
@@ -91,7 +91,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-16">
           <div className="space-y-4">
             <h2 className="font-serif text-3xl text-text-primary uppercase tracking-wide">Core Capabilities</h2>
-            <p className="text-sm font-sans text-text-tertiary max-w-lg">Advanced frequency-domain watermarking meets rigorous stress testing.</p>
+            <p className="text-sm font-sans text-text-primary max-w-lg">Advanced frequency-domain watermarking meets rigorous stress testing.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-border border border-border">
@@ -102,9 +102,9 @@ export default function HomePage() {
               { title: "Recovery Analysis", desc: "Measure watermark similarity using Normalized Correlation (NC) and Bit Error Rate (BER)." }
             ].map((cap, i) => (
               <div key={i} className="bg-background p-8 space-y-4 group hover:bg-surface-hover transition-colors">
-                <span className="font-mono text-[10px] text-text-tertiary tracking-widest">0{i+1}</span>
-                <h3 className="font-sans text-sm uppercase tracking-widest text-text-secondary group-hover:text-text-primary transition-colors">{cap.title}</h3>
-                <p className="font-sans text-xs text-text-tertiary leading-relaxed">{cap.desc}</p>
+                <span className="font-mono text-[10px] text-text-primary tracking-widest">0{i+1}</span>
+                <h3 className="font-sans text-sm uppercase tracking-widest text-text-primary group-hover:text-text-primary transition-colors">{cap.title}</h3>
+                <p className="font-sans text-xs text-text-primary leading-relaxed">{cap.desc}</p>
               </div>
             ))}
           </div>
@@ -117,7 +117,7 @@ export default function HomePage() {
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 border-b border-border pb-6">
             <div className="space-y-4">
               <h2 className="font-serif text-3xl text-text-primary uppercase tracking-wide">Attack Lab Previews</h2>
-              <p className="text-sm font-sans text-text-tertiary max-w-lg">Visualize resilience across a spectrum of signal distortions.</p>
+              <p className="text-sm font-sans text-text-primary max-w-lg">Visualize resilience across a spectrum of signal distortions.</p>
             </div>
             <Link href="/app/attack-lab">
               <Button variant="outline" size="sm">Enter Laboratory</Button>
@@ -129,9 +129,9 @@ export default function HomePage() {
               <div key={i} className="shrink-0 w-72 sm:w-80 snap-center">
                 <div className="border border-border bg-surface p-3 space-y-3">
                   <div className="aspect-[3/2] bg-background border border-border relative flex items-center justify-center">
-                    <span className="font-mono text-[9px] text-text-tertiary uppercase tracking-widest">[ Preview Frame ]</span>
+                    <span className="font-mono text-[9px] text-text-primary uppercase tracking-widest">[ Preview Frame ]</span>
                   </div>
-                  <div className="flex justify-between items-center font-mono text-[9px] uppercase tracking-widest text-text-secondary">
+                  <div className="flex justify-between items-center font-mono text-[9px] uppercase tracking-widest text-text-primary">
                     <span>{label}</span>
                     <span>#{i+1}</span>
                   </div>
@@ -146,9 +146,9 @@ export default function HomePage() {
       <section className="py-32 bg-deep-black">
         <div className="max-w-4xl mx-auto px-4 text-center space-y-8">
            <h2 className="font-serif text-4xl sm:text-5xl text-text-primary uppercase leading-tight">
-             Built for images <br/><span className="text-text-secondary italic">that carry meaning.</span>
+             Built for images <br/><span className="text-text-primary italic">that carry meaning.</span>
            </h2>
-           <p className="font-sans text-sm sm:text-base text-text-tertiary max-w-2xl mx-auto leading-relaxed">
+           <p className="font-sans text-sm sm:text-base text-text-primary max-w-2xl mx-auto leading-relaxed">
              A rigorous technical intersection of photography, ownership, provenance, and integrity. We do not claim unbreakable security—we provide verifiable, cryptographic resilience and transparent technical validation.
            </p>
            <div className="pt-8">

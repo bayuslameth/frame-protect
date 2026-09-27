@@ -19,7 +19,7 @@ export function PlaceholderPage({
       <div className="space-y-3 border-b border-border pb-8">
         <div className="flex flex-wrap items-center gap-3">
           <Badge variant="phase">Phase 5 Complete</Badge>
-          <span className="font-mono text-[9px] text-text-tertiary tracking-widest uppercase">
+          <span className="font-mono text-[9px] text-text-secondary tracking-widest uppercase">
             {routePath}
           </span>
         </div>

@@ -58,7 +58,7 @@ export function CardDescription({
   return (
     <p
       className={cn(
-        "text-xs font-sans text-text-tertiary leading-relaxed",
+        "text-xs font-sans text-text-secondary leading-relaxed",
         className
       )}
       {...props}

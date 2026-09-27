@@ -123,7 +123,7 @@ export default function AttackLabPage() {
         routePath="/app/attack-lab"
       >
         <div className="text-center py-24 space-y-4">
-          <p className="font-mono text-sm text-text-tertiary">No active baseline.</p>
+          <p className="font-mono text-sm text-text-secondary">No active baseline.</p>
           <p className="font-sans text-sm text-text-secondary">Please return to the Protect page and process an image first.</p>
         </div>
       </PlaceholderPage>
@@ -147,7 +147,7 @@ export default function AttackLabPage() {
                   <h4 className="font-sans text-sm uppercase tracking-widest text-text-primary">
                     Attack Configuration
                   </h4>
-                  <p className="text-[10px] text-text-tertiary font-mono tracking-widest uppercase">
+                  <p className="text-[10px] text-text-secondary font-mono tracking-widest uppercase">
                     Configure distortion parameters
                   </p>
                 </div>
@@ -219,15 +219,15 @@ export default function AttackLabPage() {
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <span className="block font-mono text-[8px] uppercase tracking-widest text-text-tertiary">Attack</span>
+                      <span className="block font-mono text-[8px] uppercase tracking-widest text-text-secondary">Attack</span>
                       <span className="block font-mono text-[11px] text-text-primary">{ATTACK_OPTIONS[currentResult.attack_type as AttackType]?.name || currentResult.attack_type}</span>
                     </div>
                     <div>
-                      <span className="block font-mono text-[8px] uppercase tracking-widest text-text-tertiary">Parameter</span>
+                      <span className="block font-mono text-[8px] uppercase tracking-widest text-text-secondary">Parameter</span>
                       <span className="block font-mono text-[11px] text-text-primary">{currentResult.parameter}</span>
                     </div>
                     <div>
-                      <span className="block font-mono text-[8px] uppercase tracking-widest text-text-tertiary">Dimensions</span>
+                      <span className="block font-mono text-[8px] uppercase tracking-widest text-text-secondary">Dimensions</span>
                       <span className="block font-mono text-[11px] text-text-primary">{currentResult.attacked_dimensions.width} × {currentResult.attacked_dimensions.height}</span>
                     </div>
                   </div>
@@ -240,13 +240,13 @@ export default function AttackLabPage() {
                     </h4>
                   </div>
                   <div className="bg-background p-4 border border-border space-y-1">
-                    <span className="block font-mono text-[8px] uppercase tracking-widest text-text-tertiary">Status</span>
+                    <span className="block font-mono text-[8px] uppercase tracking-widest text-text-secondary">Status</span>
                     <span className={`block font-mono text-xs font-bold ${currentResult.extraction_status === "DETECTED" ? "text-success" : "text-error"}`}>
                       {currentResult.extraction_status}
                     </span>
                   </div>
                   <div className="bg-background p-4 border border-border space-y-1">
-                    <span className="block font-mono text-[8px] uppercase tracking-widest text-text-tertiary">Extracted Watermark</span>
+                    <span className="block font-mono text-[8px] uppercase tracking-widest text-text-secondary">Extracted Watermark</span>
                     <div className="font-mono text-sm text-text-primary font-medium tracking-wide">
                       {currentResult.extracted_watermark || "(empty)"}
                     </div>
@@ -261,20 +261,20 @@ export default function AttackLabPage() {
                   </div>
                   <div className="grid grid-cols-3 gap-3">
                     <div className="bg-background p-3 border border-border">
-                      <span className="block font-mono text-[8px] uppercase tracking-widest text-text-tertiary">PSNR</span>
-                      <span className="block font-mono text-xs text-text-primary font-bold">
+                      <span className="block font-mono text-[8px] uppercase tracking-widest text-text-secondary">PSNR</span>
+                      <span className="block font-mono text-sm text-black font-extrabold">
                         {currentResult.psnr === null ? "N/A" : currentResult.psnr === -1.0 ? "∞" : `${currentResult.psnr.toFixed(2)} dB`}
                       </span>
                     </div>
                     <div className="bg-background p-3 border border-border">
-                      <span className="block font-mono text-[8px] uppercase tracking-widest text-text-tertiary">NC</span>
-                      <span className="block font-mono text-xs text-text-primary font-bold">
+                      <span className="block font-mono text-[8px] uppercase tracking-widest text-text-secondary">NC</span>
+                      <span className="block font-mono text-sm text-black font-extrabold">
                         {currentResult.nc === null ? "N/A" : currentResult.nc.toFixed(4)}
                       </span>
                     </div>
                     <div className="bg-background p-3 border border-border">
-                      <span className="block font-mono text-[8px] uppercase tracking-widest text-text-tertiary">BER</span>
-                      <span className="block font-mono text-xs text-text-primary font-bold">
+                      <span className="block font-mono text-[8px] uppercase tracking-widest text-text-secondary">BER</span>
+                      <span className="block font-mono text-sm text-black font-extrabold">
                         {currentResult.ber === null ? "N/A" : currentResult.ber.toFixed(6)}
                       </span>
                     </div>
@@ -314,8 +314,8 @@ export default function AttackLabPage() {
               </h4>
               {history.length === 0 ? (
                 <div className="text-center py-8">
-                  <p className="font-mono text-[10px] uppercase tracking-widest text-text-tertiary">NO ATTACKS RUN</p>
-                  <p className="font-sans text-xs text-text-tertiary mt-2">Run an attack to begin robustness analysis.</p>
+                  <p className="font-mono text-[10px] uppercase tracking-widest text-text-secondary">NO ATTACKS RUN</p>
+                  <p className="font-sans text-xs text-text-secondary mt-2">Run an attack to begin robustness analysis.</p>
                 </div>
               ) : (
                 <div className="overflow-x-auto">

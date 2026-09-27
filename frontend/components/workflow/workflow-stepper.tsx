@@ -34,7 +34,7 @@ export function WorkflowStepper({
   return (
     <div
       className={cn(
-        "flex flex-col md:flex-row md:items-start gap-4 md:gap-0 border-y border-border py-5 bg-surface-soft px-4",
+        "flex flex-col md:flex-row md:items-start gap-4 md:gap-0 border-y border-border-strong py-5 bg-surface px-4",
         className
       )}
     >
@@ -50,10 +50,10 @@ export function WorkflowStepper({
                 className={cn(
                   "font-mono text-[10px] tracking-widest",
                   isCurrent
-                    ? "text-technical font-bold"
+                    ? "text-black font-bold"
                     : isComplete
-                    ? "text-success"
-                    : "text-text-tertiary"
+                    ? "text-success font-semibold"
+                    : "text-text-secondary"
                 )}
               >
                 {step.stepNumber}
@@ -62,7 +62,7 @@ export function WorkflowStepper({
                 <div
                   className={cn(
                     "hidden md:block absolute top-2 right-0 left-6 h-px transition-colors",
-                    isComplete ? "bg-success/40" : "bg-border"
+                    isComplete ? "bg-success/60" : "bg-border-strong"
                   )}
                 />
               )}
@@ -73,10 +73,10 @@ export function WorkflowStepper({
                 className={cn(
                   "block font-sans text-xs uppercase tracking-widest transition-colors",
                   isCurrent
-                    ? "text-text-primary font-semibold"
+                    ? "text-black font-bold"
                     : isComplete
                     ? "text-text-secondary"
-                    : "text-text-tertiary"
+                    : "text-text-secondary"
                 )}
               >
                 {step.title}
@@ -84,13 +84,13 @@ export function WorkflowStepper({
               <p
                 className={cn(
                   "mt-0.5 text-[10px] font-mono uppercase tracking-wider",
-                  isCurrent || isComplete ? "text-text-tertiary" : "text-border-strong"
+                  isCurrent || isComplete ? "text-text-secondary" : "text-text-tertiary"
                 )}
               >
                 {step.description}
               </p>
               {isComplete && (
-                <span className="inline-block mt-1 text-[8px] text-success font-mono uppercase tracking-widest border border-success/30 px-1 bg-success/5">
+                <span className="inline-block mt-1 text-[8px] text-success font-mono uppercase tracking-widest border border-success/50 px-1 bg-success/5 font-bold">
                   Done
                 </span>
               )}

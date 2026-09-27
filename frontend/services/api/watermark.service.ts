@@ -49,17 +49,23 @@ export async function embedWatermark(req: EmbedRequest): Promise<EmbedResponse> 
 export interface DetectRequest {
   image: File;
   secret_key: string;
+  original_watermark_text?: string;
 }
 
 export interface DetectResponse {
   success: boolean;
   recovered_text: string;
+  nc?: number;
+  ber?: number;
 }
 
 export async function detectWatermark(req: DetectRequest): Promise<DetectResponse> {
   const formData = new FormData();
   formData.append("image", req.image);
   formData.append("secret_key", req.secret_key);
+  if (req.original_watermark_text) {
+    formData.append("original_watermark_text", req.original_watermark_text);
+  }
 
   const response = await fetch(`${API_URL}/api/watermark/detect`, {
     method: "POST",

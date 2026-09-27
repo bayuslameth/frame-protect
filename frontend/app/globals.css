@@ -5,12 +5,12 @@
   --surface: #FFFFFF;
   --surface-soft: #F0F0EC;
   --surface-hover: #EAEAE5;
-  --text-primary: #111111;
-  --text-secondary: #666666;
-  --text-tertiary: #8A8A85;
-  --border: #DCDCD7;
-  --border-strong: #BEBEB8;
-  --technical: #171717;
+  --text-primary: #0A0A0A;
+  --text-secondary: #333333;
+  --text-tertiary: #555555;
+  --border: #CFCFC9;
+  --border-strong: #000000;
+  --technical: #111111;
   --status-success: #6B8F5E;
   --status-warning: #A68C5B;
   --status-error: #9E5B5B;

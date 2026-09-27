@@ -32,20 +32,20 @@ export function WatermarkConfigPanel({
   const [showKey, setShowKey] = useState(false);
 
   const inputClass =
-    "w-full h-10 bg-surface-soft border border-border px-3 text-[11px] font-mono text-text-primary placeholder:text-text-tertiary focus:outline-none focus:border-border-strong transition-colors";
+    "w-full h-10 bg-surface border border-border-strong px-3 text-[11px] font-mono text-text-primary placeholder:text-text-secondary focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors";
 
   return (
     <div className={cn("border border-border bg-surface p-6 space-y-6", className)}>
       <div className="flex items-end justify-between border-b border-border pb-4">
         <div>
-          <h4 className="font-sans text-xs uppercase tracking-widest text-text-primary">
+          <h4 className="font-sans text-xs uppercase tracking-widest text-text-primary font-semibold">
             Watermark Configuration
           </h4>
-          <p className="text-[10px] text-text-tertiary font-mono tracking-wider mt-1 uppercase">
+          <p className="text-[10px] text-text-secondary font-mono tracking-wider mt-1 uppercase">
             DCT Frequency Domain
           </p>
         </div>
-        <span className="font-mono text-[9px] text-text-secondary tracking-widest uppercase">
+        <span className="font-mono text-[9px] text-black tracking-widest uppercase font-semibold">
           8 × 8 Blocks
         </span>
       </div>
@@ -53,19 +53,19 @@ export function WatermarkConfigPanel({
       <div className="space-y-5">
         {/* Type Toggle */}
         <div className="space-y-2">
-          <label className="block text-[10px] font-mono uppercase tracking-widest text-text-secondary">
+          <label className="block text-[10px] font-mono uppercase tracking-widest text-black font-semibold">
             Watermark Type
           </label>
-          <div className="flex bg-surface-soft border border-border h-9">
+          <div className="flex bg-surface border border-border-strong h-9">
             {(["text", "logo"] as const).map((t) => (
               <button
                 key={t}
                 onClick={() => setWatermarkType(t)}
                 className={cn(
-                  "flex-1 text-[10px] font-mono uppercase tracking-widest transition-colors",
+                  "flex-1 text-[10px] font-mono uppercase tracking-widest transition-colors font-semibold",
                   watermarkType === t
-                    ? "bg-technical text-background"
-                    : "text-text-tertiary hover:text-text-primary hover:bg-surface-hover"
+                    ? "bg-black text-white"
+                    : "text-text-secondary hover:text-black hover:bg-surface-soft"
                 )}
               >
                 {t}
@@ -76,7 +76,7 @@ export function WatermarkConfigPanel({
 
         {/* Payload */}
         <div className="space-y-2">
-          <label className="block text-[10px] font-mono uppercase tracking-widest text-text-secondary">
+          <label className="block text-[10px] font-mono uppercase tracking-widest text-black font-semibold">
             {watermarkType === "text" ? "Text Payload" : "Logo (Not Implemented)"}
           </label>
           {watermarkType === "text" ? (
@@ -88,7 +88,7 @@ export function WatermarkConfigPanel({
               className={inputClass}
             />
           ) : (
-            <div className="w-full h-10 bg-surface-soft border border-border flex items-center justify-center text-[10px] font-mono text-text-tertiary uppercase tracking-widest">
+            <div className="w-full h-10 bg-surface border border-border-strong flex items-center justify-center text-[10px] font-mono text-text-secondary uppercase tracking-widest">
               Logo support deferred to Phase 7
             </div>
           )}
@@ -97,12 +97,12 @@ export function WatermarkConfigPanel({
         {/* Secret Key */}
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <label className="block text-[10px] font-mono uppercase tracking-widest text-text-secondary">
+            <label className="block text-[10px] font-mono uppercase tracking-widest text-black font-semibold">
               Secret Key
             </label>
             <button
               onClick={() => setShowKey(!showKey)}
-              className="text-[9px] font-mono uppercase tracking-widest text-text-tertiary hover:text-text-primary transition-colors"
+              className="text-[9px] font-mono uppercase tracking-widest text-text-secondary hover:text-black transition-colors font-semibold"
             >
               {showKey ? "Hide" : "Show"}
             </button>
@@ -115,7 +115,7 @@ export function WatermarkConfigPanel({
             className={inputClass}
             autoComplete="off"
           />
-          <p className="text-[9px] font-sans text-text-tertiary">
+          <p className="text-[9px] font-sans text-text-secondary">
             Used to deterministically select embedding blocks. Not stored.
           </p>
         </div>
@@ -123,9 +123,9 @@ export function WatermarkConfigPanel({
         <div className="grid grid-cols-2 gap-5">
           {/* Strength */}
           <div className="space-y-2">
-            <label className="flex items-center justify-between text-[10px] font-mono uppercase tracking-widest text-text-secondary">
+            <label className="flex items-center justify-between text-[10px] font-mono uppercase tracking-widest text-black font-semibold">
               <span>Embed Strength</span>
-              <span className="text-text-primary">{strength.toFixed(2)}</span>
+              <span className="text-black">{strength.toFixed(2)}</span>
             </label>
             <input
               type="range"
@@ -136,7 +136,7 @@ export function WatermarkConfigPanel({
               onChange={(e) => setStrength(parseFloat(e.target.value))}
               className="w-full"
             />
-            <div className="flex justify-between text-[9px] font-mono text-text-tertiary">
+            <div className="flex justify-between text-[9px] font-mono text-text-secondary font-semibold">
               <span>0.05</span>
               <span>0.50</span>
             </div>
@@ -144,20 +144,20 @@ export function WatermarkConfigPanel({
 
           {/* DCT Band */}
           <div className="space-y-2">
-            <label className="block text-[10px] font-mono uppercase tracking-widest text-text-secondary">
+            <label className="block text-[10px] font-mono uppercase tracking-widest text-black font-semibold">
               DCT Band
             </label>
-            <div className="flex bg-surface-soft border border-border h-9">
+            <div className="flex bg-surface border border-border-strong h-9">
               {(["low", "mid", "high"] as const).map((b) => (
                 <button
                   key={b}
                   disabled={b !== "mid"}
                   onClick={() => setDctBand(b)}
                   className={cn(
-                    "flex-1 text-[10px] font-mono uppercase tracking-widest transition-colors",
+                    "flex-1 text-[10px] font-mono uppercase tracking-widest transition-colors font-semibold",
                     dctBand === b
-                      ? "bg-technical text-background"
-                      : "text-text-tertiary hover:text-text-primary",
+                      ? "bg-black text-white"
+                      : "text-text-secondary hover:text-black",
                     b !== "mid" && "opacity-30 cursor-not-allowed"
                   )}
                 >

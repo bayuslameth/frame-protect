@@ -61,7 +61,7 @@ function BarChart({ data, yLabel, height = 180 }: BarChartProps) {
   if (valid.length === 0) {
     return (
       <div className="flex items-center justify-center py-12 border border-border bg-background">
-        <p className="font-mono text-[10px] uppercase tracking-widest text-text-tertiary">NO DATA</p>
+        <p className="font-mono text-[10px] uppercase tracking-widest text-text-secondary">NO DATA</p>
       </div>
     );
   }
@@ -281,7 +281,7 @@ export default function ResultsPage() {
 
         {!session ? (
           <div className="border border-border bg-surface p-12 text-center space-y-4">
-            <p className="font-mono text-[10px] uppercase tracking-widest text-text-tertiary">NO EXPERIMENT SESSION</p>
+            <p className="font-mono text-[10px] uppercase tracking-widest text-text-secondary">NO EXPERIMENT SESSION</p>
             <p className="font-sans text-sm text-text-secondary">
               Return to the <strong>Protect</strong> page, embed a watermark and verify the baseline to create a session.
             </p>
@@ -293,7 +293,7 @@ export default function ResultsPage() {
               <div className="flex items-end justify-between border-b border-border pb-4">
                 <div className="space-y-1">
                   <h4 className="font-sans text-sm uppercase tracking-widest text-text-primary">Session</h4>
-                  <p className="font-mono text-[10px] text-text-tertiary tracking-widest uppercase">Experiment Context</p>
+                  <p className="font-mono text-[10px] text-text-secondary tracking-widest uppercase">Experiment Context</p>
                 </div>
                 <div className="flex gap-3">
                   <Button variant="outline" size="sm" onClick={requestClearSession} aria-label="Clear experiment session">
@@ -303,19 +303,19 @@ export default function ResultsPage() {
               </div>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 font-mono text-[10px]">
                 <div>
-                  <span className="block text-text-tertiary uppercase tracking-widest">Session ID</span>
+                  <span className="block text-text-secondary uppercase tracking-widest">Session ID</span>
                   <span className="block text-text-primary truncate">{session.sessionId.slice(0, 16)}…</span>
                 </div>
                 <div>
-                  <span className="block text-text-tertiary uppercase tracking-widest">Image</span>
+                  <span className="block text-text-secondary uppercase tracking-widest">Image</span>
                   <span className="block text-text-primary truncate">{session.imageFileName}</span>
                 </div>
                 <div>
-                  <span className="block text-text-tertiary uppercase tracking-widest">Dimensions</span>
+                  <span className="block text-text-secondary uppercase tracking-widest">Dimensions</span>
                   <span className="block text-text-primary">{session.imageWidth} × {session.imageHeight}</span>
                 </div>
                 <div>
-                  <span className="block text-text-tertiary uppercase tracking-widest">Watermark</span>
+                  <span className="block text-text-secondary uppercase tracking-widest">Watermark</span>
                   <span className="block text-text-primary">{session.watermarkText}</span>
                 </div>
               </div>
@@ -340,7 +340,7 @@ export default function ResultsPage() {
                 <div className="flex items-end justify-between border-b border-border pb-4">
                   <div className="space-y-1">
                     <h4 className="font-sans text-sm uppercase tracking-widest text-text-primary">Baseline</h4>
-                    <p className="font-mono text-[10px] text-text-tertiary tracking-widest uppercase">
+                    <p className="font-mono text-[10px] text-text-secondary tracking-widest uppercase">
                       Original → Watermarked (no attack)
                     </p>
                   </div>
@@ -355,9 +355,9 @@ export default function ResultsPage() {
                     { label: "BER", value: fmt(baseline.ber, 6), unit: "0–1" },
                   ].map((m) => (
                     <div key={m.label} className="bg-background p-5 space-y-3">
-                      <span className="block font-mono text-[9px] uppercase tracking-widest text-text-tertiary">{m.label}</span>
-                      <div className="font-serif text-2xl text-text-primary">{m.value}</div>
-                      <span className="block font-mono text-[8px] text-text-tertiary uppercase">{m.unit}</span>
+                      <span className="block font-mono text-[9px] uppercase tracking-widest text-text-secondary">{m.label}</span>
+                      <div className="font-serif text-3xl text-black font-semibold">{m.value}</div>
+                      <span className="block font-mono text-[8px] text-text-secondary uppercase">{m.unit}</span>
                     </div>
                   ))}
                 </div>
@@ -369,7 +369,7 @@ export default function ResultsPage() {
               </div>
             ) : (
               <div className="border border-dashed border-border bg-surface p-6 text-center">
-                <p className="font-mono text-[10px] uppercase tracking-widest text-text-tertiary">No baseline result.</p>
+                <p className="font-mono text-[10px] uppercase tracking-widest text-text-secondary">No baseline result.</p>
               </div>
             )}
 
@@ -379,23 +379,23 @@ export default function ResultsPage() {
                 <h4 className="font-sans text-sm uppercase tracking-widest text-text-primary border-b border-border pb-3">Summary</h4>
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-4 font-mono text-[10px]">
                   <div>
-                    <span className="block text-text-tertiary uppercase tracking-widest">Total Attacks</span>
+                    <span className="block text-text-secondary uppercase tracking-widest">Total Attacks</span>
                     <span className="block text-text-primary text-base font-bold">{attackResults.length}</span>
                   </div>
                   <div>
-                    <span className="block text-text-tertiary uppercase tracking-widest">Detected</span>
+                    <span className="block text-text-secondary uppercase tracking-widest">Detected</span>
                     <span className="block text-success text-base font-bold">{attackResults.filter((r) => r.extractionStatus === "DETECTED").length}</span>
                   </div>
                   <div>
-                    <span className="block text-text-tertiary uppercase tracking-widest">Failed</span>
+                    <span className="block text-text-secondary uppercase tracking-widest">Failed</span>
                     <span className="block text-error text-base font-bold">{attackResults.filter((r) => r.extractionStatus === "FAILED").length}</span>
                   </div>
                   <div>
-                    <span className="block text-text-tertiary uppercase tracking-widest">Avg PSNR</span>
+                    <span className="block text-text-secondary uppercase tracking-widest">Avg PSNR</span>
                     <span className="block text-text-primary">{avg(validPsnr) !== null ? avg(validPsnr)!.toFixed(2) + " dB" : "—"}</span>
                   </div>
                   <div>
-                    <span className="block text-text-tertiary uppercase tracking-widest">Avg NC / BER</span>
+                    <span className="block text-text-secondary uppercase tracking-widest">Avg NC / BER</span>
                     <span className="block text-text-primary">
                       {avg(validNc) !== null ? avg(validNc)!.toFixed(4) : "—"} / {avg(validBer) !== null ? avg(validBer)!.toFixed(4) : "—"}
                     </span>
@@ -411,8 +411,8 @@ export default function ResultsPage() {
               </h4>
               {sortedResults.length === 0 ? (
                 <div className="text-center py-10">
-                  <p className="font-mono text-[10px] uppercase tracking-widest text-text-tertiary">NO EXPERIMENT RESULTS</p>
-                  <p className="font-sans text-xs text-text-tertiary mt-2">Run an attack in Attack Lab to populate this section.</p>
+                  <p className="font-mono text-[10px] uppercase tracking-widest text-text-secondary">NO EXPERIMENT RESULTS</p>
+                  <p className="font-sans text-xs text-text-secondary mt-2">Run an attack in Attack Lab to populate this section.</p>
                 </div>
               ) : (
                 <div className="overflow-x-auto">
@@ -461,12 +461,12 @@ export default function ResultsPage() {
                       <table className="w-full text-left border-collapse border border-border">
                         <thead>
                           <tr className="border-b border-border bg-surface">
-                            <th className="py-1 px-3 font-mono text-[8px] text-text-tertiary uppercase tracking-widest font-normal">Param</th>
-                            <th className="py-1 px-3 font-mono text-[8px] text-text-tertiary uppercase tracking-widest font-normal">Dims</th>
-                            <th className="py-1 px-3 font-mono text-[8px] text-text-tertiary uppercase tracking-widest font-normal">Extraction</th>
-                            <th className="py-1 px-3 font-mono text-[8px] text-text-tertiary uppercase tracking-widest font-normal">PSNR</th>
-                            <th className="py-1 px-3 font-mono text-[8px] text-text-tertiary uppercase tracking-widest font-normal">NC</th>
-                            <th className="py-1 px-3 font-mono text-[8px] text-text-tertiary uppercase tracking-widest font-normal">BER</th>
+                            <th className="py-1 px-3 font-mono text-[8px] text-text-secondary uppercase tracking-widest font-normal">Param</th>
+                            <th className="py-1 px-3 font-mono text-[8px] text-text-secondary uppercase tracking-widest font-normal">Dims</th>
+                            <th className="py-1 px-3 font-mono text-[8px] text-text-secondary uppercase tracking-widest font-normal">Extraction</th>
+                            <th className="py-1 px-3 font-mono text-[8px] text-text-secondary uppercase tracking-widest font-normal">PSNR</th>
+                            <th className="py-1 px-3 font-mono text-[8px] text-text-secondary uppercase tracking-widest font-normal">NC</th>
+                            <th className="py-1 px-3 font-mono text-[8px] text-text-secondary uppercase tracking-widest font-normal">BER</th>
                           </tr>
                         </thead>
                         <tbody className="font-mono text-[10px]">
@@ -494,14 +494,14 @@ export default function ResultsPage() {
                 <h4 className="font-sans text-sm uppercase tracking-widest text-text-primary border-b border-border pb-3">
                   Visual Analysis
                 </h4>
-                <p className="font-mono text-[9px] text-text-tertiary uppercase tracking-widest">
+                <p className="font-mono text-[9px] text-text-secondary uppercase tracking-widest">
                   Charts are generated from actual experiment results only. Missing values are not interpolated.
                 </p>
                 <div className="space-y-6">
                   <div>
                     <h5 className="font-mono text-[10px] uppercase tracking-widest text-text-secondary mb-2">PSNR (dB)</h5>
                     <BarChart data={chartData.map((d) => ({ label: d.label, value: d.psnr === -1 ? null : d.psnr }))} yLabel="PSNR dB" />
-                    <p className="font-mono text-[8px] text-text-tertiary mt-1">N/A shown as dashed bars (dimension-altering attacks)</p>
+                    <p className="font-mono text-[8px] text-text-secondary mt-1">N/A shown as dashed bars (dimension-altering attacks)</p>
                   </div>
                   <div>
                     <h5 className="font-mono text-[10px] uppercase tracking-widest text-text-secondary mb-2">NC (Normalized Correlation)</h5>
@@ -518,7 +518,7 @@ export default function ResultsPage() {
             {/* ── EXPORT ── */}
             <div className="border border-border bg-surface p-6 space-y-4">
               <h4 className="font-sans text-sm uppercase tracking-widest text-text-primary border-b border-border pb-3">Export</h4>
-              <p className="font-mono text-[9px] text-text-tertiary uppercase tracking-widest">
+              <p className="font-mono text-[9px] text-text-secondary uppercase tracking-widest">
                 Exported data excludes secret keys and credentials.
                 XLSX export deferred — CSV and JSON are fully functional.
               </p>
@@ -543,7 +543,7 @@ export default function ResultsPage() {
                 </Button>
               </div>
               {results.length > 0 && (
-                <p className="font-mono text-[8px] text-text-tertiary">
+                <p className="font-mono text-[8px] text-text-secondary">
                   {results.length} record(s) · frame-protect-results.csv / frame-protect-results.json
                 </p>
               )}
