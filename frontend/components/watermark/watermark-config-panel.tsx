@@ -8,6 +8,8 @@ interface WatermarkConfigPanelProps {
   setWatermarkType: (v: "text" | "logo") => void;
   watermarkText: string;
   setWatermarkText: (v: string) => void;
+  watermarkFile?: File | null;
+  setWatermarkFile?: (v: File | null) => void;
   secretKey: string;
   setSecretKey: (v: string) => void;
   strength: number;
@@ -22,6 +24,8 @@ export function WatermarkConfigPanel({
   setWatermarkType,
   watermarkText,
   setWatermarkText,
+  watermarkFile,
+  setWatermarkFile,
   secretKey,
   setSecretKey,
   strength,

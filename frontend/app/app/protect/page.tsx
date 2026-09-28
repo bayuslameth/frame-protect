@@ -33,6 +33,7 @@ export default function ProtectPage() {
   // Config State
   const [watermarkType, setWatermarkType] = useState<"text" | "logo">("text");
   const [watermarkText, setWatermarkText] = useState("");
+  const [watermarkFile, setWatermarkFile] = useState<File | null>(null);
   const [secretKey, setSecretKey] = useState("");
   const [strength, setStrength] = useState(0.15);
   const [dctBand, setDctBand] = useState<"low" | "mid" | "high">("mid");
@@ -81,6 +82,10 @@ export default function ProtectPage() {
         image: asset.file,
         watermark_type: watermarkType,
         watermark_text: watermarkText,
+        watermark_file: watermarkFile || undefined,
+        
+        
+        
         secret_key: secretKey,
         strength,
         dct_band: dctBand,
@@ -96,6 +101,10 @@ export default function ProtectPage() {
         watermarked_image: wmFile,
         watermark_type: watermarkType,
         watermark_text: watermarkText,
+        watermark_file: watermarkFile || undefined,
+        
+        
+        
         secret_key: secretKey,
       });
       const duration = Date.now() - embedStart;
@@ -187,6 +196,8 @@ export default function ProtectPage() {
               setWatermarkType={setWatermarkType}
               watermarkText={watermarkText}
               setWatermarkText={setWatermarkText}
+              watermarkFile={watermarkFile}
+              setWatermarkFile={setWatermarkFile}
               secretKey={secretKey}
               setSecretKey={setSecretKey}
               strength={strength}
