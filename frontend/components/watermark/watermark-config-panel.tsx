@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { cn } from "@/lib/utils";
 
 interface WatermarkConfigPanelProps {
@@ -34,9 +34,16 @@ export function WatermarkConfigPanel({
   setDctBand,
 }: WatermarkConfigPanelProps) {
   const [showKey, setShowKey] = useState(false);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const inputClass =
     "w-full h-10 bg-surface border border-border-strong px-3 text-[11px] font-mono text-text-primary placeholder:text-text-secondary focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors";
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files.length > 0) {
+      if (setWatermarkFile) setWatermarkFile(e.target.files[0]);
+    }
+  };
 
   return (
     <div className={cn("border border-border bg-surface p-6 space-y-6", className)}>
@@ -81,7 +88,7 @@ export function WatermarkConfigPanel({
         {/* Payload */}
         <div className="space-y-2">
           <label className="block text-[10px] font-mono uppercase tracking-widest text-black font-semibold">
-            {watermarkType === "text" ? "Text Payload" : "Logo (Not Implemented)"}
+            {watermarkType === "text" ? "Text Payload" : "Logo Payload (Image)"}
           </label>
           {watermarkType === "text" ? (
             <input
@@ -92,8 +99,23 @@ export function WatermarkConfigPanel({
               className={inputClass}
             />
           ) : (
-            <div className="w-full h-10 bg-surface border border-border-strong flex items-center justify-center text-[10px] font-mono text-text-secondary uppercase tracking-widest">
-              Logo support deferred to Phase 7
+            <div className="flex items-center space-x-3">
+              <input 
+                type="file" 
+                ref={fileInputRef} 
+                onChange={handleFileChange}
+                accept="image/png, image/jpeg" 
+                className="hidden" 
+              />
+              <button 
+                onClick={() => fileInputRef.current?.click()}
+                className="h-10 px-4 bg-white border border-border-strong text-[10px] font-mono uppercase tracking-widest text-black hover:bg-surface-soft transition-colors"
+              >
+                Select Logo
+              </button>
+              <span className="text-[10px] font-mono text-text-secondary truncate max-w-[150px]">
+                {watermarkFile ? watermarkFile.name : "No file selected"}
+              </span>
             </div>
           )}
         </div>

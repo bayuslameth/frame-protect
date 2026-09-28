@@ -1,6 +1,8 @@
 import numpy as np
+from PIL import Image
 
 MAGIC = b'FP'
+MAGIC_IMG = b'FI'
 VERSION = 1
 
 def text_to_bits(text: str) -> np.ndarray:
@@ -47,12 +49,67 @@ def bits_to_text(bits: np.ndarray) -> str:
     except UnicodeDecodeError:
         return ""
 
-def logo_to_bits(logo_bytes: bytes, threshold: int = 128) -> np.ndarray:
+def logo_to_bits(logo_img: Image.Image) -> np.ndarray:
     """
-    Convert a small logo image into a binary payload.
-    (This is basic mapping, but the prompt says 'Convert logo to grayscale... resize...').
-    Since we only need bits, we will do the resize in the endpoint/service,
-    and here just take the grayscale pixel array and binarize it.
+    Converts a logo image to a binary payload.
+    Format: MAGIC_IMG (2 bytes) + VERSION (1 byte) + WIDTH (2 bytes) + HEIGHT (2 bytes) + PIXELS (1 bit per pixel)
     """
-    pass # We will implement logo encoding properly if needed, but text is priority for testing structure first.
+    gray = logo_img.convert('L')
+    # Binarize with threshold 128
+    binary = (np.array(gray) > 127).astype(np.uint8)
+    
+    width, height = logo_img.size
+    
+    header = MAGIC_IMG + VERSION.to_bytes(1, 'big') + width.to_bytes(2, 'big') + height.to_bytes(2, 'big')
+    header_bits = np.unpackbits(np.frombuffer(header, dtype=np.uint8))
+    
+    pixel_bits = binary.flatten()
+    
+    return np.concatenate((header_bits, pixel_bits))
 
+def bits_to_logo(bits: np.ndarray) -> Image.Image:
+    """
+    Recovers a logo image from a bit array.
+    Returns None if magic doesn't match or corrupted.
+    """
+    if len(bits) < 56: # 2 + 1 + 2 + 2 = 7 bytes = 56 bits
+        return None
+        
+    # Only need to pack first 7 bytes to read header
+    header_bytes = np.packbits(bits[:56]).tobytes()
+    magic = header_bytes[0:2]
+    if magic != MAGIC_IMG:
+        return None
+        
+    version = header_bytes[2]
+    if version != VERSION:
+        return None
+        
+    width = int.from_bytes(header_bytes[3:5], 'big')
+    height = int.from_bytes(header_bytes[5:7], 'big')
+    
+    total_pixels = width * height
+    if total_pixels == 0 or len(bits) < 56 + total_pixels:
+        return None
+        
+    pixel_bits = bits[56:56+total_pixels]
+    # Multiply by 255 so 1 becomes white, 0 becomes black
+    pixels_255 = pixel_bits * 255
+    pixel_array = pixels_255.reshape((height, width)).astype(np.uint8)
+    
+    return Image.fromarray(pixel_array, mode='L')
+
+def detect_payload_type(bits: np.ndarray) -> str:
+    """
+    Detects if the payload is text or image based on magic bytes.
+    Returns 'text', 'image', or 'unknown'
+    """
+    if len(bits) < 16:
+        return "unknown"
+    header_bytes = np.packbits(bits[:16]).tobytes()
+    magic = header_bytes[0:2]
+    if magic == MAGIC:
+        return "text"
+    elif magic == MAGIC_IMG:
+        return "image"
+    return "unknown"

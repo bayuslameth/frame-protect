@@ -274,13 +274,20 @@ export default function ProtectPage() {
                       </span>
                     </div>
 
-                    <div className="bg-background p-4 border border-border space-y-1">
+                    <div className="bg-background p-4 border border-border space-y-2">
                       <span className="block font-mono text-[8px] uppercase tracking-widest text-text-secondary">
                         Extracted Watermark
                       </span>
-                      <div className="font-mono text-sm text-text-primary font-medium tracking-wide">
-                        {metricsResult.recovered_text || "(empty)"}
-                      </div>
+                      {metricsResult.recovered_logo ? (
+                        <div className="border border-border-strong bg-white inline-block">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={metricsResult.recovered_logo} alt="Extracted Logo" className="h-16 w-auto object-contain" />
+                        </div>
+                      ) : (
+                        <div className="font-mono text-sm text-text-primary font-medium tracking-wide">
+                          {metricsResult.recovered_text || "(empty)"}
+                        </div>
+                      )}
                     </div>
 
                     <div className="grid grid-cols-3 gap-3">

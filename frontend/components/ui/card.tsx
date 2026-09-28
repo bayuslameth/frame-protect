@@ -6,7 +6,7 @@ export type CardProps = React.HTMLAttributes<HTMLDivElement>;
 export function Card({ className, children, ...props }: CardProps) {
   return (
     <div
-      className={cn("border border-border bg-surface p-6", className)}
+      className={cn("border border-border bg-surface", className)}
       {...props}
     >
       {children}
@@ -21,10 +21,7 @@ export function CardHeader({
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn(
-        "flex flex-col space-y-1 pb-4 border-b border-border mb-4",
-        className
-      )}
+      className={cn("px-5 py-4 border-b border-border", className)}
       {...props}
     >
       {children}
@@ -40,7 +37,7 @@ export function CardTitle({
   return (
     <h3
       className={cn(
-        "font-sans text-xs tracking-widest text-text-primary uppercase",
+        "font-mono text-[10px] tracking-widest text-text-primary uppercase",
         className
       )}
       {...props}
@@ -57,10 +54,7 @@ export function CardDescription({
 }: React.HTMLAttributes<HTMLParagraphElement>) {
   return (
     <p
-      className={cn(
-        "text-xs font-sans text-text-secondary leading-relaxed",
-        className
-      )}
+      className={cn("text-xs font-sans text-text-tertiary leading-relaxed mt-1", className)}
       {...props}
     >
       {children}
@@ -74,7 +68,7 @@ export function CardContent({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn("", className)} {...props}>
+    <div className={cn("px-5 py-4", className)} {...props}>
       {children}
     </div>
   );

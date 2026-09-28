@@ -159,7 +159,7 @@ export default function AttackLabPage() {
                     Attack Type
                   </label>
                   <select
-                    className="w-full bg-background border border-border text-sm p-3 focus:outline-none focus:border-text-primary font-mono"
+                    className="w-full bg-background border border-border text-[11px] p-2.5 focus:outline-none focus:border-text-primary font-mono tracking-wide transition-colors"
                     value={selectedAttack}
                     onChange={handleAttackChange}
                   >
@@ -176,7 +176,7 @@ export default function AttackLabPage() {
                     Parameter
                   </label>
                   <select
-                    className="w-full bg-background border border-border text-sm p-3 focus:outline-none focus:border-text-primary font-mono"
+                    className="w-full bg-background border border-border text-[11px] p-2.5 focus:outline-none focus:border-text-primary font-mono tracking-wide transition-colors"
                     value={selectedParam}
                     onChange={(e) => setSelectedParam(Number(e.target.value))}
                   >

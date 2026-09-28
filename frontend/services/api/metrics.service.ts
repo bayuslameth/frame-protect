@@ -4,13 +4,16 @@ export interface VerifyRequest {
   original_image: File;
   watermarked_image: File;
   watermark_type: "text" | "logo";
-  watermark_text: string;
+  watermark_text?: string;
+  watermark_file?: File;
   secret_key: string;
 }
 
 export interface VerifyResponse {
   success: boolean;
+  watermark_type?: string;
   recovered_text?: string;
+  recovered_logo?: string;
   metrics: {
     psnr: {
       value: number;
@@ -32,7 +35,8 @@ export async function verifyWatermark(req: VerifyRequest): Promise<VerifyRespons
   formData.append("original_image", req.original_image);
   formData.append("watermarked_image", req.watermarked_image);
   formData.append("watermark_type", req.watermark_type);
-  formData.append("watermark_text", req.watermark_text);
+  if (req.watermark_text) formData.append("watermark_text", req.watermark_text);
+  if (req.watermark_file) formData.append("watermark_file", req.watermark_file);
   formData.append("secret_key", req.secret_key);
 
   const response = await fetch(`${API_URL}/api/metrics/verify`, {

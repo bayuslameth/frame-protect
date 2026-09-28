@@ -4,6 +4,7 @@ export interface EmbedRequest {
   image: File;
   watermark_type: "text" | "logo";
   watermark_text?: string;
+  watermark_file?: File;
   secret_key: string;
   strength: number;
   dct_band: string;
@@ -29,6 +30,7 @@ export async function embedWatermark(req: EmbedRequest): Promise<EmbedResponse> 
   formData.append("image", req.image);
   formData.append("watermark_type", req.watermark_type);
   if (req.watermark_text) formData.append("watermark_text", req.watermark_text);
+  if (req.watermark_file) formData.append("watermark_file", req.watermark_file);
   formData.append("secret_key", req.secret_key);
   formData.append("strength", req.strength.toString());
   formData.append("dct_band", req.dct_band);
@@ -50,6 +52,7 @@ export interface DetectRequest {
   image: File;
   secret_key: string;
   original_watermark_text?: string;
+  original_watermark_file?: File;
 }
 
 export interface DetectResponse {
@@ -65,6 +68,9 @@ export async function detectWatermark(req: DetectRequest): Promise<DetectRespons
   formData.append("secret_key", req.secret_key);
   if (req.original_watermark_text) {
     formData.append("original_watermark_text", req.original_watermark_text);
+  }
+  if (req.original_watermark_file) {
+    formData.append("original_watermark_file", req.original_watermark_file);
   }
 
   const response = await fetch(`${API_URL}/api/watermark/detect`, {

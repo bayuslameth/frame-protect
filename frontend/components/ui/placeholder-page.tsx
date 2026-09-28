@@ -1,5 +1,5 @@
 import React from "react";
-import { Badge } from "./badge";
+import { cn } from "@/lib/utils";
 
 interface PlaceholderPageProps {
   pageName: string;
@@ -15,18 +15,15 @@ export function PlaceholderPage({
   children,
 }: PlaceholderPageProps) {
   return (
-    <div className="mx-auto w-full max-w-7xl space-y-10 py-10 px-4 sm:px-6 lg:px-8">
-      <div className="space-y-3 border-b border-border pb-8">
-        <div className="flex flex-wrap items-center gap-3">
-          <Badge variant="phase">Phase 5 Complete</Badge>
-          <span className="font-mono text-[9px] text-text-secondary tracking-widest uppercase">
-            {routePath}
-          </span>
-        </div>
-        <h1 className="text-3xl sm:text-4xl font-serif text-text-primary tracking-tight">
+    <div className="mx-auto w-full max-w-7xl py-10 px-4 sm:px-6 lg:px-8">
+      <div className="border-b border-border pb-8 mb-10">
+        <p className="font-mono text-[9px] text-text-tertiary uppercase tracking-widest mb-3">
+          {routePath}
+        </p>
+        <h1 className="font-serif text-3xl sm:text-4xl text-text-primary tracking-tight">
           {pageName}
         </h1>
-        <p className="max-w-2xl text-sm font-sans text-text-secondary leading-relaxed">
+        <p className="mt-2 max-w-2xl text-sm font-sans text-text-secondary leading-relaxed">
           {description}
         </p>
       </div>

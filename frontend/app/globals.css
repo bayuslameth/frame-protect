@@ -1,40 +1,52 @@
 @import "tailwindcss";
 
 :root {
-  --background: #F7F7F5;
-  --surface: #FFFFFF;
-  --surface-soft: #F0F0EC;
-  --surface-hover: #EAEAE5;
-  --text-primary: #0A0A0A;
-  --text-secondary: #333333;
-  --text-tertiary: #555555;
-  --border: #CFCFC9;
-  --border-strong: #000000;
-  --technical: #111111;
-  --status-success: #6B8F5E;
-  --status-warning: #A68C5B;
-  --status-error: #9E5B5B;
+  /* ── Surfaces ─────────────────────────────────── */
+  --background:    #F7F7F5;
+  --surface:       #FFFFFF;
+  --surface-soft:  #F0F0EC;
+  --surface-hover: #E8E8E2;
+
+  /* ── Text hierarchy ───────────────────────────── */
+  --text-primary:   #050505;   /* near-black — main content     */
+  --text-secondary: #222222;   /* dark gray  — supporting text  */
+  --text-tertiary:  #444444;   /* mid gray   — labels, captions */
+
+  /* ── Borders ──────────────────────────────────── */
+  --border:        #BDBDB7;   /* subtle structural divider     */
+  --border-strong: #000000;   /* strong frame / section line   */
+
+  /* ── Technical accent ─────────────────────────── */
+  --technical:     #000000;
+
+  /* ── Status (semantic only) ───────────────────── */
+  --status-success: #3A6B30;
+  --status-warning: #7A6020;
+  --status-error:   #7A3030;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-surface: var(--surface);
-  --color-surface-soft: var(--surface-soft);
+  --color-background:    var(--background);
+  --color-surface:       var(--surface);
+  --color-surface-soft:  var(--surface-soft);
   --color-surface-hover: var(--surface-hover);
-  --color-text-primary: var(--text-primary);
-  --color-text-secondary: var(--text-secondary);
+  --color-text-primary:  var(--text-primary);
+  --color-text-secondary:var(--text-secondary);
   --color-text-tertiary: var(--text-tertiary);
-  --color-border: var(--border);
+  --color-border:        var(--border);
   --color-border-strong: var(--border-strong);
-  --color-technical: var(--technical);
-  --color-success: var(--status-success);
-  --color-warning: var(--status-warning);
-  --color-error: var(--status-error);
+  --color-technical:     var(--technical);
+  --color-success:       var(--status-success);
+  --color-warning:       var(--status-warning);
+  --color-error:         var(--status-error);
 
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, monospace;
-  --font-serif: var(--font-playfair), ui-serif, Georgia, serif;
+  --font-sans:  var(--font-geist-sans),  ui-sans-serif,  system-ui, sans-serif;
+  --font-mono:  var(--font-geist-mono),  ui-monospace,   SFMono-Regular, monospace;
+  --font-serif: var(--font-playfair),    ui-serif,       Georgia, serif;
 }
+
+/* ── Base reset ───────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
 
 body {
   background-color: var(--background);
@@ -42,13 +54,81 @@ body {
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-size: 14px;
+  line-height: 1.6;
 }
 
 ::selection {
-  background: var(--technical);
-  color: var(--background);
+  background: #000000;
+  color: #F7F7F5;
 }
 
+/* ── Focus ring ───────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid #000000;
+  outline-offset: 2px;
+}
+
+/* ── Range inputs ─────────────────────────────────── */
 input[type="range"] {
-  accent-color: var(--technical);
+  accent-color: #000000;
+}
+
+/* ── Text inputs / selects ────────────────────────── */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+select,
+textarea {
+  color: var(--text-primary);
+  background-color: var(--surface);
+}
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-tertiary);
+}
+
+/* ── Minimal scrollbar ────────────────────────────── */
+::-webkit-scrollbar         { width: 4px; height: 4px; }
+::-webkit-scrollbar-track   { background: transparent; }
+::-webkit-scrollbar-thumb   { background: var(--border); }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ── Image grid placeholder texture ──────────────── */
+.img-grid-bg {
+  background-image:
+    repeating-linear-gradient(0deg,  rgba(0,0,0,0.05) 0px, rgba(0,0,0,0.05) 1px, transparent 1px, transparent 20px),
+    repeating-linear-gradient(90deg, rgba(0,0,0,0.05) 0px, rgba(0,0,0,0.05) 1px, transparent 1px, transparent 20px);
+}
+
+/* ── Metric readout — large bold number ───────────── */
+.metric-value {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #000000;
+  letter-spacing: -0.01em;
+  line-height: 1;
+}
+
+/* ── Section label — tiny mono uppercase ──────────── */
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;   /* 9px */
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: var(--text-tertiary);
+}
+
+/* ── Technical heading ────────────────────────────── */
+.tech-heading {
+  font-family: var(--font-sans);
+  font-size: 0.625rem;   /* 10px */
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-primary);
 }

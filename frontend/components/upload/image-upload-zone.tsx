@@ -50,47 +50,48 @@ export function ImageUploadZone({
     }
   };
 
+  // Loaded state
   if (asset) {
     return (
-      <div className={cn("border border-border bg-surface p-5 space-y-4", className)}>
-        <div className="flex items-center justify-between border-b border-border pb-3">
-          <span className="font-mono text-[10px] uppercase tracking-widest text-text-primary">
+      <div className={cn("border border-border bg-surface", className)}>
+        {/* Header */}
+        <div className="flex items-center justify-between px-4 py-2.5 border-b border-border bg-surface-soft">
+          <span className="font-mono text-[9px] uppercase tracking-widest text-text-primary font-semibold">
             {label}
           </span>
-          <span className="font-mono text-[9px] text-success tracking-widest uppercase">
-            Ready
+          <span className="font-mono text-[8px] text-success tracking-widest uppercase">
+            ● Loaded
           </span>
         </div>
-        <div className="grid grid-cols-2 gap-x-6 gap-y-3">
+
+        {/* Metadata grid */}
+        <div className="p-4 grid grid-cols-2 gap-3">
           {[
-            [
-              "Format",
-              asset.metadata.type.split("/")[1]?.toUpperCase() ||
-                asset.metadata.type,
-            ],
+            ["Format", asset.metadata.type.split("/")[1]?.toUpperCase() || asset.metadata.type],
             ["Size", `${(asset.metadata.size / (1024 * 1024)).toFixed(2)} MB`],
-            [
-              "Dimensions",
-              `${asset.metadata.width} × ${asset.metadata.height}`,
-            ],
-            ["Color", "RGB"],
+            ["Dimensions", `${asset.metadata.width} × ${asset.metadata.height}`],
+            ["Color Space", "RGB"],
           ].map(([k, v]) => (
             <div key={k}>
-              <span className="block font-mono text-[9px] text-text-secondary uppercase tracking-widest">
+              <span className="block font-mono text-[8px] text-text-tertiary uppercase tracking-widest">
                 {k}
               </span>
-              <span className="block font-mono text-[11px] text-text-primary">
+              <span className="block font-mono text-[10px] text-text-primary mt-0.5">
                 {v}
               </span>
             </div>
           ))}
         </div>
-        <button
-          onClick={onReset}
-          className="text-[10px] font-mono uppercase tracking-widest text-text-secondary hover:text-error transition-colors"
-        >
-          [ Remove Image ]
-        </button>
+
+        {/* Remove */}
+        <div className="px-4 py-2.5 border-t border-border">
+          <button
+            onClick={onReset}
+            className="font-mono text-[9px] uppercase tracking-widest text-text-tertiary hover:text-error transition-colors duration-150"
+          >
+            [ Remove ]
+          </button>
+        </div>
       </div>
     );
   }
@@ -106,13 +107,13 @@ export function ImageUploadZone({
       aria-label={`Upload ${label}`}
       onKeyDown={(e) => e.key === "Enter" && handleClick()}
       className={cn(
-        "relative flex flex-col items-center justify-center p-12 text-center transition-all cursor-pointer select-none",
-        "border border-dashed group",
+        "relative flex flex-col items-center justify-center p-12 text-center transition-colors duration-150 cursor-pointer select-none",
+        "border border-dashed",
         error
-          ? "border-error bg-[#9E5B5B]/5"
+          ? "border-error bg-error/5"
           : isDragging
-          ? "border-border-strong bg-surface-soft"
-          : "border-border bg-surface hover:border-border-strong hover:bg-surface-soft",
+          ? "border-text-primary bg-surface-soft"
+          : "border-border bg-background hover:border-text-tertiary hover:bg-surface-soft",
         isProcessing && "opacity-60 cursor-wait",
         className
       )}
@@ -126,7 +127,7 @@ export function ImageUploadZone({
         aria-hidden="true"
       />
 
-      {/* Crop Marks */}
+      {/* Corner crop marks */}
       {[
         "top-0 left-0 border-t border-l",
         "top-0 right-0 border-t border-r",
@@ -138,31 +139,33 @@ export function ImageUploadZone({
           className={cn(
             "absolute w-3 h-3 transition-colors",
             pos,
-            error ? "border-error" : "border-border-strong"
+            error ? "border-error" : "border-text-tertiary"
           )}
         />
       ))}
 
-      <div className="space-y-2 relative z-10">
+      <div className="space-y-1.5 relative z-10">
         <p
           className={cn(
-            "font-mono text-xs uppercase tracking-widest",
+            "font-mono text-[10px] uppercase tracking-widest",
             error ? "text-error" : "text-text-primary"
           )}
         >
-          {error ? "Upload Failed" : isDragging ? "Drop Image Here" : label}
+          {error ? "Upload Failed" : isDragging ? "Drop Here" : label}
         </p>
         {error ? (
-          <p className="text-[10px] text-error font-sans">{getErrorText(error)}</p>
+          <p className="text-[9px] text-error font-sans max-w-[200px]">
+            {getErrorText(error)}
+          </p>
         ) : (
-          <p className="text-[10px] text-text-secondary font-mono uppercase tracking-wider">
+          <p className="text-[9px] text-text-tertiary font-mono uppercase tracking-wider">
             {isProcessing ? "Processing..." : accept}
           </p>
         )}
       </div>
 
       {!error && (
-        <p className="mt-5 text-[10px] text-text-secondary font-mono tracking-widest uppercase relative z-10">
+        <p className="mt-6 text-[9px] text-text-tertiary font-mono tracking-widest uppercase relative z-10">
           {isDragging ? "Release to upload" : "Click or drag & drop"}
         </p>
       )}
