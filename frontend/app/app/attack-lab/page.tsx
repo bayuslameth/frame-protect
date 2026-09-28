@@ -141,10 +141,10 @@ export default function AttackLabPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
           <div className="space-y-8">
-            <div className="border border-border bg-surface p-6 space-y-6">
-              <div className="flex items-end justify-between border-b border-border pb-4">
+            <div className="border border-[#000000] bg-surface p-6 space-y-6">
+              <div className="flex items-end justify-between border-b border-[#000000] pb-4">
                 <div className="space-y-1">
-                  <h4 className="font-sans text-sm uppercase tracking-widest text-text-primary">
+                  <h4 className="font-sans text-[11px] font-bold uppercase tracking-widest text-[#000000]">
                     Attack Configuration
                   </h4>
                   <p className="text-[10px] text-text-secondary font-mono tracking-widest uppercase">
@@ -159,7 +159,7 @@ export default function AttackLabPage() {
                     Attack Type
                   </label>
                   <select
-                    className="w-full bg-background border border-border text-[11px] p-2.5 focus:outline-none focus:border-text-primary font-mono tracking-wide transition-colors"
+                    className="w-full h-10 bg-white border border-[#000000] px-3 text-[11px] font-mono font-bold text-[#000000] focus:outline-none focus:ring-2 focus:ring-[#000000] focus:ring-offset-1 transition-colors"
                     value={selectedAttack}
                     onChange={handleAttackChange}
                   >
@@ -176,7 +176,7 @@ export default function AttackLabPage() {
                     Parameter
                   </label>
                   <select
-                    className="w-full bg-background border border-border text-[11px] p-2.5 focus:outline-none focus:border-text-primary font-mono tracking-wide transition-colors"
+                    className="w-full h-10 bg-white border border-[#000000] px-3 text-[11px] font-mono font-bold text-[#000000] focus:outline-none focus:ring-2 focus:ring-[#000000] focus:ring-offset-1 transition-colors"
                     value={selectedParam}
                     onChange={(e) => setSelectedParam(Number(e.target.value))}
                   >
@@ -211,8 +211,8 @@ export default function AttackLabPage() {
             {/* Results Block */}
             {currentResult && (
               <div className="space-y-6">
-                <div className="border border-border bg-surface p-5 space-y-4">
-                  <div className="flex items-center justify-between border-b border-border pb-3">
+                <div className="border border-[#000000] bg-surface p-5 space-y-4">
+                  <div className="flex items-center justify-between border-b border-[#000000] pb-3">
                     <h4 className="font-mono text-[10px] uppercase tracking-widest text-text-primary">
                       Attacked Image
                     </h4>
@@ -233,19 +233,19 @@ export default function AttackLabPage() {
                   </div>
                 </div>
 
-                <div className="border border-border bg-surface p-5 space-y-4">
-                  <div className="flex items-center justify-between border-b border-border pb-3">
+                <div className="border border-[#000000] bg-surface p-5 space-y-4">
+                  <div className="flex items-center justify-between border-b border-[#000000] pb-3">
                     <h4 className="font-mono text-[10px] uppercase tracking-widest text-text-primary">
                       Extraction
                     </h4>
                   </div>
-                  <div className="bg-background p-4 border border-border space-y-1">
+                  <div className="bg-background p-4 border border-[#000000] space-y-1">
                     <span className="block font-mono text-[8px] uppercase tracking-widest text-text-secondary">Status</span>
                     <span className={`block font-mono text-xs font-bold ${currentResult.extraction_status === "DETECTED" ? "text-success" : "text-error"}`}>
                       {currentResult.extraction_status}
                     </span>
                   </div>
-                  <div className="bg-background p-4 border border-border space-y-1">
+                  <div className="bg-background p-4 border border-[#000000] space-y-1">
                     <span className="block font-mono text-[8px] uppercase tracking-widest text-text-secondary">Extracted Watermark</span>
                     <div className="font-mono text-sm text-text-primary font-medium tracking-wide">
                       {currentResult.extracted_watermark || "(empty)"}
@@ -253,28 +253,28 @@ export default function AttackLabPage() {
                   </div>
                 </div>
 
-                <div className="border border-border bg-surface p-5 space-y-4">
-                  <div className="flex items-center justify-between border-b border-border pb-3">
+                <div className="border border-[#000000] bg-surface p-5 space-y-4">
+                  <div className="flex items-center justify-between border-b border-[#000000] pb-3">
                     <h4 className="font-mono text-[10px] uppercase tracking-widest text-text-primary">
                       Metrics vs Baseline
                     </h4>
                   </div>
                   <div className="grid grid-cols-3 gap-3">
-                    <div className="bg-background p-3 border border-border">
+                    <div className="bg-background p-3 border border-[#000000]">
                       <span className="block font-mono text-[8px] uppercase tracking-widest text-text-secondary">PSNR</span>
-                      <span className="block font-mono text-sm text-black font-extrabold">
+                      <span className="metric-value">
                         {currentResult.psnr === null ? "N/A" : currentResult.psnr === -1.0 ? "∞" : `${currentResult.psnr.toFixed(2)} dB`}
                       </span>
                     </div>
-                    <div className="bg-background p-3 border border-border">
+                    <div className="bg-background p-3 border border-[#000000]">
                       <span className="block font-mono text-[8px] uppercase tracking-widest text-text-secondary">NC</span>
-                      <span className="block font-mono text-sm text-black font-extrabold">
+                      <span className="metric-value">
                         {currentResult.nc === null ? "N/A" : currentResult.nc.toFixed(4)}
                       </span>
                     </div>
-                    <div className="bg-background p-3 border border-border">
+                    <div className="bg-background p-3 border border-[#000000]">
                       <span className="block font-mono text-[8px] uppercase tracking-widest text-text-secondary">BER</span>
-                      <span className="block font-mono text-sm text-black font-extrabold">
+                      <span className="metric-value">
                         {currentResult.ber === null ? "N/A" : currentResult.ber.toFixed(6)}
                       </span>
                     </div>
@@ -308,8 +308,8 @@ export default function AttackLabPage() {
             </div>
             
             {/* History Table */}
-            <div className="border border-border bg-surface p-6 space-y-4 mt-8">
-              <h4 className="font-sans text-sm uppercase tracking-widest text-text-primary border-b border-border pb-3">
+            <div className="border border-[#000000] bg-surface p-6 space-y-4 mt-8">
+              <h4 className="font-sans text-[11px] font-bold uppercase tracking-widest text-[#000000] border-b border-[#000000] pb-3">
                 Attack History
               </h4>
               {history.length === 0 ? (
@@ -321,7 +321,7 @@ export default function AttackLabPage() {
                 <div className="overflow-x-auto">
                   <table className="w-full text-left border-collapse">
                     <thead>
-                      <tr className="border-b border-border">
+                      <tr className="border-b border-[#000000]">
                         <th className="py-2 pr-4 font-mono text-[8px] uppercase tracking-widest text-text-secondary font-normal">Attack</th>
                         <th className="py-2 pr-4 font-mono text-[8px] uppercase tracking-widest text-text-secondary font-normal">Param</th>
                         <th className="py-2 pr-4 font-mono text-[8px] uppercase tracking-widest text-text-secondary font-normal">Dims</th>
@@ -333,7 +333,7 @@ export default function AttackLabPage() {
                     </thead>
                     <tbody className="font-mono text-[10px] text-text-primary">
                       {history.map((h, i) => (
-                        <tr key={i} className="border-b border-border last:border-0 hover:bg-surface-hover">
+                        <tr key={i} className="border-b border-[#000000] last:border-0 hover:bg-surface-hover">
                           <td className="py-2 pr-4">{ATTACK_OPTIONS[h.attack_type as AttackType]?.name || h.attack_type}</td>
                           <td className="py-2 pr-4">{h.parameter}</td>
                           <td className="py-2 pr-4">{h.attacked_dimensions.width}×{h.attacked_dimensions.height}</td>

@@ -8,16 +8,17 @@
   --surface-hover: #E8E8E2;
 
   /* ── Text hierarchy ───────────────────────────── */
-  --text-primary:   #050505;   /* near-black — main content     */
-  --text-secondary: #222222;   /* dark gray  — supporting text  */
-  --text-tertiary:  #444444;   /* mid gray   — labels, captions */
+  --text-primary:   #000000;   /* PRIMARY BLACK */
+  --text-strong:    #050505;   /* STRONG TEXT */
+  --text-secondary: #222222;   /* SECONDARY TEXT */
+  --text-tertiary:  #444444;   /* MUTED TEXT */
 
   /* ── Borders ──────────────────────────────────── */
-  --border:        #BDBDB7;   /* subtle structural divider     */
-  --border-strong: #000000;   /* strong frame / section line   */
+  --border:        #BDBDB7;   /* subtle structural divider */
+  --border-strong: #000000;   /* strong frame / section line */
 
   /* ── Technical accent ─────────────────────────── */
-  --technical:     #000000;
+  --technical:     #111111;   /* TECHNICAL DARK */
 
   /* ── Status (semantic only) ───────────────────── */
   --status-success: #3A6B30;
@@ -31,6 +32,7 @@
   --color-surface-soft:  var(--surface-soft);
   --color-surface-hover: var(--surface-hover);
   --color-text-primary:  var(--text-primary);
+  --color-text-strong:   var(--text-strong);
   --color-text-secondary:var(--text-secondary);
   --color-text-tertiary: var(--text-tertiary);
   --color-border:        var(--border);
@@ -59,19 +61,19 @@ body {
 }
 
 ::selection {
-  background: #000000;
-  color: #F7F7F5;
+  background: var(--technical);
+  color: var(--surface);
 }
 
 /* ── Focus ring ───────────────────────────────────── */
 :focus-visible {
-  outline: 2px solid #000000;
+  outline: 2px solid var(--text-primary);
   outline-offset: 2px;
 }
 
 /* ── Range inputs ─────────────────────────────────── */
 input[type="range"] {
-  accent-color: #000000;
+  accent-color: var(--text-primary);
 }
 
 /* ── Text inputs / selects ────────────────────────── */
@@ -103,30 +105,28 @@ textarea::placeholder {
     repeating-linear-gradient(90deg, rgba(0,0,0,0.05) 0px, rgba(0,0,0,0.05) 1px, transparent 1px, transparent 20px);
 }
 
-/* ── Metric readout — large bold number ───────────── */
+/* ── Typography Utility Classes ──────────────────── */
 .metric-value {
   font-family: var(--font-mono);
-  font-size: 1.25rem;
-  font-weight: 800;
-  color: #000000;
-  letter-spacing: -0.01em;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
   line-height: 1;
 }
 
-/* ── Section label — tiny mono uppercase ──────────── */
 .section-label {
   font-family: var(--font-mono);
-  font-size: 0.5625rem;   /* 9px */
+  font-size: 0.625rem;   /* 10px */
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: var(--text-tertiary);
+  color: var(--text-primary);
 }
 
-/* ── Technical heading ────────────────────────────── */
 .tech-heading {
   font-family: var(--font-sans);
-  font-size: 0.625rem;   /* 10px */
+  font-size: 0.6875rem;   /* 11px */
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.12em;

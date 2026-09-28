@@ -226,8 +226,8 @@ export default function ProtectPage() {
 
             {embedResult && !isVerifying && (
               <div className="space-y-6">
-                <div className="border border-border bg-surface p-5 space-y-4">
-                  <div className="flex items-center justify-between border-b border-border pb-3">
+                <div className="border border-[#000000] bg-surface p-5 space-y-4">
+                  <div className="flex items-center justify-between border-b border-[#000000] pb-3">
                     <h4 className="font-mono text-[10px] uppercase tracking-widest text-text-primary">
                       Embedding Record
                     </h4>
@@ -259,8 +259,8 @@ export default function ProtectPage() {
                 </div>
 
                 {metricsResult?.metrics && (
-                  <div className="border border-border bg-surface p-5 space-y-4">
-                    <div className="flex items-center justify-between border-b border-border pb-3">
+                  <div className="border border-[#000000] bg-surface p-5 space-y-4">
+                    <div className="flex items-center justify-between border-b border-[#000000] pb-3">
                       <div className="space-y-0.5">
                         <h4 className="font-mono text-[10px] uppercase tracking-widest text-text-primary">
                           Baseline Verification
@@ -274,12 +274,12 @@ export default function ProtectPage() {
                       </span>
                     </div>
 
-                    <div className="bg-background p-4 border border-border space-y-2">
+                    <div className="bg-background p-4 border border-[#000000] space-y-2">
                       <span className="block font-mono text-[8px] uppercase tracking-widest text-text-secondary">
                         Extracted Watermark
                       </span>
                       {metricsResult.recovered_logo ? (
-                        <div className="border border-border-strong bg-white inline-block">
+                        <div className="border border-[#000000]-strong bg-white inline-block">
                           {/* eslint-disable-next-line @next/next/no-img-element */}
                           <img src={metricsResult.recovered_logo} alt="Extracted Logo" className="h-16 w-auto object-contain" />
                         </div>
@@ -291,29 +291,29 @@ export default function ProtectPage() {
                     </div>
 
                     <div className="grid grid-cols-3 gap-3">
-                      <div className="bg-background p-3 border border-border">
+                      <div className="bg-background p-3 border border-[#000000]">
                         <span className="block font-mono text-[8px] uppercase tracking-widest text-text-secondary">
                           PSNR
                         </span>
-                        <span className="block font-mono text-xs text-text-primary font-bold">
+                        <span className="metric-value">
                           {metricsResult.metrics.psnr.value === Infinity
                             ? "∞"
                             : `${metricsResult.metrics.psnr.value.toFixed(2)} dB`}
                         </span>
                       </div>
-                      <div className="bg-background p-3 border border-border">
+                      <div className="bg-background p-3 border border-[#000000]">
                         <span className="block font-mono text-[8px] uppercase tracking-widest text-text-secondary">
                           NC
                         </span>
-                        <span className="block font-mono text-xs text-text-primary font-bold">
+                        <span className="metric-value">
                           {metricsResult.metrics.nc.value.toFixed(4)}
                         </span>
                       </div>
-                      <div className="bg-background p-3 border border-border">
+                      <div className="bg-background p-3 border border-[#000000]">
                         <span className="block font-mono text-[8px] uppercase tracking-widest text-text-secondary">
                           BER
                         </span>
-                        <span className="block font-mono text-xs text-text-primary font-bold">
+                        <span className="metric-value">
                           {metricsResult.metrics.ber.value.toFixed(6)}
                         </span>
                       </div>
@@ -330,7 +330,7 @@ export default function ProtectPage() {
                       </Button>
                       <button
                         onClick={() => router.push("/app/results")}
-                        className="font-mono text-[10px] uppercase tracking-widest text-text-secondary hover:text-text-primary transition-colors border border-border px-3 py-2 hover:border-border-strong text-center"
+                        className="font-mono text-[10px] uppercase tracking-widest text-text-secondary hover:text-text-primary transition-colors border border-[#000000] px-3 py-2 hover:border-[#000000]-strong text-center"
                       >
                         Detailed Analysis →
                       </button>

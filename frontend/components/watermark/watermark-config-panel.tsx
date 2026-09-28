@@ -37,7 +37,7 @@ export function WatermarkConfigPanel({
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const inputClass =
-    "w-full h-10 bg-surface border border-border-strong px-3 text-[11px] font-mono text-text-primary placeholder:text-text-secondary focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors";
+    "w-full h-10 bg-white border border-[#000000] px-3 text-[11px] font-mono font-bold text-[#000000] placeholder:text-[#555555] placeholder:font-normal focus:outline-none focus:ring-2 focus:ring-[#000000] focus:ring-offset-1 transition-colors";
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -46,8 +46,8 @@ export function WatermarkConfigPanel({
   };
 
   return (
-    <div className={cn("border border-border bg-surface p-6 space-y-6", className)}>
-      <div className="flex items-end justify-between border-b border-border pb-4">
+    <div className={cn("border border-[#000000] bg-surface p-6 space-y-6", className)}>
+      <div className="flex items-end justify-between border-b border-[#000000] pb-4">
         <div>
           <h4 className="font-sans text-xs uppercase tracking-widest text-text-primary font-semibold">
             Watermark Configuration
@@ -67,7 +67,7 @@ export function WatermarkConfigPanel({
           <label className="block text-[10px] font-mono uppercase tracking-widest text-black font-semibold">
             Watermark Type
           </label>
-          <div className="flex bg-surface border border-border-strong h-9">
+          <div className="flex bg-surface border border-[#000000] h-9">
             {(["text", "logo"] as const).map((t) => (
               <button
                 key={t}
@@ -109,7 +109,7 @@ export function WatermarkConfigPanel({
               />
               <button 
                 onClick={() => fileInputRef.current?.click()}
-                className="h-10 px-4 bg-white border border-border-strong text-[10px] font-mono uppercase tracking-widest text-black hover:bg-surface-soft transition-colors"
+                className="h-10 px-4 bg-white border border-[#000000] text-[10px] font-mono uppercase tracking-widest text-black hover:bg-surface-soft transition-colors"
               >
                 Select Logo
               </button>
@@ -173,7 +173,7 @@ export function WatermarkConfigPanel({
             <label className="block text-[10px] font-mono uppercase tracking-widest text-black font-semibold">
               DCT Band
             </label>
-            <div className="flex bg-surface border border-border-strong h-9">
+            <div className="flex bg-surface border border-[#000000] h-9">
               {(["low", "mid", "high"] as const).map((b) => (
                 <button
                   key={b}

@@ -34,7 +34,7 @@ export function WorkflowStepper({
   return (
     <div
       className={cn(
-        "flex flex-col md:flex-row md:items-start gap-4 md:gap-0 border-y border-border py-4 bg-background px-4",
+        "flex flex-col md:flex-row md:items-start gap-4 md:gap-0 border-y border-[#000000] py-4 bg-background px-4",
         className
       )}
     >

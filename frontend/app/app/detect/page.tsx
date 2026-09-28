@@ -112,8 +112,8 @@ export default function DetectPage() {
               onReset={handleReset}
             />
 
-            <div className="border border-border bg-surface p-5 space-y-5">
-              <h4 className="font-mono text-[10px] uppercase tracking-widest text-text-primary border-b border-border pb-3 font-semibold">
+            <div className="border border-[#000000] bg-surface p-5 space-y-5">
+              <h4 className="font-mono text-[10px] uppercase tracking-widest text-text-primary border-b border-[#000000] pb-3 font-semibold">
                 Extraction Parameters
               </h4>
               <div className="space-y-4">
@@ -126,7 +126,7 @@ export default function DetectPage() {
                     placeholder="Enter secret key..."
                     value={secretKey}
                     onChange={(e) => setSecretKey(e.target.value)}
-                    className="w-full h-10 bg-white border border-border-strong px-3 text-[11px] font-mono text-text-primary placeholder:text-text-secondary focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors"
+                    className="w-full h-10 bg-white border border-[#000000] px-3 text-[11px] font-mono font-bold text-[#000000] placeholder:text-[#555555] placeholder:font-normal focus:outline-none focus:ring-2 focus:ring-[#000000] focus:ring-offset-1 transition-colors"
                   />
                   <p className="text-[9px] font-sans text-text-secondary">
                     Must match the key used during embedding.
@@ -139,7 +139,7 @@ export default function DetectPage() {
                     <span className="text-text-secondary">(Optional)</span>
                   </label>
                   
-                  <div className="flex bg-surface border border-border-strong h-9 mb-2">
+                  <div className="flex bg-surface border border-[#000000]-strong h-9 mb-2">
                     {(["text", "logo"] as const).map((t) => (
                       <button
                         key={t}
@@ -162,7 +162,7 @@ export default function DetectPage() {
                       placeholder="Enter reference text to calculate NC/BER..."
                       value={originalText}
                       onChange={(e) => setOriginalText(e.target.value)}
-                      className="w-full h-10 bg-white border border-border-strong px-3 text-[11px] font-mono text-text-primary placeholder:text-text-secondary focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors"
+                      className="w-full h-10 bg-white border border-[#000000] px-3 text-[11px] font-mono font-bold text-[#000000] placeholder:text-[#555555] placeholder:font-normal focus:outline-none focus:ring-2 focus:ring-[#000000] focus:ring-offset-1 transition-colors"
                     />
                   ) : (
                     <div className="flex items-center space-x-3">
@@ -175,7 +175,7 @@ export default function DetectPage() {
                       />
                       <button 
                         onClick={() => fileInputRef.current?.click()}
-                        className="h-10 px-4 bg-white border border-border-strong text-[10px] font-mono uppercase tracking-widest text-black hover:bg-surface-soft transition-colors"
+                        className="h-10 px-4 bg-white border border-[#000000]-strong text-[10px] font-mono uppercase tracking-widest text-black hover:bg-surface-soft transition-colors"
                       >
                         Select Ref Logo
                       </button>
@@ -217,10 +217,10 @@ export default function DetectPage() {
             />
             
             {result && (
-              <div className="border border-border-strong bg-white p-6 space-y-6">
+              <div className="border border-[#000000]-strong bg-white p-6 space-y-6">
                 <div>
                   <h4 className="font-mono text-[10px] uppercase tracking-widest text-text-primary mb-2 font-semibold">Extraction Result</h4>
-                  <div className="bg-white p-4 border border-border-strong">
+                  <div className="bg-white p-4 border border-[#000000]-strong">
                     {(result as any).recovered_logo ? (
                       <div>
                         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -240,7 +240,7 @@ export default function DetectPage() {
                 
                 {result.nc !== undefined && result.ber !== undefined && result.nc !== null && (
                   <div className="grid grid-cols-2 gap-3 mt-4">
-                    <div className="bg-white p-3 border border-border-strong">
+                    <div className="bg-white p-3 border border-[#000000]-strong">
                       <span className="block font-mono text-[8px] uppercase tracking-widest text-text-secondary">
                         NC
                       </span>
@@ -248,7 +248,7 @@ export default function DetectPage() {
                         {result.nc.toFixed(4)}
                       </span>
                     </div>
-                    <div className="bg-white p-3 border border-border-strong">
+                    <div className="bg-white p-3 border border-[#000000]-strong">
                       <span className="block font-mono text-[8px] uppercase tracking-widest text-text-secondary">
                         BER
                       </span>

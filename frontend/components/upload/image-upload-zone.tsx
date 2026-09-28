@@ -53,9 +53,9 @@ export function ImageUploadZone({
   // Loaded state
   if (asset) {
     return (
-      <div className={cn("border border-border bg-surface", className)}>
+      <div className={cn("border border-[#000000] bg-surface", className)}>
         {/* Header */}
-        <div className="flex items-center justify-between px-4 py-2.5 border-b border-border bg-surface-soft">
+        <div className="flex items-center justify-between px-4 py-2.5 border-b border-[#000000] bg-surface-soft">
           <span className="font-mono text-[9px] uppercase tracking-widest text-text-primary font-semibold">
             {label}
           </span>
@@ -113,7 +113,7 @@ export function ImageUploadZone({
           ? "border-error bg-error/5"
           : isDragging
           ? "border-text-primary bg-surface-soft"
-          : "border-border bg-background hover:border-text-tertiary hover:bg-surface-soft",
+          : "border-[#000000] bg-background hover:border-text-tertiary hover:bg-surface-soft",
         isProcessing && "opacity-60 cursor-wait",
         className
       )}

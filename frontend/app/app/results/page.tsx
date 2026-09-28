@@ -60,7 +60,7 @@ function BarChart({ data, yLabel, height = 180 }: BarChartProps) {
   const valid = data.filter((d) => d.value !== null && d.value !== -1);
   if (valid.length === 0) {
     return (
-      <div className="flex items-center justify-center py-12 border border-border bg-background">
+      <div className="flex items-center justify-center py-12 border border-[#000000] bg-background">
         <p className="font-mono text-[10px] uppercase tracking-widest text-text-secondary">NO DATA</p>
       </div>
     );
@@ -280,7 +280,7 @@ export default function ResultsPage() {
         <WorkflowStepper currentStepId="analyze" />
 
         {!session ? (
-          <div className="border border-border bg-surface p-12 text-center space-y-4">
+          <div className="border border-[#000000] bg-surface p-12 text-center space-y-4">
             <p className="font-mono text-[10px] uppercase tracking-widest text-text-secondary">NO EXPERIMENT SESSION</p>
             <p className="font-sans text-sm text-text-secondary">
               Return to the <strong>Protect</strong> page, embed a watermark and verify the baseline to create a session.
@@ -289,10 +289,10 @@ export default function ResultsPage() {
         ) : (
           <div className="space-y-12">
             {/* ── SESSION INFO ── */}
-            <div className="border border-border bg-surface p-6 space-y-4">
-              <div className="flex items-end justify-between border-b border-border pb-4">
+            <div className="border border-[#000000] bg-surface p-6 space-y-4">
+              <div className="flex items-end justify-between border-b border-[#000000] pb-4">
                 <div className="space-y-1">
-                  <h4 className="font-sans text-sm uppercase tracking-widest text-text-primary">Session</h4>
+                  <h4 className="font-sans text-[11px] font-bold uppercase tracking-widest text-[#000000]">Session</h4>
                   <p className="font-mono text-[10px] text-text-secondary tracking-widest uppercase">Experiment Context</p>
                 </div>
                 <div className="flex gap-3">
@@ -323,7 +323,7 @@ export default function ResultsPage() {
 
             {/* ── CONFIRM CLEAR ── */}
             {confirmClearPending && (
-              <div className="border border-border bg-surface p-6 space-y-4">
+              <div className="border border-[#000000] bg-surface p-6 space-y-4">
                 <p className="font-sans text-sm text-text-primary">
                   Are you sure you want to clear all experiment results? This cannot be undone.
                 </p>
@@ -336,10 +336,10 @@ export default function ResultsPage() {
 
             {/* ── BASELINE ── */}
             {baseline ? (
-              <div className="border border-border bg-surface p-6 space-y-6">
-                <div className="flex items-end justify-between border-b border-border pb-4">
+              <div className="border border-[#000000] bg-surface p-6 space-y-6">
+                <div className="flex items-end justify-between border-b border-[#000000] pb-4">
                   <div className="space-y-1">
-                    <h4 className="font-sans text-sm uppercase tracking-widest text-text-primary">Baseline</h4>
+                    <h4 className="font-sans text-[11px] font-bold uppercase tracking-widest text-[#000000]">Baseline</h4>
                     <p className="font-mono text-[10px] text-text-secondary tracking-widest uppercase">
                       Original → Watermarked (no attack)
                     </p>
@@ -348,7 +348,7 @@ export default function ResultsPage() {
                     {baseline.extractionStatus}
                   </span>
                 </div>
-                <div className="grid grid-cols-3 gap-px bg-border border border-border">
+                <div className="grid grid-cols-3 gap-px bg-border border border-[#000000]">
                   {[
                     { label: "PSNR", value: fmtPsnr(baseline.psnr), unit: "dB" },
                     { label: "NC", value: fmt(baseline.nc, 4), unit: "0–1" },
@@ -356,7 +356,7 @@ export default function ResultsPage() {
                   ].map((m) => (
                     <div key={m.label} className="bg-background p-5 space-y-3">
                       <span className="block font-mono text-[9px] uppercase tracking-widest text-text-secondary">{m.label}</span>
-                      <div className="font-serif text-3xl text-black font-semibold">{m.value}</div>
+                      <div className="metric-value">{m.value}</div>
                       <span className="block font-mono text-[8px] text-text-secondary uppercase">{m.unit}</span>
                     </div>
                   ))}
@@ -368,15 +368,15 @@ export default function ResultsPage() {
                 )}
               </div>
             ) : (
-              <div className="border border-dashed border-border bg-surface p-6 text-center">
+              <div className="border border-dashed border-[#000000] bg-surface p-6 text-center">
                 <p className="font-mono text-[10px] uppercase tracking-widest text-text-secondary">No baseline result.</p>
               </div>
             )}
 
             {/* ── SUMMARY STATISTICS ── */}
             {attackResults.length > 0 && (
-              <div className="border border-border bg-surface p-6 space-y-4">
-                <h4 className="font-sans text-sm uppercase tracking-widest text-text-primary border-b border-border pb-3">Summary</h4>
+              <div className="border border-[#000000] bg-surface p-6 space-y-4">
+                <h4 className="font-sans text-[11px] font-bold uppercase tracking-widest text-[#000000] border-b border-[#000000] pb-3">Summary</h4>
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-4 font-mono text-[10px]">
                   <div>
                     <span className="block text-text-secondary uppercase tracking-widest">Total Attacks</span>
@@ -405,8 +405,8 @@ export default function ResultsPage() {
             )}
 
             {/* ── RESULTS TABLE ── */}
-            <div className="border border-border bg-surface p-6 space-y-4">
-              <h4 className="font-sans text-sm uppercase tracking-widest text-text-primary border-b border-border pb-3">
+            <div className="border border-[#000000] bg-surface p-6 space-y-4">
+              <h4 className="font-sans text-[11px] font-bold uppercase tracking-widest text-[#000000] border-b border-[#000000] pb-3">
                 Robustness Experiments
               </h4>
               {sortedResults.length === 0 ? (
@@ -418,7 +418,7 @@ export default function ResultsPage() {
                 <div className="overflow-x-auto">
                   <table className="w-full text-left border-collapse" aria-label="Robustness experiment results">
                     <thead>
-                      <tr className="border-b border-border">
+                      <tr className="border-b border-[#000000]">
                         <th className={thClass} onClick={() => toggleSort("attackType")}>Attack {sortKey === "attackType" ? (sortDir === "asc" ? "↑" : "↓") : ""}</th>
                         <th className="py-2 pr-4 font-mono text-[8px] uppercase tracking-widest text-text-secondary font-normal text-left">Param</th>
                         <th className="py-2 pr-4 font-mono text-[8px] uppercase tracking-widest text-text-secondary font-normal text-left">Dims</th>
@@ -430,7 +430,7 @@ export default function ResultsPage() {
                     </thead>
                     <tbody className="font-mono text-[10px] text-text-primary">
                       {sortedResults.map((r) => (
-                        <tr key={r.experimentId} className="border-b border-border last:border-0 hover:bg-surface-hover">
+                        <tr key={r.experimentId} className="border-b border-[#000000] last:border-0 hover:bg-surface-hover">
                           <td className="py-2 pr-4">{ATTACK_LABELS[r.attackType]}</td>
                           <td className="py-2 pr-4">{formatParam(r.attackType, r.attackParameter)}</td>
                           <td className="py-2 pr-4">{r.attackedWidth}×{r.attackedHeight}</td>
@@ -450,17 +450,17 @@ export default function ResultsPage() {
 
             {/* ── GROUPED VIEW ── */}
             {ATTACK_GROUP_ORDER.some((type) => grouped[type]?.length) && (
-              <div className="border border-border bg-surface p-6 space-y-6">
-                <h4 className="font-sans text-sm uppercase tracking-widest text-text-primary border-b border-border pb-3">
+              <div className="border border-[#000000] bg-surface p-6 space-y-6">
+                <h4 className="font-sans text-[11px] font-bold uppercase tracking-widest text-[#000000] border-b border-[#000000] pb-3">
                   Results by Attack Type
                 </h4>
                 {ATTACK_GROUP_ORDER.filter((type) => grouped[type]?.length).map((type) => (
                   <div key={type} className="space-y-2">
                     <h5 className="font-mono text-[10px] uppercase tracking-widest text-text-secondary">{ATTACK_LABELS[type]}</h5>
                     <div className="overflow-x-auto">
-                      <table className="w-full text-left border-collapse border border-border">
+                      <table className="w-full text-left border-collapse border border-[#000000]">
                         <thead>
-                          <tr className="border-b border-border bg-surface">
+                          <tr className="border-b border-[#000000] bg-surface">
                             <th className="py-1 px-3 font-mono text-[8px] text-text-secondary uppercase tracking-widest font-normal">Param</th>
                             <th className="py-1 px-3 font-mono text-[8px] text-text-secondary uppercase tracking-widest font-normal">Dims</th>
                             <th className="py-1 px-3 font-mono text-[8px] text-text-secondary uppercase tracking-widest font-normal">Extraction</th>
@@ -471,7 +471,7 @@ export default function ResultsPage() {
                         </thead>
                         <tbody className="font-mono text-[10px]">
                           {grouped[type]!.map((r) => (
-                            <tr key={r.experimentId} className="border-b border-border last:border-0">
+                            <tr key={r.experimentId} className="border-b border-[#000000] last:border-0">
                               <td className="py-1 px-3">{formatParam(r.attackType, r.attackParameter)}</td>
                               <td className="py-1 px-3">{r.attackedWidth}×{r.attackedHeight}</td>
                               <td className={`py-1 px-3 ${r.extractionStatus === "DETECTED" ? "text-success" : "text-error"}`}>{r.extractionStatus}</td>
@@ -490,8 +490,8 @@ export default function ResultsPage() {
 
             {/* ── CHARTS ── */}
             {chartData.length > 0 && (
-              <div className="border border-border bg-surface p-6 space-y-8">
-                <h4 className="font-sans text-sm uppercase tracking-widest text-text-primary border-b border-border pb-3">
+              <div className="border border-[#000000] bg-surface p-6 space-y-8">
+                <h4 className="font-sans text-[11px] font-bold uppercase tracking-widest text-[#000000] border-b border-[#000000] pb-3">
                   Visual Analysis
                 </h4>
                 <p className="font-mono text-[9px] text-text-secondary uppercase tracking-widest">
@@ -516,8 +516,8 @@ export default function ResultsPage() {
             )}
 
             {/* ── EXPORT ── */}
-            <div className="border border-border bg-surface p-6 space-y-4">
-              <h4 className="font-sans text-sm uppercase tracking-widest text-text-primary border-b border-border pb-3">Export</h4>
+            <div className="border border-[#000000] bg-surface p-6 space-y-4">
+              <h4 className="font-sans text-[11px] font-bold uppercase tracking-widest text-[#000000] border-b border-[#000000] pb-3">Export</h4>
               <p className="font-mono text-[9px] text-text-secondary uppercase tracking-widest">
                 Exported data excludes secret keys and credentials.
                 XLSX export deferred — CSV and JSON are fully functional.
