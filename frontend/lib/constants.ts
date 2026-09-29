@@ -4,11 +4,11 @@
  */
 
 export const APP_NAME = "FRAME PROTECT";
-export const APP_TAGLINE = "Protect the Image. Prove the Origin.";
+export const APP_TAGLINE = "Lindungi Citra. Buktikan Keaslian.";
 export const APP_DESCRIPTION =
-  "Digital watermarking and image-authenticity web application for photographers, creators, and students studying information security.";
+  "Aplikasi web watermarking digital dan autentikasi citra untuk fotografer, kreator, dan mahasiswa bidang keamanan informasi.";
 
-export const CURRENT_PHASE = "Phase 1 — Frontend Foundation";
+export const CURRENT_PHASE = "Fase 1 — Fondasi Antarmuka";
 
 export interface NavRoute {
   label: string;
@@ -19,34 +19,34 @@ export interface NavRoute {
 
 export const MAIN_NAV_ROUTES: NavRoute[] = [
   {
-    label: "Home",
+    label: "Beranda",
     href: "/",
-    description: "Landing page & project overview",
+    description: "Halaman utama & ringkasan proyek",
   },
   {
-    label: "Dashboard",
+    label: "Workspace",
     href: "/app",
-    description: "Application control center",
+    description: "Pusat kendali aplikasi",
   },
   {
-    label: "Protect",
+    label: "Lindungi",
     href: "/app/protect",
-    description: "Watermark protection workflow",
+    description: "Alur kerja penyisipan watermark",
   },
   {
-    label: "Detect",
+    label: "Deteksi",
     href: "/app/detect",
-    description: "Watermark detection workflow",
+    description: "Alur kerja deteksi watermark",
   },
   {
-    label: "Attack Lab",
+    label: "Uji Ketahanan",
     href: "/app/attack-lab",
-    description: "Image attack and resilience testing laboratory",
+    description: "Laboratorium pengujian ketahanan citra terhadap distorsi",
   },
   {
-    label: "Results",
+    label: "Hasil",
     href: "/app/results",
-    description: "Analysis, verification verdict, and metrics",
+    description: "Analisis, status verifikasi, dan metrik",
   },
 ];
 

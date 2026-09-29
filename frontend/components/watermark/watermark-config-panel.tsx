@@ -50,14 +50,14 @@ export function WatermarkConfigPanel({
       <div className="flex items-end justify-between border-b border-[#000000] pb-4">
         <div>
           <h4 className="font-sans text-xs uppercase tracking-widest text-text-primary font-semibold">
-            Watermark Configuration
+            Konfigurasi Watermark
           </h4>
           <p className="text-[10px] text-text-secondary font-mono tracking-wider mt-1 uppercase">
-            DCT Frequency Domain
+            Domain Frekuensi DCT
           </p>
         </div>
         <span className="font-mono text-[9px] text-black tracking-widest uppercase font-semibold">
-          8 × 8 Blocks
+          Blok 8 × 8
         </span>
       </div>
 
@@ -65,7 +65,7 @@ export function WatermarkConfigPanel({
         {/* Type Toggle */}
         <div className="space-y-2">
           <label className="block text-[10px] font-mono uppercase tracking-widest text-black font-semibold">
-            Watermark Type
+            Jenis Watermark
           </label>
           <div className="flex bg-surface border border-[#000000] h-9">
             {(["text", "logo"] as const).map((t) => (
@@ -79,7 +79,7 @@ export function WatermarkConfigPanel({
                     : "text-text-secondary hover:text-black hover:bg-surface-soft"
                 )}
               >
-                {t}
+                {t === "text" ? "Teks" : "Logo"}
               </button>
             ))}
           </div>
@@ -88,7 +88,7 @@ export function WatermarkConfigPanel({
         {/* Payload */}
         <div className="space-y-2">
           <label className="block text-[10px] font-mono uppercase tracking-widest text-black font-semibold">
-            {watermarkType === "text" ? "Text Payload" : "Logo Payload (Image)"}
+            {watermarkType === "text" ? "Teks Watermark" : "Logo Watermark (Citra)"}
           </label>
           {watermarkType === "text" ? (
             <input
@@ -111,10 +111,10 @@ export function WatermarkConfigPanel({
                 onClick={() => fileInputRef.current?.click()}
                 className="h-10 px-4 bg-white border border-[#000000] text-[10px] font-mono uppercase tracking-widest text-black hover:bg-surface-soft transition-colors"
               >
-                Select Logo
+                Pilih Logo
               </button>
               <span className="text-[10px] font-mono text-text-secondary truncate max-w-[150px]">
-                {watermarkFile ? watermarkFile.name : "No file selected"}
+                {watermarkFile ? watermarkFile.name : "Belum ada file"}
               </span>
             </div>
           )}
@@ -124,25 +124,25 @@ export function WatermarkConfigPanel({
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <label className="block text-[10px] font-mono uppercase tracking-widest text-black font-semibold">
-              Secret Key
+              Kunci Rahasia
             </label>
             <button
               onClick={() => setShowKey(!showKey)}
               className="text-[9px] font-mono uppercase tracking-widest text-text-secondary hover:text-black transition-colors font-semibold"
             >
-              {showKey ? "Hide" : "Show"}
+              {showKey ? "Sembunyikan" : "Tampilkan"}
             </button>
           </div>
           <input
             type={showKey ? "text" : "password"}
             value={secretKey}
             onChange={(e) => setSecretKey(e.target.value)}
-            placeholder="Enter secret key"
+            placeholder="Masukkan kunci rahasia"
             className={inputClass}
             autoComplete="off"
           />
           <p className="text-[9px] font-sans text-text-secondary">
-            Used to deterministically select embedding blocks. Not stored.
+            Digunakan untuk menentukan blok penyisipan secara deterministik. Tidak disimpan.
           </p>
         </div>
 
@@ -150,7 +150,7 @@ export function WatermarkConfigPanel({
           {/* Strength */}
           <div className="space-y-2">
             <label className="flex items-center justify-between text-[10px] font-mono uppercase tracking-widest text-black font-semibold">
-              <span>Embed Strength</span>
+              <span>Kekuatan Penyisipan</span>
               <span className="text-black">{strength.toFixed(2)}</span>
             </label>
             <input
@@ -171,7 +171,7 @@ export function WatermarkConfigPanel({
           {/* DCT Band */}
           <div className="space-y-2">
             <label className="block text-[10px] font-mono uppercase tracking-widest text-black font-semibold">
-              DCT Band
+              Frekuensi DCT
             </label>
             <div className="flex bg-surface border border-[#000000] h-9">
               {(["low", "mid", "high"] as const).map((b) => (
@@ -187,7 +187,7 @@ export function WatermarkConfigPanel({
                     b !== "mid" && "opacity-30 cursor-not-allowed"
                   )}
                 >
-                  {b}
+                  {b === "low" ? "Rendah" : b === "mid" ? "Menengah" : "Tinggi"}
                 </button>
               ))}
             </div>

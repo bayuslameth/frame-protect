@@ -9,13 +9,13 @@ export interface WorkflowStep {
 }
 
 export const DEFAULT_PROTECT_STEPS: WorkflowStep[] = [
-  { id: "upload", stepNumber: "01", title: "Upload", description: "Source image" },
-  { id: "configure", stepNumber: "02", title: "Configure", description: "Parameters" },
-  { id: "embed", stepNumber: "03", title: "Embed", description: "Signal injection" },
-  { id: "preview", stepNumber: "04", title: "Preview", description: "Visual diff" },
-  { id: "attack", stepNumber: "05", title: "Attack", description: "Distortion test" },
-  { id: "detect", stepNumber: "06", title: "Detect", description: "Extraction" },
-  { id: "analyze", stepNumber: "07", title: "Analyze", description: "Metrics" },
+  { id: "upload", stepNumber: "01", title: "Unggah", description: "Citra sumber" },
+  { id: "configure", stepNumber: "02", title: "Konfigurasi", description: "Parameter" },
+  { id: "embed", stepNumber: "03", title: "Sisipkan", description: "Injeksi sinyal" },
+  { id: "preview", stepNumber: "04", title: "Pratinjau", description: "Perbandingan visual" },
+  { id: "attack", stepNumber: "05", title: "Uji Distorsi", description: "Uji ketahanan" },
+  { id: "detect", stepNumber: "06", title: "Deteksi", description: "Ekstraksi" },
+  { id: "analyze", stepNumber: "07", title: "Analisis", description: "Metrik" },
 ];
 
 interface WorkflowStepperProps {
@@ -83,7 +83,7 @@ export function WorkflowStepper({
               </p>
               {isComplete && (
                 <span className="inline-block mt-1 text-[7px] text-success font-mono uppercase tracking-widest border border-success/30 px-1">
-                  Done
+                  Selesai
                 </span>
               )}
             </div>

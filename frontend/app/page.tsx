@@ -5,377 +5,696 @@ export default function HomePage() {
   const steps = [
     {
       n: "01",
-      title: "Protect",
-      desc: "Upload a source image. Configure watermark payload, secret key, and DCT parameters. The signal is injected into mid-frequency coefficients of 8×8 blocks.",
+      title: "Lindungi",
+      desc: "Unggah citra sumber, tentukan watermark, kunci rahasia, dan parameter DCT. Watermark disisipkan pada koefisien frekuensi menengah dalam blok 8×8.",
     },
     {
       n: "02",
-      title: "Attack",
-      desc: "Subject the watermarked image to JPEG compression, cropping, noise, brightness, and contrast attacks. Test the resilience of the embedded signal under realistic conditions.",
+      title: "Uji",
+      desc: "Uji citra yang telah diberi watermark dengan kompresi JPEG, pemotongan, noise, perubahan kecerahan, dan kontras untuk melihat ketahanannya.",
     },
     {
       n: "03",
-      title: "Detect",
-      desc: "Provide the candidate image and secret key. Recover the embedded watermark bitstream without access to the original image. Blind extraction only.",
+      title: "Deteksi",
+      desc: "Masukkan citra yang akan diperiksa dan kunci rahasia. Sistem mencoba mengambil kembali watermark yang tertanam tanpa memerlukan citra asli.",
     },
     {
       n: "04",
-      title: "Analyze",
-      desc: "Evaluate fidelity (PSNR) and watermark integrity (NC, BER) across all attack conditions. The results quantify the robustness of the embedding.",
+      title: "Analisis",
+      desc: "Bandingkan kualitas citra dan ketahanan watermark menggunakan PSNR, NC, dan BER pada berbagai kondisi pengujian.",
     },
   ];
 
   const capabilities = [
     {
       code: "DCT",
-      name: "Frequency-Domain Embedding",
-      desc: "Watermark bits are encoded into the relationship between mid-frequency DCT coefficients — imperceptible yet recoverable.",
+      name: "Penyisipan pada Domain Frekuensi",
+      desc: "Bit watermark disisipkan melalui hubungan antara koefisien DCT frekuensi menengah sehingga tidak mudah terlihat namun tetap dapat dideteksi.",
     },
     {
       code: "KEY",
-      name: "Secret Key Selection",
-      desc: "SHA-256 key derivation drives a PRNG that selects which image blocks carry the watermark. Without the key, extraction yields noise.",
+      name: "Kunci Rahasia",
+      desc: "Kunci rahasia digunakan untuk menentukan posisi blok citra secara teratur. Tanpa kunci yang sesuai, watermark tidak dapat diekstraksi dengan benar.",
     },
     {
       code: "PSNR",
-      name: "Fidelity Measurement",
-      desc: "Peak Signal-to-Noise Ratio measures the visual imperceptibility of the watermark — typically above 35 dB for strong embedding.",
+      name: "Pengukuran Kualitas Citra",
+      desc: "PSNR digunakan untuk mengukur seberapa besar perubahan kualitas citra setelah watermark disisipkan.",
     },
     {
       code: "NC",
-      name: "Normalized Correlation",
-      desc: "Measures structural similarity between original and extracted watermark. NC = 1.0000 indicates perfect bit recovery.",
+      name: "Kemiripan Watermark",
+      desc: "NC mengukur tingkat kemiripan antara watermark asli dan watermark hasil ekstraksi.",
     },
     {
       code: "BER",
-      name: "Bit Error Rate",
-      desc: "Proportion of incorrectly recovered watermark bits. BER = 0.000000 means the watermark survived without error.",
+      name: "Kesalahan Bit",
+      desc: "BER menunjukkan proporsi bit watermark yang berhasil atau gagal dipulihkan setelah proses pengujian.",
     },
     {
       code: "BLIND",
-      name: "Blind Extraction",
-      desc: "Watermark is extracted using only the secret key and candidate image. No original image required at detection time.",
+      name: "Ekstraksi Blind",
+      desc: "Watermark dapat diekstraksi menggunakan citra yang diperiksa dan kunci rahasia tanpa memerlukan citra asli pada saat deteksi.",
     },
   ];
 
   return (
     <div className="w-full">
 
-      {/* ══════════════════════════════════════════════════════════
+      {/* =====================================================
           HERO
-      ══════════════════════════════════════════════════════════ */}
+      ====================================================== */}
       <section className="border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[88vh] items-center gap-12 lg:gap-0 py-16 lg:py-0">
 
-            {/* Left — editorial headline */}
-            <div className="lg:col-span-5 space-y-8 lg:pr-16 lg:border-r lg:border-border">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+          <div className="grid min-h-[88vh] grid-cols-1 items-center gap-12 py-16 lg:grid-cols-12 lg:gap-0 lg:py-0">
+
+            {/* LEFT */}
+            <div className="space-y-8 lg:col-span-5 lg:border-r lg:border-border lg:pr-16">
+
               <div className="space-y-2">
-                <p className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-[#444444] mb-6">
-                  Digital Watermarking Laboratory
+
+                <p className="mb-6 font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-[#444444]">
+                  Laboratorium Watermark Digital
                 </p>
-                <h1 className="font-serif leading-[0.95] tracking-tight text-[#000000]"
-                    style={{ fontSize: "clamp(3rem, 6vw, 4.5rem)", fontWeight: 900 }}>
-                  Protect<br />
-                  <span className="text-[#222222]">the image.</span><br />
-                  Prove<br />
-                  <span className="text-[#222222]">the origin.</span>
+
+                <h1
+                  className="font-serif leading-[0.95] tracking-tight text-[#000000]"
+                  style={{
+                    fontSize: "clamp(3rem, 6vw, 4.5rem)",
+                    fontWeight: 900,
+                  }}
+                >
+                  Lindungi
+                  <br />
+                  <span className="text-[#222222]">
+                    citra.
+                  </span>
+                  <br />
+                  Buktikan
+                  <br />
+                  <span className="text-[#222222]">
+                    asalnya.
+                  </span>
                 </h1>
+
               </div>
 
-              <p className="text-sm font-sans text-[#333333] leading-relaxed max-w-sm font-medium">
-                Embed imperceptible cryptographic signatures into photographs
-                using discrete cosine transform frequency-domain encoding.
-                Verify authenticity. Measure resilience.
+              <p className="max-w-sm font-sans text-sm font-medium leading-relaxed text-[#333333]">
+                Sisipkan watermark digital yang tidak terlihat
+                pada citra menggunakan metode DCT.
+                Periksa keberadaan watermark dan ukur
+                ketahanannya terhadap berbagai perubahan citra.
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-3 pt-2">
+              <div className="flex flex-col gap-3 pt-2 sm:flex-row">
+
                 <Link href="/app/protect">
-                  <Button variant="primary" size="lg">Protect an Image</Button>
+                  <Button variant="primary" size="lg">
+                    Lindungi Citra
+                  </Button>
                 </Link>
+
                 <Link href="/app/attack-lab">
-                  <Button variant="outline" size="lg">Attack Lab</Button>
+                  <Button variant="outline" size="lg">
+                    Uji Ketahanan
+                  </Button>
                 </Link>
+
               </div>
 
-              {/* Technical spec strip */}
-              <div className="pt-6 border-t border-border grid grid-cols-3 gap-4">
+              {/* TECHNICAL SPEC */}
+              <div className="grid grid-cols-3 gap-4 border-t border-border pt-6">
+
                 {[
-                  ["Mode", "DCT · 8×8"],
-                  ["Band", "Mid-Freq."],
-                  ["Key", "SHA-256"],
+                  ["Metode", "DCT · 8×8"],
+                  ["Frekuensi", "Menengah"],
+                  ["Kunci", "SHA-256"],
                 ].map(([k, v]) => (
                   <div key={k}>
-                    <span className="block font-mono text-[8px] font-bold uppercase tracking-widest text-[#444444]">{k}</span>
-                    <span className="block font-mono text-[11px] font-bold text-[#000000] mt-0.5">{v}</span>
+
+                    <span className="block font-mono text-[8px] font-bold uppercase tracking-widest text-[#444444]">
+                      {k}
+                    </span>
+
+                    <span className="mt-0.5 block font-mono text-[11px] font-bold text-[#000000]">
+                      {v}
+                    </span>
+
                   </div>
                 ))}
+
               </div>
+
             </div>
 
-            {/* Right — photographic frame composition */}
-            <div className="lg:col-span-7 lg:pl-16 w-full">
+            {/* RIGHT */}
+            <div className="w-full lg:col-span-7 lg:pl-16">
+
               <div className="relative border border-[#000000] bg-white p-4 sm:p-6">
-                {/* Corner crop marks */}
-                {["top-0 left-0 border-t-2 border-l-2", "top-0 right-0 border-t-2 border-r-2",
-                  "bottom-0 left-0 border-b-2 border-l-2", "bottom-0 right-0 border-b-2 border-r-2"].map((cls) => (
-                  <div key={cls} className={`absolute w-5 h-5 border-[#000000] ${cls}`} />
+
+                {/* CORNER MARKS */}
+                {[
+                  "top-0 left-0 border-t-2 border-l-2",
+                  "top-0 right-0 border-t-2 border-r-2",
+                  "bottom-0 left-0 border-b-2 border-l-2",
+                  "bottom-0 right-0 border-b-2 border-r-2",
+                ].map((cls) => (
+                  <div
+                    key={cls}
+                    className={`absolute h-5 w-5 border-[#000000] ${cls}`}
+                  />
                 ))}
 
-                {/* Metadata bar */}
-                <div className="flex items-center justify-between mb-4">
-                  <span className="font-mono text-[9px] font-bold uppercase tracking-widest text-[#000000]">Frame / 001</span>
-                  <div className="flex items-center gap-2">
-                    <span className="h-1.5 w-1.5 rounded-full bg-success" />
-                    <span className="font-mono text-[9px] font-bold uppercase tracking-widest text-[#444444]">Ready</span>
-                  </div>
+                {/* METADATA */}
+                <div className="mb-4 flex items-center justify-between">
+
+                  <span className="font-mono text-[9px] font-bold uppercase tracking-widest text-[#000000]">
+                    Frame / 001
+                  </span>
+
                 </div>
 
-                {/* Main image placeholder */}
-                <div className="aspect-[4/3] bg-[#F0F0EC] border border-[#BDBDB7] img-grid-bg relative overflow-hidden flex items-center justify-center">
-                  {/* Crosshair */}
-                  <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                    <div className="relative w-16 h-16">
+                {/* IMAGE PLACEHOLDER */}
+                <div className="img-grid-bg relative flex aspect-[4/3] items-center justify-center overflow-hidden border border-[#BDBDB7] bg-[#F0F0EC]">
+
+                  {/* CROSSHAIR */}
+                  <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+
+                    <div className="relative h-16 w-16">
+
                       <div className="absolute inset-0 border border-[#BDBDB7]" />
-                      <div className="absolute top-1/2 left-0 right-0 h-px bg-[#BDBDB7]" />
-                      <div className="absolute left-1/2 top-0 bottom-0 w-px bg-[#BDBDB7]" />
+
+                      <div className="absolute left-0 right-0 top-1/2 h-px bg-[#BDBDB7]" />
+
+                      <div className="absolute bottom-0 left-1/2 top-0 w-px bg-[#BDBDB7]" />
+
                     </div>
+
                   </div>
+
                   <div className="absolute bottom-3 left-3 right-3 flex justify-between">
-                    <span className="font-mono text-[8px] font-bold uppercase tracking-widest text-[#444444]">Source Image</span>
-                    <span className="font-mono text-[8px] font-bold uppercase tracking-widest text-[#444444]">Awaiting Upload</span>
+
+                    <span className="font-mono text-[8px] font-bold uppercase tracking-widest text-[#444444]">
+                      Citra Sumber
+                    </span>
+
+                    <span className="font-mono text-[8px] font-bold uppercase tracking-widest text-[#444444]">
+                      Menunggu Citra
+                    </span>
+
                   </div>
+
                 </div>
 
-                {/* Contact sheet — 3 comparison frames */}
+                {/* COMPARISON */}
                 <div className="mt-3 grid grid-cols-3 gap-2">
+
                   {[
-                    { label: "Original", tag: "#A" },
-                    { label: "Watermarked", tag: "#B" },
-                    { label: "Δ Difference", tag: "#C" },
+                    {
+                      label: "Asli",
+                      tag: "#A",
+                    },
+                    {
+                      label: "Ber-watermark",
+                      tag: "#B",
+                    },
+                    {
+                      label: "Perbedaan",
+                      tag: "#C",
+                    },
                   ].map(({ label, tag }) => (
-                    <div key={tag} className="border border-[#BDBDB7] bg-white">
-                      <div className="aspect-square img-grid-bg flex items-center justify-center">
-                        <span className="font-mono text-[7px] font-bold text-[#444444]">{tag}</span>
+
+                    <div
+                      key={tag}
+                      className="border border-[#BDBDB7] bg-white"
+                    >
+
+                      <div className="img-grid-bg flex aspect-square items-center justify-center">
+
+                        <span className="font-mono text-[7px] font-bold text-[#444444]">
+                          {tag}
+                        </span>
+
                       </div>
-                      <div className="px-2 py-1 border-t border-[#BDBDB7]">
-                        <span className="font-mono text-[7px] font-bold uppercase tracking-widest text-[#222222]">{label}</span>
+
+                      <div className="border-t border-[#BDBDB7] px-2 py-1">
+
+                        <span className="font-mono text-[7px] font-bold uppercase tracking-widest text-[#222222]">
+                          {label}
+                        </span>
+
                       </div>
+
                     </div>
+
                   ))}
+
                 </div>
 
-                {/* Metric preview strip */}
-                <div className="flex justify-between mt-4 pt-3 border-t border-[#BDBDB7]">
-                  <span className="font-mono text-[9px] font-bold uppercase tracking-widest text-[#444444]">PSNR — dB</span>
-                  <span className="font-mono text-[9px] font-bold uppercase tracking-widest text-[#444444]">NC — · BER —</span>
+                {/* METRICS */}
+                <div className="mt-4 flex justify-between border-t border-[#BDBDB7] pt-3">
+
+                  <span className="font-mono text-[9px] font-bold uppercase tracking-widest text-[#444444]">
+                    PSNR — dB
+                  </span>
+
+                  <span className="font-mono text-[9px] font-bold uppercase tracking-widest text-[#444444]">
+                    NC — · BER —
+                  </span>
+
                 </div>
+
               </div>
+
             </div>
+
           </div>
+
         </div>
+
       </section>
 
-      {/* ══════════════════════════════════════════════════════════
-          PROCESS — 01 02 03 04
-      ══════════════════════════════════════════════════════════ */}
-      <section className="py-24 border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+      {/* =====================================================
+          WORKFLOW
+      ====================================================== */}
+      <section className="border-b border-border py-24">
 
-            {/* Sticky label */}
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12">
+
+            {/* LABEL */}
             <div className="lg:col-span-3">
-              <div className="lg:sticky lg:top-24 space-y-4">
-                <p className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-[#444444]">Process</p>
-                <h2 className="font-serif text-[#000000] leading-tight" style={{ fontSize: "2.25rem", fontWeight: 800 }}>
-                  The<br />Workflow
-                </h2>
-                <p className="text-sm text-[#333333] font-sans leading-relaxed font-medium">
-                  A four-stage laboratory workflow for embedding, stress-testing, and verifying digital watermarks.
+
+              <div className="space-y-4 lg:sticky lg:top-24">
+
+                <p className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-[#444444]">
+                  Proses
                 </p>
+
+                <h2
+                  className="font-serif leading-tight text-[#000000]"
+                  style={{
+                    fontSize: "2.25rem",
+                    fontWeight: 800,
+                  }}
+                >
+                  Alur
+                  <br />
+                  Kerja
+                </h2>
+
+                <p className="font-sans text-sm font-medium leading-relaxed text-[#333333]">
+                  Empat tahap utama untuk menyisipkan,
+                  menguji, mendeteksi, dan menganalisis
+                  watermark digital.
+                </p>
+
                 <div className="pt-4">
+
                   <Link href="/app/protect">
-                    <Button variant="outline" size="sm">Begin Workflow</Button>
+                    <Button variant="outline" size="sm">
+                      Mulai Proses
+                    </Button>
                   </Link>
+
                 </div>
+
               </div>
+
             </div>
 
-            {/* Steps grid */}
+            {/* STEPS */}
             <div className="lg:col-span-9">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-px bg-border border border-[#BDBDB7]">
+
+              <div className="grid grid-cols-1 gap-px border border-[#BDBDB7] bg-border sm:grid-cols-2">
+
                 {steps.map((step) => (
+
                   <div
                     key={step.n}
-                    className="bg-background p-8 space-y-4 hover:bg-surface-soft transition-colors duration-150"
+                    className="space-y-4 bg-background p-8 transition-colors duration-150 hover:bg-surface-soft"
                   >
-                    <span className="font-serif text-5xl text-[#BDBDB7] leading-none font-black">{step.n}</span>
-                    <div className="pt-3 border-t border-[#BDBDB7]">
+
+                    <span className="font-serif text-5xl font-black leading-none text-[#BDBDB7]">
+                      {step.n}
+                    </span>
+
+                    <div className="border-t border-[#BDBDB7] pt-3">
+
                       <h3 className="font-sans text-[11px] font-bold uppercase tracking-widest text-[#000000]">
                         {step.title}
                       </h3>
-                      <p className="mt-2 text-sm font-sans text-[#333333] leading-relaxed font-medium">
+
+                      <p className="mt-2 font-sans text-sm font-medium leading-relaxed text-[#333333]">
                         {step.desc}
                       </p>
+
                     </div>
+
                   </div>
+
                 ))}
+
               </div>
+
             </div>
+
           </div>
+
         </div>
+
       </section>
 
-      {/* ══════════════════════════════════════════════════════════
-          CONTEXT — Photography carries provenance
-      ══════════════════════════════════════════════════════════ */}
-      <section className="py-24 border-b border-border bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+      {/* =====================================================
+          CONTEXT
+      ====================================================== */}
+      <section className="border-b border-border bg-white py-24">
 
-            {/* Text column */}
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+
+          <div className="grid grid-cols-1 items-start gap-16 lg:grid-cols-2 lg:gap-24">
+
+            {/* TEXT */}
             <div className="space-y-6">
-              <p className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-[#444444]">Context</p>
-              <h2 className="font-serif text-[#000000] leading-tight" style={{ fontSize: "2.5rem", fontWeight: 800 }}>
-                Images carry<br />provenance.
+
+              <p className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-[#444444]">
+                Latar Belakang
+              </p>
+
+              <h2
+                className="font-serif leading-tight text-[#000000]"
+                style={{
+                  fontSize: "2.5rem",
+                  fontWeight: 800,
+                }}
+              >
+                Citra membawa
+                <br />
+                informasi asal.
               </h2>
-              <div className="space-y-4 text-sm font-sans text-[#333333] leading-relaxed font-medium">
+
+              <div className="space-y-4 font-sans text-sm font-medium leading-relaxed text-[#333333]">
+
                 <p>
-                  Every photograph has an origin. Frequency-domain watermarking provides a technical mechanism to assert that provenance in a mathematically verifiable way — without visibly altering the image.
+                  Setiap foto memiliki asal dan riwayat.
+                  Watermark pada domain frekuensi dapat
+                  digunakan sebagai salah satu cara untuk
+                  memberikan informasi asal tersebut tanpa
+                  mengubah tampilan citra secara terlihat.
                 </p>
+
                 <p>
-                  Unlike metadata, which can be stripped, watermarks embedded in the DCT domain survive many common transformations: JPEG recompression, resizing, brightness and contrast adjustment.
+                  Berbeda dengan metadata yang dapat
+                  dihapus, watermark pada domain DCT
+                  dirancang agar tetap dapat dideteksi
+                  setelah beberapa perubahan umum seperti
+                  kompresi JPEG, perubahan ukuran,
+                  kecerahan, dan kontras.
                 </p>
+
                 <p>
-                  Frame Protect does not claim perfect security. It provides technical evidence — a way to measure, test, and quantify watermark integrity under controlled and realistic conditions.
+                  FRAME PROTECT tidak menjanjikan keamanan
+                  yang sempurna. Sistem ini menyediakan
+                  bukti teknis yang dapat diuji dan diukur
+                  untuk melihat ketahanan watermark pada
+                  kondisi yang terkontrol.
                 </p>
+
               </div>
 
-              <div className="pt-5 grid grid-cols-2 gap-5 border-t border-[#BDBDB7]">
+              <div className="grid grid-cols-2 gap-5 border-t border-[#BDBDB7] pt-5">
+
                 {[
-                  ["Embedding Domain", "Frequency (DCT)"],
-                  ["Block Size",       "8 × 8 px"],
-                  ["Extraction",       "Blind — no original"],
-                  ["Key Derivation",   "SHA-256 HMAC"],
+                  ["Metode Penyisipan", "Domain Frekuensi (DCT)"],
+                  ["Ukuran Blok", "8 × 8 piksel"],
+                  ["Ekstraksi", "Blind — tanpa citra asli"],
+                  ["Derivasi Kunci", "SHA-256"],
                 ].map(([label, value]) => (
-                  <div key={label as string}>
-                    <span className="block font-mono text-[8px] font-bold uppercase tracking-widest text-[#444444]">{label}</span>
-                    <span className="block font-mono text-[11px] font-bold text-[#000000] mt-0.5">{value}</span>
+
+                  <div key={label}>
+
+                    <span className="block font-mono text-[8px] font-bold uppercase tracking-widest text-[#444444]">
+                      {label}
+                    </span>
+
+                    <span className="mt-0.5 block font-mono text-[11px] font-bold text-[#000000]">
+                      {value}
+                    </span>
+
                   </div>
+
                 ))}
+
               </div>
+
             </div>
 
-            {/* Signal chain diagram */}
-            <div className="space-y-0">
+            {/* SIGNAL CHAIN */}
+            <div>
+
               {[
-                { label: "Original Image",             sub: "Unmodified source frame" },
-                { label: "DCT Transform",              sub: "8×8 block frequency decomposition" },
-                { label: "Coefficient Modification",   sub: "Mid-freq. pair embedding" },
-                { label: "Watermarked Image",          sub: "Visually imperceptible Δ" },
+                {
+                  label: "Citra Asli",
+                  sub: "Citra sumber sebelum watermark",
+                },
+                {
+                  label: "Transformasi DCT",
+                  sub: "Pemecahan frekuensi dalam blok 8×8",
+                },
+                {
+                  label: "Modifikasi Koefisien",
+                  sub: "Penyisipan pada pasangan frekuensi menengah",
+                },
+                {
+                  label: "Citra Ber-watermark",
+                  sub: "Perubahan visual yang tidak terlihat",
+                },
               ].map(({ label, sub }, i) => (
-                <div key={label} className="flex items-center gap-4 py-4 border-b border-[#BDBDB7] last:border-0">
-                  <div className="shrink-0 w-9 h-9 border border-[#BDBDB7] flex items-center justify-center bg-white">
-                    <span className="font-mono text-[10px] font-bold text-[#444444]">{String(i + 1).padStart(2, "0")}</span>
+
+                <div
+                  key={label}
+                  className="flex items-center gap-4 border-b border-[#BDBDB7] py-4 last:border-0"
+                >
+
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center border border-[#BDBDB7] bg-white">
+
+                    <span className="font-mono text-[10px] font-bold text-[#444444]">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+
                   </div>
+
                   <div className="flex-1">
-                    <p className="font-sans text-[11px] font-bold text-[#000000] uppercase tracking-wide">{label}</p>
-                    <p className="font-mono text-[9px] text-[#444444] tracking-wider mt-0.5 font-semibold">{sub}</p>
+
+                    <p className="font-sans text-[11px] font-bold uppercase tracking-wide text-[#000000]">
+                      {label}
+                    </p>
+
+                    <p className="mt-0.5 font-mono text-[9px] font-semibold tracking-wider text-[#444444]">
+                      {sub}
+                    </p>
+
                   </div>
-                  {i < 3 && <span className="shrink-0 font-mono text-[10px] font-bold text-[#BDBDB7]">↓</span>}
+
+                  {i < 3 && (
+                    <span className="shrink-0 font-mono text-[10px] font-bold text-[#BDBDB7]">
+                      ↓
+                    </span>
+                  )}
+
                 </div>
+
               ))}
 
-              <div className="mt-5 p-4 border border-[#BDBDB7] bg-[#F0F0EC]">
-                <p className="font-mono text-[8px] font-bold uppercase tracking-widest text-[#444444] mb-2">Signal Comparison</p>
+              {/* DCT COMPARISON */}
+              <div className="mt-5 border border-[#BDBDB7] bg-[#F0F0EC] p-4">
+
+                <p className="mb-2 font-mono text-[8px] font-bold uppercase tracking-widest text-[#444444]">
+                  Perbandingan Sinyal
+                </p>
+
                 <div className="grid grid-cols-2 gap-px bg-[#BDBDB7]">
-                  {["Original DCT", "Modified DCT"].map((lbl) => (
-                    <div key={lbl} className="bg-white p-3 aspect-[3/2] img-grid-bg flex items-end">
-                      <span className="font-mono text-[7px] font-bold text-[#444444] uppercase">{lbl}</span>
+
+                  {[
+                    "DCT Asli",
+                    "DCT Setelah Modifikasi",
+                  ].map((lbl) => (
+
+                    <div
+                      key={lbl}
+                      className="img-grid-bg flex aspect-[3/2] items-end bg-white p-3"
+                    >
+
+                      <span className="font-mono text-[7px] font-bold uppercase text-[#444444]">
+                        {lbl}
+                      </span>
+
                     </div>
+
                   ))}
+
                 </div>
+
               </div>
+
             </div>
+
           </div>
+
         </div>
+
       </section>
 
-      {/* ══════════════════════════════════════════════════════════
-          CAPABILITIES — 6-cell grid
-      ══════════════════════════════════════════════════════════ */}
-      <section className="py-24 border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
+      {/* =====================================================
+          CAPABILITIES
+      ====================================================== */}
+      <section className="border-b border-border py-24">
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            <div className="lg:col-span-4 space-y-3">
-              <p className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-[#444444]">Technical Foundation</p>
-              <h2 className="font-serif text-[#000000] leading-tight" style={{ fontSize: "2.25rem", fontWeight: 800 }}>
-                Core Capabilities
-              </h2>
-              <p className="text-sm font-sans text-[#333333] leading-relaxed font-medium">
-                A transparent implementation of classical digital watermarking with measurable quality metrics.
+        <div className="mx-auto max-w-7xl space-y-10 px-4 sm:px-6 lg:px-8">
+
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
+
+            <div className="space-y-3 lg:col-span-4">
+
+              <p className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-[#444444]">
+                Dasar Teknis
               </p>
+
+              <h2
+                className="font-serif leading-tight text-[#000000]"
+                style={{
+                  fontSize: "2.25rem",
+                  fontWeight: 800,
+                }}
+              >
+                Fitur
+                <br />
+                Utama
+              </h2>
+
+              <p className="font-sans text-sm font-medium leading-relaxed text-[#333333]">
+                Metode watermark digital yang dapat
+                diperiksa dan diukur menggunakan
+                metrik kualitas citra.
+              </p>
+
             </div>
+
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-[#BDBDB7] border border-[#BDBDB7]">
+          {/* CAPABILITY GRID */}
+          <div className="grid grid-cols-1 gap-px border border-[#BDBDB7] bg-[#BDBDB7] md:grid-cols-2 lg:grid-cols-3">
+
             {capabilities.map((c) => (
+
               <div
                 key={c.code}
-                className="bg-background p-8 space-y-4 hover:bg-white transition-colors duration-150"
+                className="space-y-4 bg-background p-8 transition-colors duration-150 hover:bg-white"
               >
-                <span className="font-mono text-xs font-black text-[#000000] tracking-widest">{c.code}</span>
-                <div className="pt-3 border-t border-[#BDBDB7]">
+
+                <span className="font-mono text-xs font-black tracking-widest text-[#000000]">
+                  {c.code}
+                </span>
+
+                <div className="border-t border-[#BDBDB7] pt-3">
+
                   <h3 className="font-sans text-[10px] font-bold uppercase tracking-widest text-[#000000]">
                     {c.name}
                   </h3>
-                  <p className="mt-2 text-xs font-sans text-[#444444] leading-relaxed font-medium">
+
+                  <p className="mt-2 font-sans text-xs font-medium leading-relaxed text-[#444444]">
                     {c.desc}
                   </p>
+
                 </div>
+
               </div>
+
             ))}
+
           </div>
+
         </div>
+
       </section>
 
-      {/* ══════════════════════════════════════════════════════════
+      {/* =====================================================
           CTA
-      ══════════════════════════════════════════════════════════ */}
-      <section className="py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="border-2 border-[#000000] p-12 sm:p-16 text-center space-y-8 relative">
-            {/* Corner marks */}
-            {["top-[-1px] left-[-1px] border-t-4 border-l-4",
+      ====================================================== */}
+      <section className="bg-white py-24">
+
+        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+
+          <div className="relative space-y-8 border-2 border-[#000000] p-12 text-center sm:p-16">
+
+            {/* CORNER MARKS */}
+            {[
+              "top-[-1px] left-[-1px] border-t-4 border-l-4",
               "top-[-1px] right-[-1px] border-t-4 border-r-4",
               "bottom-[-1px] left-[-1px] border-b-4 border-l-4",
-              "bottom-[-1px] right-[-1px] border-b-4 border-r-4"].map((cls) => (
-              <div key={cls} className={`absolute w-6 h-6 border-[#000000] ${cls}`} />
+              "bottom-[-1px] right-[-1px] border-b-4 border-r-4",
+            ].map((cls) => (
+
+              <div
+                key={cls}
+                className={`absolute h-6 w-6 border-[#000000] ${cls}`}
+              />
+
             ))}
 
             <p className="font-mono text-[9px] font-bold uppercase tracking-[0.2em] text-[#444444]">
-              Begin
+              Mulai
             </p>
-            <h2 className="font-serif text-[#000000] leading-tight" style={{ fontSize: "clamp(2rem, 4vw, 3rem)", fontWeight: 900 }}>
-              Built for images<br />
-              <span className="text-[#333333]">that carry meaning.</span>
+
+            <h2
+              className="font-serif leading-tight text-[#000000]"
+              style={{
+                fontSize: "clamp(2rem, 4vw, 3rem)",
+                fontWeight: 900,
+              }}
+            >
+              Lindungi citra
+              <br />
+              <span className="text-[#333333]">
+                yang memiliki makna.
+              </span>
             </h2>
-            <p className="text-sm font-sans text-[#333333] leading-relaxed max-w-xl mx-auto font-medium">
-              A rigorous technical intersection of photography, ownership, and integrity verification.
-              All processing runs locally. No images are uploaded to external servers.
+
+            <p className="mx-auto max-w-xl font-sans text-sm font-medium leading-relaxed text-[#333333]">
+              Menggabungkan fotografi, watermark digital,
+              dan pengujian ketahanan untuk membantu
+              memeriksa keaslian serta keberadaan watermark
+              pada citra.
+              <br />
+              Seluruh pemrosesan dilakukan secara lokal.
+              Citra tidak dikirim ke server eksternal.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+
+            <div className="flex flex-col justify-center gap-4 pt-4 sm:flex-row">
+
               <Link href="/app/protect">
-                <Button variant="primary" size="lg">Start Protecting</Button>
+                <Button variant="primary" size="lg">
+                  Mulai Melindungi
+                </Button>
               </Link>
+
               <Link href="/app/detect">
-                <Button variant="outline" size="lg">Detect Watermark</Button>
+                <Button variant="outline" size="lg">
+                  Deteksi Watermark
+                </Button>
               </Link>
+
             </div>
+
           </div>
+
         </div>
+
       </section>
+
     </div>
   );
 }

@@ -9,9 +9,9 @@ export function MetricChartPlaceholder({
   className,
 }: MetricChartPlaceholderProps) {
   const metrics = [
-    { symbol: "PSNR", label: "Fidelity", unit: "dB" },
-    { symbol: "NC", label: "Correlation", unit: "0-1" },
-    { symbol: "BER", label: "Error Rate", unit: "0-1" },
+    { symbol: "PSNR", label: "Kualitas Citra", unit: "dB" },
+    { symbol: "NC", label: "Korelasi", unit: "0-1" },
+    { symbol: "BER", label: "Rasio Kesalahan", unit: "0-1" },
   ];
 
   return (
@@ -19,10 +19,10 @@ export function MetricChartPlaceholder({
       <div className="flex items-end justify-between border-b border-border pb-4">
         <div className="space-y-1">
           <h4 className="font-sans text-sm uppercase tracking-widest text-text-primary">
-            Scientific Metrics
+            Metrik Ilmiah
           </h4>
           <p className="text-[10px] text-text-secondary font-mono tracking-widest uppercase">
-            Signal Integrity & Recovery
+            Integritas & Pemulihan Sinyal
           </p>
         </div>
       </div>

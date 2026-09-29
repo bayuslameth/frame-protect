@@ -14,5 +14,5 @@ app.add_middleware(
 )
 
 app.include_router(watermark_router, prefix="/api/watermark", tags=["Watermark"])
-app.include_router(metrics_router, prefix="/api/metricsz", tags=["Metrics"])
+app.include_router(metrics_router, prefix="/api/metrics", tags=["Metrics"])
 app.include_router(attack_router, prefix="/api/attacks", tags=["Attacks"])

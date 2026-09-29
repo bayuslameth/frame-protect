@@ -9,12 +9,12 @@ export interface AttackDescriptor {
 }
 
 export const ATTACKS: AttackDescriptor[] = [
-  { id: "jpeg", name: "JPEG Compression", category: "Quantization", defaultParam: "Q=50" },
-  { id: "crop", name: "Crop", category: "Spatial", defaultParam: "20%" },
-  { id: "resize", name: "Resize", category: "Interpolation", defaultParam: "0.5x" },
-  { id: "gaussian_noise", name: "Gaussian Noise", category: "Additive", defaultParam: "σ=20" },
-  { id: "brightness", name: "Brightness", category: "Photometric", defaultParam: "+1.25" },
-  { id: "contrast", name: "Contrast", category: "Histogram", defaultParam: "+1.30" },
+  { id: "jpeg", name: "Kompresi JPEG", category: "Kuantisasi", defaultParam: "Q=50" },
+  { id: "crop", name: "Pemotongan (Crop)", category: "Spasial", defaultParam: "20%" },
+  { id: "resize", name: "Penskalaan (Resize)", category: "Interpolasi", defaultParam: "0.5x" },
+  { id: "gaussian_noise", name: "Derau Gaussian", category: "Aditif", defaultParam: "σ=20" },
+  { id: "brightness", name: "Kecerahan", category: "Fotometrik", defaultParam: "+1.25" },
+  { id: "contrast", name: "Kontras", category: "Histogram", defaultParam: "+1.30" },
 ];
 
 interface AttackPaletteProps {
@@ -27,14 +27,14 @@ export function AttackPalette({ className }: AttackPaletteProps) {
       <div className="flex items-end justify-between border-b border-border pb-4">
         <div className="space-y-1">
           <h4 className="font-sans text-sm uppercase tracking-widest text-text-primary">
-            Distortion Vectors
+            Vektor Distorsi
           </h4>
           <p className="text-[10px] text-text-secondary font-mono tracking-widest uppercase">
-            Robustness Simulation Suite
+            Simulasi Uji Ketahanan
           </p>
         </div>
         <span className="font-mono text-[9px] text-text-secondary tracking-widest uppercase">
-          VECTORS / 06
+          VEKTOR / 06
         </span>
       </div>
 

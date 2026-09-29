@@ -20,7 +20,7 @@ interface ImageUploadZoneProps {
 
 export function ImageUploadZone({
   className,
-  label = "SOURCE IMAGE",
+  label = "CITRA SUMBER",
   accept = "JPEG / PNG / WEBP",
   asset,
   error,
@@ -40,11 +40,11 @@ export function ImageUploadZone({
   const getErrorText = (err: ImageValidationError) => {
     switch (err) {
       case "INVALID_FORMAT":
-        return "Unsupported format. Accepted: JPG · PNG · WEBP";
+        return "Format tidak didukung. Format yang diterima: JPG · PNG · WEBP";
       case "FILE_TOO_LARGE":
-        return "File exceeds limit. Maximum size: 20 MB";
+        return "Ukuran file melebihi batas. Maksimum: 20 MB";
       case "IMAGE_UNREADABLE":
-        return "Image could not be read. Please select another file.";
+        return "Citra tidak dapat dibaca. Silakan pilih file lain.";
       default:
         return "";
     }
@@ -60,7 +60,7 @@ export function ImageUploadZone({
             {label}
           </span>
           <span className="font-mono text-[8px] text-success tracking-widest uppercase">
-            ● Loaded
+            ● Siap
           </span>
         </div>
 
@@ -68,9 +68,9 @@ export function ImageUploadZone({
         <div className="p-4 grid grid-cols-2 gap-3">
           {[
             ["Format", asset.metadata.type.split("/")[1]?.toUpperCase() || asset.metadata.type],
-            ["Size", `${(asset.metadata.size / (1024 * 1024)).toFixed(2)} MB`],
-            ["Dimensions", `${asset.metadata.width} × ${asset.metadata.height}`],
-            ["Color Space", "RGB"],
+            ["Ukuran", `${(asset.metadata.size / (1024 * 1024)).toFixed(2)} MB`],
+            ["Dimensi", `${asset.metadata.width} × ${asset.metadata.height}`],
+            ["Ruang Warna", "RGB"],
           ].map(([k, v]) => (
             <div key={k}>
               <span className="block font-mono text-[8px] text-text-tertiary uppercase tracking-widest">
@@ -89,7 +89,7 @@ export function ImageUploadZone({
             onClick={onReset}
             className="font-mono text-[9px] uppercase tracking-widest text-text-tertiary hover:text-error transition-colors duration-150"
           >
-            [ Remove ]
+            [ Hapus Citra ]
           </button>
         </div>
       </div>
@@ -104,7 +104,7 @@ export function ImageUploadZone({
       onDrop={onDrop}
       role="button"
       tabIndex={0}
-      aria-label={`Upload ${label}`}
+      aria-label={`Unggah ${label}`}
       onKeyDown={(e) => e.key === "Enter" && handleClick()}
       className={cn(
         "relative flex flex-col items-center justify-center p-12 text-center transition-colors duration-150 cursor-pointer select-none",
@@ -151,7 +151,7 @@ export function ImageUploadZone({
             error ? "text-error" : "text-text-primary"
           )}
         >
-          {error ? "Upload Failed" : isDragging ? "Drop Here" : label}
+          {error ? "Gagal Mengunggah" : isDragging ? "Lepaskan Citra di Sini" : label}
         </p>
         {error ? (
           <p className="text-[9px] text-error font-sans max-w-[200px]">
@@ -159,14 +159,14 @@ export function ImageUploadZone({
           </p>
         ) : (
           <p className="text-[9px] text-text-tertiary font-mono uppercase tracking-wider">
-            {isProcessing ? "Processing..." : accept}
+            {isProcessing ? "Memproses..." : accept}
           </p>
         )}
       </div>
 
       {!error && (
         <p className="mt-6 text-[9px] text-text-tertiary font-mono tracking-widest uppercase relative z-10">
-          {isDragging ? "Release to upload" : "Click or drag & drop"}
+          {isDragging ? "Lepaskan untuk mengunggah" : "Klik atau seret & lepas citra di sini"}
         </p>
       )}
     </div>

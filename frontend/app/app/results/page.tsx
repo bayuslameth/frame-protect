@@ -10,13 +10,13 @@ import type { ExperimentResult, ExperimentAttackType } from "@/lib/types/experim
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
 const ATTACK_LABELS: Record<ExperimentAttackType, string> = {
-  baseline: "Baseline",
-  jpeg: "JPEG Compression",
-  crop: "Crop",
-  resize: "Resize",
-  gaussian_noise: "Gaussian Noise",
-  brightness: "Brightness",
-  contrast: "Contrast",
+  baseline: "Citra Acuan (Baseline)",
+  jpeg: "Kompresi JPEG",
+  crop: "Pemotongan (Crop)",
+  resize: "Penskalaan (Resize)",
+  gaussian_noise: "Derau Gaussian",
+  brightness: "Kecerahan",
+  contrast: "Kontras",
 };
 
 const ATTACK_GROUP_ORDER: ExperimentAttackType[] = [
@@ -61,7 +61,7 @@ function BarChart({ data, yLabel, height = 180 }: BarChartProps) {
   if (valid.length === 0) {
     return (
       <div className="flex items-center justify-center py-12 border border-[#000000] bg-background">
-        <p className="font-mono text-[10px] uppercase tracking-widest text-text-secondary">NO DATA</p>
+        <p className="font-mono text-[10px] uppercase tracking-widest text-text-secondary">TIDAK ADA DATA</p>
       </div>
     );
   }
@@ -272,8 +272,8 @@ export default function ResultsPage() {
 
   return (
     <PlaceholderPage
-      pageName="Analysis Results"
-      description="Watermark robustness analysis from real experiments."
+      pageName="Hasil Analisis"
+      description="Analisis ketahanan watermark berdasarkan data eksperimen nyata."
       routePath="/app/results"
     >
       <div className="space-y-12">
@@ -281,9 +281,9 @@ export default function ResultsPage() {
 
         {!session ? (
           <div className="border border-[#000000] bg-surface p-12 text-center space-y-4">
-            <p className="font-mono text-[10px] uppercase tracking-widest text-text-secondary">NO EXPERIMENT SESSION</p>
+            <p className="font-mono text-[10px] uppercase tracking-widest text-text-secondary">BELUM ADA SESI EKSPERIMEN</p>
             <p className="font-sans text-sm text-text-secondary">
-              Return to the <strong>Protect</strong> page, embed a watermark and verify the baseline to create a session.
+              Kembali ke halaman <strong>Lindungi</strong>, sisipkan watermark dan verifikasi citra acuan untuk memulai sesi pengujian.
             </p>
           </div>
         ) : (
@@ -292,26 +292,26 @@ export default function ResultsPage() {
             <div className="border border-[#000000] bg-surface p-6 space-y-4">
               <div className="flex items-end justify-between border-b border-[#000000] pb-4">
                 <div className="space-y-1">
-                  <h4 className="font-sans text-[11px] font-bold uppercase tracking-widest text-[#000000]">Session</h4>
-                  <p className="font-mono text-[10px] text-text-secondary tracking-widest uppercase">Experiment Context</p>
+                  <h4 className="font-sans text-[11px] font-bold uppercase tracking-widest text-[#000000]">Sesi</h4>
+                  <p className="font-mono text-[10px] text-text-secondary tracking-widest uppercase">Konteks Eksperimen</p>
                 </div>
                 <div className="flex gap-3">
-                  <Button variant="outline" size="sm" onClick={requestClearSession} aria-label="Clear experiment session">
-                    CLEAR SESSION
+                  <Button variant="outline" size="sm" onClick={requestClearSession} aria-label="Hapus sesi eksperimen">
+                    HAPUS SESI
                   </Button>
                 </div>
               </div>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4 font-mono text-[10px]">
                 <div>
-                  <span className="block text-text-secondary uppercase tracking-widest">Session ID</span>
+                  <span className="block text-text-secondary uppercase tracking-widest">ID Sesi</span>
                   <span className="block text-text-primary truncate">{session.sessionId.slice(0, 16)}…</span>
                 </div>
                 <div>
-                  <span className="block text-text-secondary uppercase tracking-widest">Image</span>
+                  <span className="block text-text-secondary uppercase tracking-widest">Citra</span>
                   <span className="block text-text-primary truncate">{session.imageFileName}</span>
                 </div>
                 <div>
-                  <span className="block text-text-secondary uppercase tracking-widest">Dimensions</span>
+                  <span className="block text-text-secondary uppercase tracking-widest">Dimensi</span>
                   <span className="block text-text-primary">{session.imageWidth} × {session.imageHeight}</span>
                 </div>
                 <div>
@@ -325,11 +325,11 @@ export default function ResultsPage() {
             {confirmClearPending && (
               <div className="border border-[#000000] bg-surface p-6 space-y-4">
                 <p className="font-sans text-sm text-text-primary">
-                  Are you sure you want to clear all experiment results? This cannot be undone.
+                  Apakah Anda yakin ingin menghapus seluruh hasil eksperimen? Tindakan ini tidak dapat dibatalkan.
                 </p>
                 <div className="flex gap-4">
-                  <Button variant="primary" size="sm" onClick={executeClearSession}>Yes, Clear Session</Button>
-                  <Button variant="outline" size="sm" onClick={cancelClearSession}>Cancel</Button>
+                  <Button variant="primary" size="sm" onClick={executeClearSession}>Ya, Hapus Sesi</Button>
+                  <Button variant="outline" size="sm" onClick={cancelClearSession}>Batal</Button>
                 </div>
               </div>
             )}
@@ -339,13 +339,13 @@ export default function ResultsPage() {
               <div className="border border-[#000000] bg-surface p-6 space-y-6">
                 <div className="flex items-end justify-between border-b border-[#000000] pb-4">
                   <div className="space-y-1">
-                    <h4 className="font-sans text-[11px] font-bold uppercase tracking-widest text-[#000000]">Baseline</h4>
+                    <h4 className="font-sans text-[11px] font-bold uppercase tracking-widest text-[#000000]">Citra Acuan</h4>
                     <p className="font-mono text-[10px] text-text-secondary tracking-widest uppercase">
-                      Original → Watermarked (no attack)
+                      Asli → Ber-watermark (tanpa distorsi)
                     </p>
                   </div>
                   <span className={`font-mono text-[9px] uppercase tracking-widest ${baseline.extractionStatus === "DETECTED" ? "text-success" : "text-error"}`}>
-                    {baseline.extractionStatus}
+                    {baseline.extractionStatus === "DETECTED" ? "TERDETEKSI" : "GAGAL"}
                   </span>
                 </div>
                 <div className="grid grid-cols-3 gap-px bg-border border border-[#000000]">
@@ -363,39 +363,39 @@ export default function ResultsPage() {
                 </div>
                 {baseline.extractedWatermark && (
                   <div className="font-mono text-xs text-text-secondary">
-                    Extracted: <span className="text-text-primary">{baseline.extractedWatermark}</span>
+                    Hasil Ekstraksi: <span className="text-text-primary">{baseline.extractedWatermark}</span>
                   </div>
                 )}
               </div>
             ) : (
               <div className="border border-dashed border-[#000000] bg-surface p-6 text-center">
-                <p className="font-mono text-[10px] uppercase tracking-widest text-text-secondary">No baseline result.</p>
+                <p className="font-mono text-[10px] uppercase tracking-widest text-text-secondary">Belum ada hasil acuan.</p>
               </div>
             )}
 
             {/* ── SUMMARY STATISTICS ── */}
             {attackResults.length > 0 && (
               <div className="border border-[#000000] bg-surface p-6 space-y-4">
-                <h4 className="font-sans text-[11px] font-bold uppercase tracking-widest text-[#000000] border-b border-[#000000] pb-3">Summary</h4>
+                <h4 className="font-sans text-[11px] font-bold uppercase tracking-widest text-[#000000] border-b border-[#000000] pb-3">Ringkasan</h4>
                 <div className="grid grid-cols-2 md:grid-cols-5 gap-4 font-mono text-[10px]">
                   <div>
-                    <span className="block text-text-secondary uppercase tracking-widest">Total Attacks</span>
+                    <span className="block text-text-secondary uppercase tracking-widest">Total Pengujian</span>
                     <span className="block text-text-primary text-base font-bold">{attackResults.length}</span>
                   </div>
                   <div>
-                    <span className="block text-text-secondary uppercase tracking-widest">Detected</span>
+                    <span className="block text-text-secondary uppercase tracking-widest">Terdeteksi</span>
                     <span className="block text-success text-base font-bold">{attackResults.filter((r) => r.extractionStatus === "DETECTED").length}</span>
                   </div>
                   <div>
-                    <span className="block text-text-secondary uppercase tracking-widest">Failed</span>
+                    <span className="block text-text-secondary uppercase tracking-widest">Gagal</span>
                     <span className="block text-error text-base font-bold">{attackResults.filter((r) => r.extractionStatus === "FAILED").length}</span>
                   </div>
                   <div>
-                    <span className="block text-text-secondary uppercase tracking-widest">Avg PSNR</span>
+                    <span className="block text-text-secondary uppercase tracking-widest">Rata-rata PSNR</span>
                     <span className="block text-text-primary">{avg(validPsnr) !== null ? avg(validPsnr)!.toFixed(2) + " dB" : "—"}</span>
                   </div>
                   <div>
-                    <span className="block text-text-secondary uppercase tracking-widest">Avg NC / BER</span>
+                    <span className="block text-text-secondary uppercase tracking-widest">Rata-rata NC / BER</span>
                     <span className="block text-text-primary">
                       {avg(validNc) !== null ? avg(validNc)!.toFixed(4) : "—"} / {avg(validBer) !== null ? avg(validBer)!.toFixed(4) : "—"}
                     </span>
@@ -407,22 +407,22 @@ export default function ResultsPage() {
             {/* ── RESULTS TABLE ── */}
             <div className="border border-[#000000] bg-surface p-6 space-y-4">
               <h4 className="font-sans text-[11px] font-bold uppercase tracking-widest text-[#000000] border-b border-[#000000] pb-3">
-                Robustness Experiments
+                Eksperimen Ketahanan
               </h4>
               {sortedResults.length === 0 ? (
                 <div className="text-center py-10">
-                  <p className="font-mono text-[10px] uppercase tracking-widest text-text-secondary">NO EXPERIMENT RESULTS</p>
-                  <p className="font-sans text-xs text-text-secondary mt-2">Run an attack in Attack Lab to populate this section.</p>
+                  <p className="font-mono text-[10px] uppercase tracking-widest text-text-secondary">BELUM ADA HASIL EKSPERIMEN</p>
+                  <p className="font-sans text-xs text-text-secondary mt-2">Jalankan pengujian di menu Uji Ketahanan untuk mengisi bagian ini.</p>
                 </div>
               ) : (
                 <div className="overflow-x-auto">
-                  <table className="w-full text-left border-collapse" aria-label="Robustness experiment results">
+                  <table className="w-full text-left border-collapse" aria-label="Hasil eksperimen ketahanan">
                     <thead>
                       <tr className="border-b border-[#000000]">
-                        <th className={thClass} onClick={() => toggleSort("attackType")}>Attack {sortKey === "attackType" ? (sortDir === "asc" ? "↑" : "↓") : ""}</th>
+                        <th className={thClass} onClick={() => toggleSort("attackType")}>Pengujian {sortKey === "attackType" ? (sortDir === "asc" ? "↑" : "↓") : ""}</th>
                         <th className="py-2 pr-4 font-mono text-[8px] uppercase tracking-widest text-text-secondary font-normal text-left">Param</th>
-                        <th className="py-2 pr-4 font-mono text-[8px] uppercase tracking-widest text-text-secondary font-normal text-left">Dims</th>
-                        <th className="py-2 pr-4 font-mono text-[8px] uppercase tracking-widest text-text-secondary font-normal text-left">Extraction</th>
+                        <th className="py-2 pr-4 font-mono text-[8px] uppercase tracking-widest text-text-secondary font-normal text-left">Dimensi</th>
+                        <th className="py-2 pr-4 font-mono text-[8px] uppercase tracking-widest text-text-secondary font-normal text-left">Ekstraksi</th>
                         <th className={thClass} onClick={() => toggleSort("psnr")}>PSNR {sortKey === "psnr" ? (sortDir === "asc" ? "↑" : "↓") : ""}</th>
                         <th className={thClass} onClick={() => toggleSort("nc")}>NC {sortKey === "nc" ? (sortDir === "asc" ? "↑" : "↓") : ""}</th>
                         <th className={thClass} onClick={() => toggleSort("ber")}>BER {sortKey === "ber" ? (sortDir === "asc" ? "↑" : "↓") : ""}</th>
@@ -435,7 +435,7 @@ export default function ResultsPage() {
                           <td className="py-2 pr-4">{formatParam(r.attackType, r.attackParameter)}</td>
                           <td className="py-2 pr-4">{r.attackedWidth}×{r.attackedHeight}</td>
                           <td className={`py-2 pr-4 ${r.extractionStatus === "DETECTED" ? "text-success" : "text-error"}`}>
-                            {r.extractionStatus}
+                            {r.extractionStatus === "DETECTED" ? "TERDETEKSI" : "GAGAL"}
                           </td>
                           <td className="py-2 pr-4">{fmtPsnr(r.psnr)}</td>
                           <td className="py-2 pr-4">{fmt(r.nc, 4)}</td>
@@ -452,7 +452,7 @@ export default function ResultsPage() {
             {ATTACK_GROUP_ORDER.some((type) => grouped[type]?.length) && (
               <div className="border border-[#000000] bg-surface p-6 space-y-6">
                 <h4 className="font-sans text-[11px] font-bold uppercase tracking-widest text-[#000000] border-b border-[#000000] pb-3">
-                  Results by Attack Type
+                  Hasil Berdasarkan Jenis Distorsi
                 </h4>
                 {ATTACK_GROUP_ORDER.filter((type) => grouped[type]?.length).map((type) => (
                   <div key={type} className="space-y-2">
@@ -462,8 +462,8 @@ export default function ResultsPage() {
                         <thead>
                           <tr className="border-b border-[#000000] bg-surface">
                             <th className="py-1 px-3 font-mono text-[8px] text-text-secondary uppercase tracking-widest font-normal">Param</th>
-                            <th className="py-1 px-3 font-mono text-[8px] text-text-secondary uppercase tracking-widest font-normal">Dims</th>
-                            <th className="py-1 px-3 font-mono text-[8px] text-text-secondary uppercase tracking-widest font-normal">Extraction</th>
+                            <th className="py-1 px-3 font-mono text-[8px] text-text-secondary uppercase tracking-widest font-normal">Dimensi</th>
+                            <th className="py-1 px-3 font-mono text-[8px] text-text-secondary uppercase tracking-widest font-normal">Ekstraksi</th>
                             <th className="py-1 px-3 font-mono text-[8px] text-text-secondary uppercase tracking-widest font-normal">PSNR</th>
                             <th className="py-1 px-3 font-mono text-[8px] text-text-secondary uppercase tracking-widest font-normal">NC</th>
                             <th className="py-1 px-3 font-mono text-[8px] text-text-secondary uppercase tracking-widest font-normal">BER</th>
@@ -474,7 +474,9 @@ export default function ResultsPage() {
                             <tr key={r.experimentId} className="border-b border-[#000000] last:border-0">
                               <td className="py-1 px-3">{formatParam(r.attackType, r.attackParameter)}</td>
                               <td className="py-1 px-3">{r.attackedWidth}×{r.attackedHeight}</td>
-                              <td className={`py-1 px-3 ${r.extractionStatus === "DETECTED" ? "text-success" : "text-error"}`}>{r.extractionStatus}</td>
+                              <td className={`py-1 px-3 ${r.extractionStatus === "DETECTED" ? "text-success" : "text-error"}`}>
+                                {r.extractionStatus === "DETECTED" ? "TERDETEKSI" : "GAGAL"}
+                              </td>
                               <td className="py-1 px-3">{fmtPsnr(r.psnr)}</td>
                               <td className="py-1 px-3">{fmt(r.nc, 4)}</td>
                               <td className="py-1 px-3">{fmt(r.ber, 4)}</td>
@@ -492,23 +494,23 @@ export default function ResultsPage() {
             {chartData.length > 0 && (
               <div className="border border-[#000000] bg-surface p-6 space-y-8">
                 <h4 className="font-sans text-[11px] font-bold uppercase tracking-widest text-[#000000] border-b border-[#000000] pb-3">
-                  Visual Analysis
+                  Analisis Visual
                 </h4>
                 <p className="font-mono text-[9px] text-text-secondary uppercase tracking-widest">
-                  Charts are generated from actual experiment results only. Missing values are not interpolated.
+                  Grafik dibuat langsung dari hasil eksperimen aktual. Nilai yang hilang tidak diinterpolasi.
                 </p>
                 <div className="space-y-6">
                   <div>
                     <h5 className="font-mono text-[10px] uppercase tracking-widest text-text-secondary mb-2">PSNR (dB)</h5>
                     <BarChart data={chartData.map((d) => ({ label: d.label, value: d.psnr === -1 ? null : d.psnr }))} yLabel="PSNR dB" />
-                    <p className="font-mono text-[8px] text-text-secondary mt-1">N/A shown as dashed bars (dimension-altering attacks)</p>
+                    <p className="font-mono text-[8px] text-text-secondary mt-1">N/A ditampilkan sebagai batang putus-putus (pengujian yang mengubah dimensi citra)</p>
                   </div>
                   <div>
-                    <h5 className="font-mono text-[10px] uppercase tracking-widest text-text-secondary mb-2">NC (Normalized Correlation)</h5>
+                    <h5 className="font-mono text-[10px] uppercase tracking-widest text-text-secondary mb-2">NC (Korelasi Ternormalisasi)</h5>
                     <BarChart data={chartData.map((d) => ({ label: d.label, value: d.nc }))} yLabel="NC" />
                   </div>
                   <div>
-                    <h5 className="font-mono text-[10px] uppercase tracking-widest text-text-secondary mb-2">BER (Bit Error Rate)</h5>
+                    <h5 className="font-mono text-[10px] uppercase tracking-widest text-text-secondary mb-2">BER (Rasio Kesalahan Bit)</h5>
                     <BarChart data={chartData.map((d) => ({ label: d.label, value: d.ber }))} yLabel="BER" />
                   </div>
                 </div>
@@ -517,34 +519,33 @@ export default function ResultsPage() {
 
             {/* ── EXPORT ── */}
             <div className="border border-[#000000] bg-surface p-6 space-y-4">
-              <h4 className="font-sans text-[11px] font-bold uppercase tracking-widest text-[#000000] border-b border-[#000000] pb-3">Export</h4>
+              <h4 className="font-sans text-[11px] font-bold uppercase tracking-widest text-[#000000] border-b border-[#000000] pb-3">Ekspor</h4>
               <p className="font-mono text-[9px] text-text-secondary uppercase tracking-widest">
-                Exported data excludes secret keys and credentials.
-                XLSX export deferred — CSV and JSON are fully functional.
+                Data yang diekspor tidak memuat kunci rahasia. Format CSV dan JSON berfungsi penuh.
               </p>
               <div className="flex gap-4 flex-wrap">
                 <Button
                   variant="primary"
                   size="sm"
                   onClick={() => exportCSV(results)}
-                  aria-label="Export results as CSV"
+                  aria-label="Ekspor hasil sebagai CSV"
                   disabled={results.length === 0}
                 >
-                  EXPORT CSV
+                  EKSPOR CSV
                 </Button>
                 <Button
                   variant="outline"
                   size="sm"
                   onClick={() => exportJSON(session, results)}
-                  aria-label="Export results as JSON"
+                  aria-label="Ekspor hasil sebagai JSON"
                   disabled={results.length === 0}
                 >
-                  EXPORT JSON
+                  EKSPOR JSON
                 </Button>
               </div>
               {results.length > 0 && (
                 <p className="font-mono text-[8px] text-text-secondary">
-                  {results.length} record(s) · frame-protect-results.csv / frame-protect-results.json
+                  {results.length} data riwayat · frame-protect-results.csv / frame-protect-results.json
                 </p>
               )}
             </div>

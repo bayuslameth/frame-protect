@@ -1,4 +1,3 @@
-import Link from "next/link";
 
 export function Footer() {
   return (
@@ -11,17 +10,17 @@ export function Footer() {
               Frame Protect
             </p>
             <p className="font-mono text-[10px] text-text-tertiary leading-relaxed">
-              Digital watermarking laboratory.<br />
-              Protect the image. Prove the origin.
+              Laboratorium watermark digital.<br />
+              Lindungi citra. Buktikan keaslian.
             </p>
           </div>
 
           {/* Algorithm */}
           <div className="space-y-2">
             <p className="font-mono text-[9px] uppercase tracking-widest text-text-tertiary mb-3">
-              Algorithm
+              Algoritma
             </p>
-            {["DCT · 8×8 Block Frequency", "Mid-Coefficient Embedding", "SHA-256 Key Derivation"].map((t) => (
+            {["DCT · Frekuensi Blok 8×8", "Penyisipan Koefisien Menengah", "Derivasi Kunci SHA-256"].map((t) => (
               <p key={t} className="font-mono text-[10px] text-text-secondary">{t}</p>
             ))}
           </div>
@@ -29,9 +28,9 @@ export function Footer() {
           {/* Metrics */}
           <div className="space-y-2">
             <p className="font-mono text-[9px] uppercase tracking-widest text-text-tertiary mb-3">
-              Quality Metrics
+              Metrik Kualitas
             </p>
-            {["PSNR · Peak Signal-to-Noise", "NC · Normalized Correlation", "BER · Bit Error Rate"].map((t) => (
+            {["PSNR · Kualitas Citra", "NC · Korelasi Ternormalisasi", "BER · Rasio Kesalahan Bit"].map((t) => (
               <p key={t} className="font-mono text-[10px] text-text-secondary">{t}</p>
             ))}
           </div>
@@ -39,10 +38,10 @@ export function Footer() {
 
         <div className="mt-8 pt-6 border-t border-border flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
           <p className="font-mono text-[9px] text-text-tertiary uppercase tracking-widest">
-            Information Security Project — 2026
+            Proyek Keamanan Informasi — 2026
           </p>
           <p className="font-mono text-[9px] text-text-tertiary uppercase tracking-widest">
-            All processing is local · No data transmitted
+            Semua pemrosesan lokal · Tidak ada data yang dikirim ke luar
           </p>
         </div>
       </div>
